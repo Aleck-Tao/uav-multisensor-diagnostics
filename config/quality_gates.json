@@ -1,0 +1,15 @@
+{
+  "max_ate_rmse_m": 0.12,
+  "max_camera_lidar_sync_p95_ms": 8.0,
+  "max_dropout_rate": 0.015,
+  "max_final_drift_m": 0.2,
+  "max_heading_rmse_deg": 3.0,
+  "max_jitter_rms_ms": {
+    "camera": 1.5,
+    "imu": 0.5,
+    "lidar": 2.5
+  },
+  "max_out_of_order_count": 0,
+  "max_path_length_error_pct": 5.0,
+  "max_rpe_rmse_m": 0.1
+}

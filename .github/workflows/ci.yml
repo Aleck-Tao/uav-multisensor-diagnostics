@@ -1,0 +1,24 @@
+name: reproducibility
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test-and-reproduce:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: pyproject.toml
+      - name: Install package
+        run: python -m pip install -e .
+      - name: Run tests
+        run: python -m unittest discover -s tests -v
+      - name: Reproduce benchmark
+        run: uavdiag benchmark
+      - name: Verify deterministic artifacts
+        run: git diff --exit-code -- data results

@@ -1,0 +1,16 @@
+cff-version: 1.2.0
+message: "If this software supports your work, please cite it using this metadata."
+title: "UAV Multi-Sensor Diagnostics"
+type: software
+authors:
+  - family-names: Tao
+    given-names: Yuanyuan
+version: 1.0.0
+date-released: 2026-07-19
+license: MIT
+repository-code: "https://github.com/Aleck-Tao/uav-multisensor-diagnostics"
+keywords:
+  - UAV
+  - multi-sensor synchronization
+  - trajectory evaluation
+  - SLAM diagnostics

@@ -1,0 +1,24 @@
+[build-system]
+requires = ["setuptools>=70"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "uav-multisensor-diagnostics"
+version = "1.0.0"
+description = "Reproducible timing, synchronization, and trajectory quality gates for UAV experiments"
+readme = "README.md"
+requires-python = ">=3.11"
+license = { file = "LICENSE" }
+authors = [{ name = "Yuanyuan Tao" }]
+dependencies = ["numpy==2.3.5"]
+keywords = ["uav", "slam", "lidar", "sensor-fusion", "trajectory-evaluation"]
+
+[project.scripts]
+uavdiag = "uavdiag.cli:main"
+
+[project.urls]
+Repository = "https://github.com/Aleck-Tao/uav-multisensor-diagnostics"
+Portfolio = "https://github.com/Aleck-Tao/computer-vision-autonomous-systems-portfolio"
+
+[tool.setuptools.packages.find]
+include = ["uavdiag*"]

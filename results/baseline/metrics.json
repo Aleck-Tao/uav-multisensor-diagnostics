@@ -1,0 +1,165 @@
+{
+  "camera_lidar_sync_p95_ms": 2.2064395,
+  "checks": [
+    {
+      "name": "trajectory.ate_rmse",
+      "passed": true,
+      "threshold": 0.12,
+      "unit": "m",
+      "value": 0.036994732862
+    },
+    {
+      "name": "trajectory.rpe_rmse",
+      "passed": true,
+      "threshold": 0.1,
+      "unit": "m",
+      "value": 0.04396500506
+    },
+    {
+      "name": "trajectory.final_drift",
+      "passed": true,
+      "threshold": 0.2,
+      "unit": "m",
+      "value": 0.018224558598
+    },
+    {
+      "name": "trajectory.heading_rmse",
+      "passed": true,
+      "threshold": 3.0,
+      "unit": "deg",
+      "value": 0.593091502026
+    },
+    {
+      "name": "trajectory.path_length_error",
+      "passed": true,
+      "threshold": 5.0,
+      "unit": "%",
+      "value": 0.826146712678
+    },
+    {
+      "name": "sync.camera_lidar_p95",
+      "passed": true,
+      "threshold": 8.0,
+      "unit": "ms",
+      "value": 2.2064395
+    },
+    {
+      "name": "timing.camera.jitter_rms",
+      "passed": true,
+      "threshold": 1.5,
+      "unit": "ms",
+      "value": 0.500859404859
+    },
+    {
+      "name": "timing.camera.dropout_rate",
+      "passed": true,
+      "threshold": 0.015,
+      "unit": "ratio",
+      "value": 0.0
+    },
+    {
+      "name": "timing.camera.out_of_order",
+      "passed": true,
+      "threshold": 0.0,
+      "unit": "count",
+      "value": 0.0
+    },
+    {
+      "name": "timing.imu.jitter_rms",
+      "passed": true,
+      "threshold": 0.5,
+      "unit": "ms",
+      "value": 0.115153594961
+    },
+    {
+      "name": "timing.imu.dropout_rate",
+      "passed": true,
+      "threshold": 0.015,
+      "unit": "ratio",
+      "value": 0.0
+    },
+    {
+      "name": "timing.imu.out_of_order",
+      "passed": true,
+      "threshold": 0.0,
+      "unit": "count",
+      "value": 0.0
+    },
+    {
+      "name": "timing.lidar.jitter_rms",
+      "passed": true,
+      "threshold": 2.5,
+      "unit": "ms",
+      "value": 1.001594549064
+    },
+    {
+      "name": "timing.lidar.dropout_rate",
+      "passed": true,
+      "threshold": 0.015,
+      "unit": "ratio",
+      "value": 0.0
+    },
+    {
+      "name": "timing.lidar.out_of_order",
+      "passed": true,
+      "threshold": 0.0,
+      "unit": "count",
+      "value": 0.0
+    }
+  ],
+  "passed": true,
+  "provenance": {
+    "files": {
+      "estimated_trajectory.csv": "f830edfb82cf23afb75a1de6c5b702adb52869643e62b8e2ae2f119d24a35e5f",
+      "quality_gates.json": "8590b85aff8625bcf785d0a8a6c12ffd3fd447192fa0bb0c060c91532fe48d1f",
+      "reference_trajectory.csv": "3052440c45451e67d64d740e4869b1407aafb895288d209d31b21a909a002b3a",
+      "sensor_timestamps.csv": "1ba3adbcb4f8f056ead5a00677a8b5e7a0db74bc8414018f6ef7c4409a786790"
+    },
+    "generator": "uavdiag 1.0.0 deterministic fault-injection benchmark"
+  },
+  "scenario": "baseline",
+  "timing": [
+    {
+      "dropout_rate": 0.0,
+      "estimated_dropouts": 0,
+      "jitter_rms_ms": 0.500859404859,
+      "max_gap_ms": 34.738580000003,
+      "nominal_hz": 30.0,
+      "observed_hz": 30.000399816229,
+      "out_of_order_count": 0,
+      "sample_count": 900,
+      "sensor": "camera"
+    },
+    {
+      "dropout_rate": 0.0,
+      "estimated_dropouts": 0,
+      "jitter_rms_ms": 0.115153594961,
+      "max_gap_ms": 10.37738,
+      "nominal_hz": 100.0,
+      "observed_hz": 99.999839813528,
+      "out_of_order_count": 0,
+      "sample_count": 3000,
+      "sensor": "imu"
+    },
+    {
+      "dropout_rate": 0.0,
+      "estimated_dropouts": 0,
+      "jitter_rms_ms": 1.001594549064,
+      "max_gap_ms": 102.50141,
+      "nominal_hz": 10.0,
+      "observed_hz": 10.000197301552,
+      "out_of_order_count": 0,
+      "sample_count": 300,
+      "sensor": "lidar"
+    }
+  ],
+  "trajectory": {
+    "ate_p95_m": 0.057744865146,
+    "ate_rmse_m": 0.036994732862,
+    "final_drift_m": 0.018224558598,
+    "heading_rmse_deg": 0.593091502026,
+    "path_length_error_pct": 0.826146712678,
+    "rpe_rmse_m": 0.04396500506,
+    "sample_count": 601
+  }
+}

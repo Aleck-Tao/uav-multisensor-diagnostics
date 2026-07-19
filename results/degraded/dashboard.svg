@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="420" viewBox="0 0 900 420">
+<rect width="100%" height="100%" fill="#0f172a"/>
+<style>text{font-family:Segoe UI,Arial,sans-serif;fill:#e2e8f0}.label{font-size:15px}.small{font-size:12px;fill:#94a3b8}</style>
+<text x="35" y="38" font-size="23" font-weight="700">Degraded diagnostic benchmark</text>
+<text x="790" y="38" text-anchor="end" font-size="19" font-weight="700" fill="#b91c1c">FAIL</text>
+<text x="35" y="66" class="small">Bar length is normalized to the configured acceptance limit; the marker denotes the limit.</text>
+<text x="35" y="94" class="label">trajectory.ate_rmse</text>
+<rect x="285" y="78" width="500" height="18" rx="4" fill="#1e293b"/>
+<rect x="285" y="78" width="675.0" height="18" rx="4" fill="#ef4444"/>
+<line x1="785" y1="73" x2="785" y2="101" stroke="#f8fafc" stroke-width="2"/>
+<text x="795" y="94" class="small">0.212 m / 0.12 m</text>
+<text x="35" y="156" class="label">trajectory.rpe_rmse</text>
+<rect x="285" y="140" width="500" height="18" rx="4" fill="#1e293b"/>
+<rect x="285" y="140" width="675.0" height="18" rx="4" fill="#ef4444"/>
+<line x1="785" y1="135" x2="785" y2="163" stroke="#f8fafc" stroke-width="2"/>
+<text x="795" y="156" class="small">0.153 m / 0.1 m</text>
+<text x="35" y="218" class="label">trajectory.final_drift</text>
+<rect x="285" y="202" width="500" height="18" rx="4" fill="#1e293b"/>
+<rect x="285" y="202" width="675.0" height="18" rx="4" fill="#ef4444"/>
+<line x1="785" y1="197" x2="785" y2="225" stroke="#f8fafc" stroke-width="2"/>
+<text x="795" y="218" class="small">0.282 m / 0.2 m</text>
+<text x="35" y="280" class="label">trajectory.heading_rmse</text>
+<rect x="285" y="264" width="500" height="18" rx="4" fill="#1e293b"/>
+<rect x="285" y="264" width="661.8" height="18" rx="4" fill="#ef4444"/>
+<line x1="785" y1="259" x2="785" y2="287" stroke="#f8fafc" stroke-width="2"/>
+<text x="795" y="280" class="small">3.971 deg / 3 deg</text>
+<text x="35" y="342" class="label">sync.camera_lidar_p95</text>
+<rect x="285" y="326" width="500" height="18" rx="4" fill="#1e293b"/>
+<rect x="285" y="326" width="675.0" height="18" rx="4" fill="#ef4444"/>
+<line x1="785" y1="321" x2="785" y2="349" stroke="#f8fafc" stroke-width="2"/>
+<text x="795" y="342" class="small">18.314 ms / 8 ms</text>
+</svg>
