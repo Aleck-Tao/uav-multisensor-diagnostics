@@ -121,7 +121,7 @@ def write_svg_dashboard(result: AnalysisResult, path: Path) -> None:
             ]
         )
     svg.append("</svg>")
-    path.write_text("\n".join(svg), encoding="utf-8")
+    path.write_text("\n".join(svg) + "\n", encoding="utf-8")
 
 
 def write_outputs(result: AnalysisResult, output_dir: Path) -> None:

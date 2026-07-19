@@ -111,7 +111,7 @@
   "provenance": {
     "files": {
       "estimated_trajectory.csv": "f830edfb82cf23afb75a1de6c5b702adb52869643e62b8e2ae2f119d24a35e5f",
-      "quality_gates.json": "8590b85aff8625bcf785d0a8a6c12ffd3fd447192fa0bb0c060c91532fe48d1f",
+      "quality_gates.json": "0597a6b50ec285ffda6def2930d4778a07ad7fa3433e52ccd2bed77119918209",
       "reference_trajectory.csv": "3052440c45451e67d64d740e4869b1407aafb895288d209d31b21a909a002b3a",
       "sensor_timestamps.csv": "1ba3adbcb4f8f056ead5a00677a8b5e7a0db74bc8414018f6ef7c4409a786790"
     },
