@@ -1,112 +1,58 @@
 # UAV Multi-Sensor Diagnostics
 
 [![CI](https://github.com/Aleck-Tao/uav-multisensor-diagnostics/actions/workflows/ci.yml/badge.svg)](https://github.com/Aleck-Tao/uav-multisensor-diagnostics/actions/workflows/ci.yml)
-[![Python 3.12](https://img.shields.io/badge/python-3.12-blue.svg)](https://www.python.org/)
-[![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 
-A reproducible research tool for deciding whether UAV sensor logs and pose estimates are trustworthy enough for downstream perception, mapping, planning, or control experiments.
+A Python tool for checking camera, LiDAR and IMU timing alongside trajectory error. The central question is whether a log is suitable for a downstream mapping or perception experiment when its average sampling rate still looks normal.
 
-The tool evaluates three coupled failure surfaces:
+The included benchmark uses a generated 30-second trajectory with baseline and fault-injected sensor logs. Camera, LiDAR and IMU nominal rates are 30, 10 and 100 Hz.
 
-- camera, LiDAR, and IMU timestamp jitter, dropped samples, and acquisition-order violations;
-- camera-LiDAR nearest-frame synchronization error;
-- trajectory quality using aligned ATE, one-second RPE, final drift, heading error, and path-length error.
+## What the comparison shows
 
-## Research contribution
-
-The main contribution is an experiment-ingestion quality gate rather than another trajectory plotting script. Every analysis produces a machine-readable verdict, per-metric acceptance decisions, input SHA-256 provenance, a Markdown report, and a dependency-free SVG dashboard. This makes data quality review repeatable before SLAM or perception results are trusted.
-
-## Controlled benchmark
-
-| Scenario | Verdict | ATE RMSE | RPE RMSE (1 s) | Camera-LiDAR sync p95 | LiDAR dropout rate | Failed gates |
-|---|:---:|---:|---:|---:|---:|---:|
-| Baseline | **PASS** | 0.0370 m | 0.0440 m | 2.206 ms | 0.00% | 0 |
-| Degraded | **FAIL** | 0.2119 m | 0.1525 m | 18.314 ms | 2.67% | 11 |
+| Scenario | ATE RMSE | RPE RMSE (1 s) | Camera–LiDAR mismatch p95 | LiDAR dropout rate | Decision |
+|---|---:|---:|---:|---:|:---:|
+| Baseline | 0.0370 m | 0.0440 m | 2.206 ms | 0.00% | PASS |
+| Degraded | 0.2119 m | 0.1525 m | 18.314 ms | 2.67% | FAIL |
 
 <p>
   <img src="results/baseline/dashboard.svg" alt="Baseline diagnostic dashboard" width="49%">
   <img src="results/degraded/dashboard.svg" alt="Degraded diagnostic dashboard" width="49%">
 </p>
 
-The degraded scenario injects localization drift, a temporary pose disturbance, increased timing jitter, deterministic sample loss, one timestamp-order violation, and a LiDAR clock offset. These are controlled fault-injection results, not claimed as real-flight localization accuracy.
+In the degraded run, the reported rates remain approximately 30, 10 and 100 Hz. Yet camera jitter rises to 4.716 ms, LiDAR jitter to 7.801 ms, and one camera timestamp reversal is present. A rate averaged over the whole recording therefore misses faults that matter when matching individual measurements.
 
-## Reproduce
+Camera dropout is 0.89%, below the configured 1.5% limit, while its jitter and timestamp-order checks fail. These checks answer different questions: sequence gaps identify missing samples; timestamp differences identify irregular timing. Dividing the time gap by the sequence gap prevents a known missing frame from automatically being counted as jitter.
+
+Trajectory alignment removes a fixed XY rotation/translation and vertical offset. Scale and time-varying error remain in the residual. ATE describes the aligned position discrepancy; one-second RPE describes errors in local motion. Both increase in the degraded run, which combines drift, a temporary pose disturbance and observation noise. This combined case checks detection, but does not isolate each fault's contribution.
+
+Read the [baseline report](results/baseline/report.md) and [degraded report](results/degraded/report.md) for every threshold and decision. The corresponding [baseline](results/baseline/metrics.json) and [degraded](results/degraded/metrics.json) JSON files contain the values and input hashes.
+
+## Run it
+
+From a checkout, with Python 3.12:
 
 ```bash
 python -m pip install -e .
-python -m unittest discover -s tests -v
 uavdiag benchmark
 ```
 
-Expected result:
+The expected output is `baseline: PASS (0 failed gates)` and `degraded: FAIL (11 failed gates)`. CI regenerates the data and reports and compares them with the committed files. To run the tests locally:
 
-```text
-baseline: PASS (0 failed gates)
-degraded: FAIL (11 failed gates)
+```bash
+python -m unittest discover -s tests -v
 ```
 
-The CI workflow reruns the tests and benchmark, then checks that committed data and reports are byte-stable.
+## Use your own logs
 
-## Analyze an experiment log
-
-Prepare a directory containing:
-
-```text
-sensor_timestamps.csv
-reference_trajectory.csv
-estimated_trajectory.csv
-```
-
-Run:
+Provide `sensor_timestamps.csv`, `reference_trajectory.csv` and `estimated_trajectory.csv` in one directory:
 
 ```bash
 uavdiag analyze path/to/log path/to/report --label flight-07
 ```
 
-Exit code `0` means every configured gate passed. Exit code `2` means the log requires review.
+Timing columns are `sensor,sequence,timestamp_s`; both trajectory files use `timestamp_s,x_m,y_m,z_m,yaw_rad`. The current implementation expects the three sensor names and nominal rates listed above. Trajectories need increasing timestamps and sufficient overlap. Exit code `0` means all configured checks passed; `2` requests review.
 
-### Timing schema
+The nearest-frame camera–LiDAR metric measures temporal proximity, not a unique clock offset: a periodic camera stream can match a shifted LiDAR sample to the next frame. Its p95 also leaves the worst 5% outside that summary. Interpret it together with order, dropout and gap statistics.
 
-```csv
-sensor,sequence,timestamp_s
-camera,0,0.00000000
-camera,1,0.03333333
-lidar,0,0.00080000
-```
+The committed results are synthetic fault-injection results. Applying the tool to flight logs requires a documented reference trajectory and thresholds suited to that experiment; the defaults in [quality_gates.json](config/quality_gates.json) are a starting policy. Equations and generator assumptions are in [methodology.md](docs/methodology.md).
 
-### Trajectory schema
-
-```csv
-timestamp_s,x_m,y_m,z_m,yaw_rad
-0.000000,0.000000,0.220000,1.450000,0.00000000
-```
-
-Reference poses may come from motion capture, RTK/GNSS, a trusted simulator, or another documented reference system. Thresholds in `config/quality_gates.json` are experiment policy, not universal constants.
-
-## Engineering decisions
-
-- Fixed seeds and stable CSV formatting make the benchmark deterministic.
-- Sequence gaps measure frame loss independently of timestamp jitter.
-- A least-squares rigid XY transform and vertical offset remove arbitrary initial-frame placement without hiding scale error.
-- Every report stores hashes for all inputs and the gate configuration.
-- NumPy is the only runtime dependency; SVG dashboards require no plotting library.
-- The quality decision is fail-closed: one failed metric blocks acceptance.
-
-Detailed metric definitions and assumptions are in [`docs/methodology.md`](docs/methodology.md).
-
-## Repository layout
-
-```text
-uavdiag/       importable analysis package and CLI
-config/        version-controlled acceptance policy
-data/          deterministic baseline and degraded inputs
-results/       committed JSON, Markdown, and SVG outputs
-tests/         unit and integration tests
-docs/          metric and fault-injection methodology
-```
-
-## Scope
-
-This repository diagnoses log integrity and trajectory consistency. It is not a SLAM implementation, flight controller, or safety-certified system. Real-flight accuracy claims require calibrated ground truth, documented sensor mounting, synchronized raw logs, and a justified gate configuration.
-
-Related repositories: [research portfolio](https://github.com/Aleck-Tao/computer-vision-autonomous-systems-portfolio), [real flight-video audit](https://github.com/Aleck-Tao/uav-flight-video-quality-audit), and [safety-constrained mission interface](https://github.com/Aleck-Tao/safety-constrained-uav-mission-interface).
+Related: [real flight-video audit](https://github.com/Aleck-Tao/uav-flight-video-quality-audit) · [mission interface](https://github.com/Aleck-Tao/safety-constrained-uav-mission-interface) · [portfolio](https://github.com/Aleck-Tao/computer-vision-autonomous-systems-portfolio). Code: [MIT](LICENSE).
