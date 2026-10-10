@@ -1,0 +1,6152 @@
+{
+  "config_sha256": "0597a6b50ec285ffda6def2930d4778a07ad7fa3433e52ccd2bed77119918209",
+  "fault_definitions": {
+    "baseline": "Unchanged baseline model with paired independent streams",
+    "camera_reversal": "Swap camera timestamps at sequence 40 and 41; retain sequence order",
+    "lidar_dropout": "Remove positive LiDAR sequence numbers divisible by 37",
+    "lidar_offset": "LiDAR fixed offset raised from 0.8 ms to 17 ms",
+    "timing_jitter": "Timestamp noise SD: camera 3.2 ms, lidar 5.5 ms, imu 0.75 ms; same standard-normal draws",
+    "trajectory_bump": "Add one 12\u201316 s half-sine position disturbance: x +0.28 m, y -0.20 m",
+    "trajectory_drift": "Add [0.016, -0.009, 0.0016] m/s position drift; heading unchanged"
+  },
+  "method": "One fault per paired seed; independent SeedSequence streams for trajectory/camera/lidar/imu; old baseline/degraded benchmark unchanged",
+  "runs": [
+    {
+      "camera_lidar_sync_p95_ms": 2.0268945,
+      "checks": [
+        {
+          "name": "trajectory.ate_rmse",
+          "passed": true,
+          "threshold": 0.12,
+          "unit": "m",
+          "value": 0.035800944
+        },
+        {
+          "name": "trajectory.rpe_rmse",
+          "passed": true,
+          "threshold": 0.1,
+          "unit": "m",
+          "value": 0.044499195
+        },
+        {
+          "name": "trajectory.final_drift",
+          "passed": true,
+          "threshold": 0.2,
+          "unit": "m",
+          "value": 0.045378456
+        },
+        {
+          "name": "trajectory.heading_rmse",
+          "passed": true,
+          "threshold": 3.0,
+          "unit": "deg",
+          "value": 0.611329231
+        },
+        {
+          "name": "trajectory.path_length_error",
+          "passed": true,
+          "threshold": 5.0,
+          "unit": "%",
+          "value": 0.751794233
+        },
+        {
+          "name": "sync.camera_lidar_p95",
+          "passed": true,
+          "threshold": 8.0,
+          "unit": "ms",
+          "value": 2.0268945
+        },
+        {
+          "name": "timing.camera.jitter_rms",
+          "passed": true,
+          "threshold": 1.5,
+          "unit": "ms",
+          "value": 0.503536099
+        },
+        {
+          "name": "timing.camera.dropout_rate",
+          "passed": true,
+          "threshold": 0.015,
+          "unit": "ratio",
+          "value": 0.0
+        },
+        {
+          "name": "timing.camera.out_of_order",
+          "passed": true,
+          "threshold": 0.0,
+          "unit": "count",
+          "value": 0.0
+        },
+        {
+          "name": "timing.imu.jitter_rms",
+          "passed": true,
+          "threshold": 0.5,
+          "unit": "ms",
+          "value": 0.114662742
+        },
+        {
+          "name": "timing.imu.dropout_rate",
+          "passed": true,
+          "threshold": 0.015,
+          "unit": "ratio",
+          "value": 0.0
+        },
+        {
+          "name": "timing.imu.out_of_order",
+          "passed": true,
+          "threshold": 0.0,
+          "unit": "count",
+          "value": 0.0
+        },
+        {
+          "name": "timing.lidar.jitter_rms",
+          "passed": true,
+          "threshold": 2.5,
+          "unit": "ms",
+          "value": 1.084820113
+        },
+        {
+          "name": "timing.lidar.dropout_rate",
+          "passed": true,
+          "threshold": 0.015,
+          "unit": "ratio",
+          "value": 0.0
+        },
+        {
+          "name": "timing.lidar.out_of_order",
+          "passed": true,
+          "threshold": 0.0,
+          "unit": "count",
+          "value": 0.0
+        }
+      ],
+      "failed_gates": [],
+      "fault": "baseline",
+      "input_directory": "data/ablation/20261010/baseline",
+      "input_sha256": {
+        "estimated_trajectory.csv": "c17a3cd898661186ed38020a9b3935d3a87efd145184b5dd7c7f6f3b8324d7ca",
+        "reference_trajectory.csv": "3052440c45451e67d64d740e4869b1407aafb895288d209d31b21a909a002b3a",
+        "sensor_timestamps.csv": "4a5410d0e5d1a8df23c86112c767502ea60974279f2f5733cb84daef47218d07"
+      },
+      "paired_delta": {
+        "ate_rmse_m": 0.0,
+        "rpe_rmse_m": 0.0,
+        "sync_p95_ms": 0.0
+      },
+      "seed": 20261010,
+      "timing": [
+        {
+          "dropout_rate": 0.0,
+          "estimated_dropouts": 0,
+          "jitter_rms_ms": 0.503536099,
+          "max_gap_ms": 35.49418,
+          "nominal_hz": 30.0,
+          "observed_hz": 29.999382713,
+          "out_of_order_count": 0,
+          "sample_count": 900,
+          "sensor": "camera"
+        },
+        {
+          "dropout_rate": 0.0,
+          "estimated_dropouts": 0,
+          "jitter_rms_ms": 0.114662742,
+          "max_gap_ms": 10.39322,
+          "nominal_hz": 100.0,
+          "observed_hz": 100.000108503,
+          "out_of_order_count": 0,
+          "sample_count": 3000,
+          "sensor": "imu"
+        },
+        {
+          "dropout_rate": 0.0,
+          "estimated_dropouts": 0,
+          "jitter_rms_ms": 1.084820113,
+          "max_gap_ms": 103.62122,
+          "nominal_hz": 10.0,
+          "observed_hz": 9.999472182,
+          "out_of_order_count": 0,
+          "sample_count": 300,
+          "sensor": "lidar"
+        }
+      ],
+      "trajectory": {
+        "ate_p95_m": 0.057945509,
+        "ate_rmse_m": 0.035800944,
+        "final_drift_m": 0.045378456,
+        "heading_rmse_deg": 0.611329231,
+        "path_length_error_pct": 0.751794233,
+        "rpe_rmse_m": 0.044499195,
+        "sample_count": 601
+      },
+      "unchanged_inputs": {
+        "estimated_trajectory.csv": true,
+        "reference_trajectory.csv": true,
+        "sensor_timestamps.csv": true
+      }
+    },
+    {
+      "camera_lidar_sync_p95_ms": 11.7789775,
+      "checks": [
+        {
+          "name": "trajectory.ate_rmse",
+          "passed": true,
+          "threshold": 0.12,
+          "unit": "m",
+          "value": 0.035800944
+        },
+        {
+          "name": "trajectory.rpe_rmse",
+          "passed": true,
+          "threshold": 0.1,
+          "unit": "m",
+          "value": 0.044499195
+        },
+        {
+          "name": "trajectory.final_drift",
+          "passed": true,
+          "threshold": 0.2,
+          "unit": "m",
+          "value": 0.045378456
+        },
+        {
+          "name": "trajectory.heading_rmse",
+          "passed": true,
+          "threshold": 3.0,
+          "unit": "deg",
+          "value": 0.611329231
+        },
+        {
+          "name": "trajectory.path_length_error",
+          "passed": true,
+          "threshold": 5.0,
+          "unit": "%",
+          "value": 0.751794233
+        },
+        {
+          "name": "sync.camera_lidar_p95",
+          "passed": false,
+          "threshold": 8.0,
+          "unit": "ms",
+          "value": 11.7789775
+        },
+        {
+          "name": "timing.camera.jitter_rms",
+          "passed": false,
+          "threshold": 1.5,
+          "unit": "ms",
+          "value": 4.603758306
+        },
+        {
+          "name": "timing.camera.dropout_rate",
+          "passed": true,
+          "threshold": 0.015,
+          "unit": "ratio",
+          "value": 0.0
+        },
+        {
+          "name": "timing.camera.out_of_order",
+          "passed": true,
+          "threshold": 0.0,
+          "unit": "count",
+          "value": 0.0
+        },
+        {
+          "name": "timing.imu.jitter_rms",
+          "passed": false,
+          "threshold": 0.5,
+          "unit": "ms",
+          "value": 1.074964441
+        },
+        {
+          "name": "timing.imu.dropout_rate",
+          "passed": true,
+          "threshold": 0.015,
+          "unit": "ratio",
+          "value": 0.0
+        },
+        {
+          "name": "timing.imu.out_of_order",
+          "passed": true,
+          "threshold": 0.0,
+          "unit": "count",
+          "value": 0.0
+        },
+        {
+          "name": "timing.lidar.jitter_rms",
+          "passed": false,
+          "threshold": 2.5,
+          "unit": "ms",
+          "value": 8.523588031
+        },
+        {
+          "name": "timing.lidar.dropout_rate",
+          "passed": true,
+          "threshold": 0.015,
+          "unit": "ratio",
+          "value": 0.0
+        },
+        {
+          "name": "timing.lidar.out_of_order",
+          "passed": true,
+          "threshold": 0.0,
+          "unit": "count",
+          "value": 0.0
+        }
+      ],
+      "failed_gates": [
+        "sync.camera_lidar_p95",
+        "timing.camera.jitter_rms",
+        "timing.imu.jitter_rms",
+        "timing.lidar.jitter_rms"
+      ],
+      "fault": "timing_jitter",
+      "input_directory": "data/ablation/20261010/timing_jitter",
+      "input_sha256": {
+        "estimated_trajectory.csv": "c17a3cd898661186ed38020a9b3935d3a87efd145184b5dd7c7f6f3b8324d7ca",
+        "reference_trajectory.csv": "3052440c45451e67d64d740e4869b1407aafb895288d209d31b21a909a002b3a",
+        "sensor_timestamps.csv": "986b133d06a0389e29e6a5db6c5d10406757db32c707c7e0b8ffda47f1a0add0"
+      },
+      "paired_delta": {
+        "ate_rmse_m": 0.0,
+        "rpe_rmse_m": 0.0,
+        "sync_p95_ms": 9.752083
+      },
+      "seed": 20261010,
+      "timing": [
+        {
+          "dropout_rate": 0.0,
+          "estimated_dropouts": 0,
+          "jitter_rms_ms": 4.603758306,
+          "max_gap_ms": 53.08965,
+          "nominal_hz": 30.0,
+          "observed_hz": 29.994357137,
+          "out_of_order_count": 0,
+          "sample_count": 900,
+          "sensor": "camera"
+        },
+        {
+          "dropout_rate": 0.0,
+          "estimated_dropouts": 0,
+          "jitter_rms_ms": 1.074964441,
+          "max_gap_ms": 13.68642,
+          "nominal_hz": 100.0,
+          "observed_hz": 100.001017283,
+          "out_of_order_count": 0,
+          "sample_count": 3000,
+          "sensor": "imu"
+        },
+        {
+          "dropout_rate": 0.0,
+          "estimated_dropouts": 0,
+          "jitter_rms_ms": 8.523588031,
+          "max_gap_ms": 128.45249,
+          "nominal_hz": 10.0,
+          "observed_hz": 9.995854348,
+          "out_of_order_count": 0,
+          "sample_count": 300,
+          "sensor": "lidar"
+        }
+      ],
+      "trajectory": {
+        "ate_p95_m": 0.057945509,
+        "ate_rmse_m": 0.035800944,
+        "final_drift_m": 0.045378456,
+        "heading_rmse_deg": 0.611329231,
+        "path_length_error_pct": 0.751794233,
+        "rpe_rmse_m": 0.044499195,
+        "sample_count": 601
+      },
+      "unchanged_inputs": {
+        "estimated_trajectory.csv": true,
+        "reference_trajectory.csv": true,
+        "sensor_timestamps.csv": false
+      }
+    },
+    {
+      "camera_lidar_sync_p95_ms": 16.7856135,
+      "checks": [
+        {
+          "name": "trajectory.ate_rmse",
+          "passed": true,
+          "threshold": 0.12,
+          "unit": "m",
+          "value": 0.035800944
+        },
+        {
+          "name": "trajectory.rpe_rmse",
+          "passed": true,
+          "threshold": 0.1,
+          "unit": "m",
+          "value": 0.044499195
+        },
+        {
+          "name": "trajectory.final_drift",
+          "passed": true,
+          "threshold": 0.2,
+          "unit": "m",
+          "value": 0.045378456
+        },
+        {
+          "name": "trajectory.heading_rmse",
+          "passed": true,
+          "threshold": 3.0,
+          "unit": "deg",
+          "value": 0.611329231
+        },
+        {
+          "name": "trajectory.path_length_error",
+          "passed": true,
+          "threshold": 5.0,
+          "unit": "%",
+          "value": 0.751794233
+        },
+        {
+          "name": "sync.camera_lidar_p95",
+          "passed": false,
+          "threshold": 8.0,
+          "unit": "ms",
+          "value": 16.7856135
+        },
+        {
+          "name": "timing.camera.jitter_rms",
+          "passed": true,
+          "threshold": 1.5,
+          "unit": "ms",
+          "value": 0.503536099
+        },
+        {
+          "name": "timing.camera.dropout_rate",
+          "passed": true,
+          "threshold": 0.015,
+          "unit": "ratio",
+          "value": 0.0
+        },
+        {
+          "name": "timing.camera.out_of_order",
+          "passed": true,
+          "threshold": 0.0,
+          "unit": "count",
+          "value": 0.0
+        },
+        {
+          "name": "timing.imu.jitter_rms",
+          "passed": true,
+          "threshold": 0.5,
+          "unit": "ms",
+          "value": 0.114662742
+        },
+        {
+          "name": "timing.imu.dropout_rate",
+          "passed": true,
+          "threshold": 0.015,
+          "unit": "ratio",
+          "value": 0.0
+        },
+        {
+          "name": "timing.imu.out_of_order",
+          "passed": true,
+          "threshold": 0.0,
+          "unit": "count",
+          "value": 0.0
+        },
+        {
+          "name": "timing.lidar.jitter_rms",
+          "passed": true,
+          "threshold": 2.5,
+          "unit": "ms",
+          "value": 1.084820113
+        },
+        {
+          "name": "timing.lidar.dropout_rate",
+          "passed": true,
+          "threshold": 0.015,
+          "unit": "ratio",
+          "value": 0.0
+        },
+        {
+          "name": "timing.lidar.out_of_order",
+          "passed": true,
+          "threshold": 0.0,
+          "unit": "count",
+          "value": 0.0
+        }
+      ],
+      "failed_gates": [
+        "sync.camera_lidar_p95"
+      ],
+      "fault": "lidar_offset",
+      "input_directory": "data/ablation/20261010/lidar_offset",
+      "input_sha256": {
+        "estimated_trajectory.csv": "c17a3cd898661186ed38020a9b3935d3a87efd145184b5dd7c7f6f3b8324d7ca",
+        "reference_trajectory.csv": "3052440c45451e67d64d740e4869b1407aafb895288d209d31b21a909a002b3a",
+        "sensor_timestamps.csv": "4e32d6a836ab8750818fcdf6dc6b661b1962ac43a39f6fd75cfcea31060dc935"
+      },
+      "paired_delta": {
+        "ate_rmse_m": 0.0,
+        "rpe_rmse_m": 0.0,
+        "sync_p95_ms": 14.758719
+      },
+      "seed": 20261010,
+      "timing": [
+        {
+          "dropout_rate": 0.0,
+          "estimated_dropouts": 0,
+          "jitter_rms_ms": 0.503536099,
+          "max_gap_ms": 35.49418,
+          "nominal_hz": 30.0,
+          "observed_hz": 29.999382713,
+          "out_of_order_count": 0,
+          "sample_count": 900,
+          "sensor": "camera"
+        },
+        {
+          "dropout_rate": 0.0,
+          "estimated_dropouts": 0,
+          "jitter_rms_ms": 0.114662742,
+          "max_gap_ms": 10.39322,
+          "nominal_hz": 100.0,
+          "observed_hz": 100.000108503,
+          "out_of_order_count": 0,
+          "sample_count": 3000,
+          "sensor": "imu"
+        },
+        {
+          "dropout_rate": 0.0,
+          "estimated_dropouts": 0,
+          "jitter_rms_ms": 1.084820113,
+          "max_gap_ms": 103.62122,
+          "nominal_hz": 10.0,
+          "observed_hz": 9.999472182,
+          "out_of_order_count": 0,
+          "sample_count": 300,
+          "sensor": "lidar"
+        }
+      ],
+      "trajectory": {
+        "ate_p95_m": 0.057945509,
+        "ate_rmse_m": 0.035800944,
+        "final_drift_m": 0.045378456,
+        "heading_rmse_deg": 0.611329231,
+        "path_length_error_pct": 0.751794233,
+        "rpe_rmse_m": 0.044499195,
+        "sample_count": 601
+      },
+      "unchanged_inputs": {
+        "estimated_trajectory.csv": true,
+        "reference_trajectory.csv": true,
+        "sensor_timestamps.csv": false
+      }
+    },
+    {
+      "camera_lidar_sync_p95_ms": 2.0400505,
+      "checks": [
+        {
+          "name": "trajectory.ate_rmse",
+          "passed": true,
+          "threshold": 0.12,
+          "unit": "m",
+          "value": 0.035800944
+        },
+        {
+          "name": "trajectory.rpe_rmse",
+          "passed": true,
+          "threshold": 0.1,
+          "unit": "m",
+          "value": 0.044499195
+        },
+        {
+          "name": "trajectory.final_drift",
+          "passed": true,
+          "threshold": 0.2,
+          "unit": "m",
+          "value": 0.045378456
+        },
+        {
+          "name": "trajectory.heading_rmse",
+          "passed": true,
+          "threshold": 3.0,
+          "unit": "deg",
+          "value": 0.611329231
+        },
+        {
+          "name": "trajectory.path_length_error",
+          "passed": true,
+          "threshold": 5.0,
+          "unit": "%",
+          "value": 0.751794233
+        },
+        {
+          "name": "sync.camera_lidar_p95",
+          "passed": true,
+          "threshold": 8.0,
+          "unit": "ms",
+          "value": 2.0400505
+        },
+        {
+          "name": "timing.camera.jitter_rms",
+          "passed": true,
+          "threshold": 1.5,
+          "unit": "ms",
+          "value": 0.503536099
+        },
+        {
+          "name": "timing.camera.dropout_rate",
+          "passed": true,
+          "threshold": 0.015,
+          "unit": "ratio",
+          "value": 0.0
+        },
+        {
+          "name": "timing.camera.out_of_order",
+          "passed": true,
+          "threshold": 0.0,
+          "unit": "count",
+          "value": 0.0
+        },
+        {
+          "name": "timing.imu.jitter_rms",
+          "passed": true,
+          "threshold": 0.5,
+          "unit": "ms",
+          "value": 0.114662742
+        },
+        {
+          "name": "timing.imu.dropout_rate",
+          "passed": true,
+          "threshold": 0.015,
+          "unit": "ratio",
+          "value": 0.0
+        },
+        {
+          "name": "timing.imu.out_of_order",
+          "passed": true,
+          "threshold": 0.0,
+          "unit": "count",
+          "value": 0.0
+        },
+        {
+          "name": "timing.lidar.jitter_rms",
+          "passed": true,
+          "threshold": 2.5,
+          "unit": "ms",
+          "value": 1.083683739
+        },
+        {
+          "name": "timing.lidar.dropout_rate",
+          "passed": false,
+          "threshold": 0.015,
+          "unit": "ratio",
+          "value": 0.026666667
+        },
+        {
+          "name": "timing.lidar.out_of_order",
+          "passed": true,
+          "threshold": 0.0,
+          "unit": "count",
+          "value": 0.0
+        }
+      ],
+      "failed_gates": [
+        "timing.lidar.dropout_rate"
+      ],
+      "fault": "lidar_dropout",
+      "input_directory": "data/ablation/20261010/lidar_dropout",
+      "input_sha256": {
+        "estimated_trajectory.csv": "c17a3cd898661186ed38020a9b3935d3a87efd145184b5dd7c7f6f3b8324d7ca",
+        "reference_trajectory.csv": "3052440c45451e67d64d740e4869b1407aafb895288d209d31b21a909a002b3a",
+        "sensor_timestamps.csv": "a4e4d42595a5babc0b4cb0fbbf8f8a49a2634009ab03514b7d9284f58ef14fbc"
+      },
+      "paired_delta": {
+        "ate_rmse_m": 0.0,
+        "rpe_rmse_m": 0.0,
+        "sync_p95_ms": 0.013156
+      },
+      "seed": 20261010,
+      "timing": [
+        {
+          "dropout_rate": 0.0,
+          "estimated_dropouts": 0,
+          "jitter_rms_ms": 0.503536099,
+          "max_gap_ms": 35.49418,
+          "nominal_hz": 30.0,
+          "observed_hz": 29.999382713,
+          "out_of_order_count": 0,
+          "sample_count": 900,
+          "sensor": "camera"
+        },
+        {
+          "dropout_rate": 0.0,
+          "estimated_dropouts": 0,
+          "jitter_rms_ms": 0.114662742,
+          "max_gap_ms": 10.39322,
+          "nominal_hz": 100.0,
+          "observed_hz": 100.000108503,
+          "out_of_order_count": 0,
+          "sample_count": 3000,
+          "sensor": "imu"
+        },
+        {
+          "dropout_rate": 0.026666667,
+          "estimated_dropouts": 8,
+          "jitter_rms_ms": 1.083683739,
+          "max_gap_ms": 200.28963,
+          "nominal_hz": 10.0,
+          "observed_hz": 9.999472182,
+          "out_of_order_count": 0,
+          "sample_count": 292,
+          "sensor": "lidar"
+        }
+      ],
+      "trajectory": {
+        "ate_p95_m": 0.057945509,
+        "ate_rmse_m": 0.035800944,
+        "final_drift_m": 0.045378456,
+        "heading_rmse_deg": 0.611329231,
+        "path_length_error_pct": 0.751794233,
+        "rpe_rmse_m": 0.044499195,
+        "sample_count": 601
+      },
+      "unchanged_inputs": {
+        "estimated_trajectory.csv": true,
+        "reference_trajectory.csv": true,
+        "sensor_timestamps.csv": false
+      }
+    },
+    {
+      "camera_lidar_sync_p95_ms": 2.0268945,
+      "checks": [
+        {
+          "name": "trajectory.ate_rmse",
+          "passed": true,
+          "threshold": 0.12,
+          "unit": "m",
+          "value": 0.035800944
+        },
+        {
+          "name": "trajectory.rpe_rmse",
+          "passed": true,
+          "threshold": 0.1,
+          "unit": "m",
+          "value": 0.044499195
+        },
+        {
+          "name": "trajectory.final_drift",
+          "passed": true,
+          "threshold": 0.2,
+          "unit": "m",
+          "value": 0.045378456
+        },
+        {
+          "name": "trajectory.heading_rmse",
+          "passed": true,
+          "threshold": 3.0,
+          "unit": "deg",
+          "value": 0.611329231
+        },
+        {
+          "name": "trajectory.path_length_error",
+          "passed": true,
+          "threshold": 5.0,
+          "unit": "%",
+          "value": 0.751794233
+        },
+        {
+          "name": "sync.camera_lidar_p95",
+          "passed": true,
+          "threshold": 8.0,
+          "unit": "ms",
+          "value": 2.0268945
+        },
+        {
+          "name": "timing.camera.jitter_rms",
+          "passed": false,
+          "threshold": 1.5,
+          "unit": "ms",
+          "value": 1.646724383
+        },
+        {
+          "name": "timing.camera.dropout_rate",
+          "passed": true,
+          "threshold": 0.015,
+          "unit": "ratio",
+          "value": 0.0
+        },
+        {
+          "name": "timing.camera.out_of_order",
+          "passed": false,
+          "threshold": 0.0,
+          "unit": "count",
+          "value": 1.0
+        },
+        {
+          "name": "timing.imu.jitter_rms",
+          "passed": true,
+          "threshold": 0.5,
+          "unit": "ms",
+          "value": 0.114662742
+        },
+        {
+          "name": "timing.imu.dropout_rate",
+          "passed": true,
+          "threshold": 0.015,
+          "unit": "ratio",
+          "value": 0.0
+        },
+        {
+          "name": "timing.imu.out_of_order",
+          "passed": true,
+          "threshold": 0.0,
+          "unit": "count",
+          "value": 0.0
+        },
+        {
+          "name": "timing.lidar.jitter_rms",
+          "passed": true,
+          "threshold": 2.5,
+          "unit": "ms",
+          "value": 1.084820113
+        },
+        {
+          "name": "timing.lidar.dropout_rate",
+          "passed": true,
+          "threshold": 0.015,
+          "unit": "ratio",
+          "value": 0.0
+        },
+        {
+          "name": "timing.lidar.out_of_order",
+          "passed": true,
+          "threshold": 0.0,
+          "unit": "count",
+          "value": 0.0
+        }
+      ],
+      "failed_gates": [
+        "timing.camera.jitter_rms",
+        "timing.camera.out_of_order"
+      ],
+      "fault": "camera_reversal",
+      "input_directory": "data/ablation/20261010/camera_reversal",
+      "input_sha256": {
+        "estimated_trajectory.csv": "c17a3cd898661186ed38020a9b3935d3a87efd145184b5dd7c7f6f3b8324d7ca",
+        "reference_trajectory.csv": "3052440c45451e67d64d740e4869b1407aafb895288d209d31b21a909a002b3a",
+        "sensor_timestamps.csv": "034231c7da174162fbbeadd55b0a274b9588a18ad5af6361785a605ab3393722"
+      },
+      "paired_delta": {
+        "ate_rmse_m": 0.0,
+        "rpe_rmse_m": 0.0,
+        "sync_p95_ms": 0.0
+      },
+      "seed": 20261010,
+      "timing": [
+        {
+          "dropout_rate": 0.0,
+          "estimated_dropouts": 0,
+          "jitter_rms_ms": 1.646724383,
+          "max_gap_ms": 66.9569,
+          "nominal_hz": 30.0,
+          "observed_hz": 29.999382713,
+          "out_of_order_count": 1,
+          "sample_count": 900,
+          "sensor": "camera"
+        },
+        {
+          "dropout_rate": 0.0,
+          "estimated_dropouts": 0,
+          "jitter_rms_ms": 0.114662742,
+          "max_gap_ms": 10.39322,
+          "nominal_hz": 100.0,
+          "observed_hz": 100.000108503,
+          "out_of_order_count": 0,
+          "sample_count": 3000,
+          "sensor": "imu"
+        },
+        {
+          "dropout_rate": 0.0,
+          "estimated_dropouts": 0,
+          "jitter_rms_ms": 1.084820113,
+          "max_gap_ms": 103.62122,
+          "nominal_hz": 10.0,
+          "observed_hz": 9.999472182,
+          "out_of_order_count": 0,
+          "sample_count": 300,
+          "sensor": "lidar"
+        }
+      ],
+      "trajectory": {
+        "ate_p95_m": 0.057945509,
+        "ate_rmse_m": 0.035800944,
+        "final_drift_m": 0.045378456,
+        "heading_rmse_deg": 0.611329231,
+        "path_length_error_pct": 0.751794233,
+        "rpe_rmse_m": 0.044499195,
+        "sample_count": 601
+      },
+      "unchanged_inputs": {
+        "estimated_trajectory.csv": true,
+        "reference_trajectory.csv": true,
+        "sensor_timestamps.csv": false
+      }
+    },
+    {
+      "camera_lidar_sync_p95_ms": 2.0268945,
+      "checks": [
+        {
+          "name": "trajectory.ate_rmse",
+          "passed": false,
+          "threshold": 0.12,
+          "unit": "m",
+          "value": 0.176978486
+        },
+        {
+          "name": "trajectory.rpe_rmse",
+          "passed": true,
+          "threshold": 0.1,
+          "unit": "m",
+          "value": 0.048637318
+        },
+        {
+          "name": "trajectory.final_drift",
+          "passed": false,
+          "threshold": 0.2,
+          "unit": "m",
+          "value": 0.309168147
+        },
+        {
+          "name": "trajectory.heading_rmse",
+          "passed": true,
+          "threshold": 3.0,
+          "unit": "deg",
+          "value": 1.079069343
+        },
+        {
+          "name": "trajectory.path_length_error",
+          "passed": true,
+          "threshold": 5.0,
+          "unit": "%",
+          "value": 4.054986616
+        },
+        {
+          "name": "sync.camera_lidar_p95",
+          "passed": true,
+          "threshold": 8.0,
+          "unit": "ms",
+          "value": 2.0268945
+        },
+        {
+          "name": "timing.camera.jitter_rms",
+          "passed": true,
+          "threshold": 1.5,
+          "unit": "ms",
+          "value": 0.503536099
+        },
+        {
+          "name": "timing.camera.dropout_rate",
+          "passed": true,
+          "threshold": 0.015,
+          "unit": "ratio",
+          "value": 0.0
+        },
+        {
+          "name": "timing.camera.out_of_order",
+          "passed": true,
+          "threshold": 0.0,
+          "unit": "count",
+          "value": 0.0
+        },
+        {
+          "name": "timing.imu.jitter_rms",
+          "passed": true,
+          "threshold": 0.5,
+          "unit": "ms",
+          "value": 0.114662742
+        },
+        {
+          "name": "timing.imu.dropout_rate",
+          "passed": true,
+          "threshold": 0.015,
+          "unit": "ratio",
+          "value": 0.0
+        },
+        {
+          "name": "timing.imu.out_of_order",
+          "passed": true,
+          "threshold": 0.0,
+          "unit": "count",
+          "value": 0.0
+        },
+        {
+          "name": "timing.lidar.jitter_rms",
+          "passed": true,
+          "threshold": 2.5,
+          "unit": "ms",
+          "value": 1.084820113
+        },
+        {
+          "name": "timing.lidar.dropout_rate",
+          "passed": true,
+          "threshold": 0.015,
+          "unit": "ratio",
+          "value": 0.0
+        },
+        {
+          "name": "timing.lidar.out_of_order",
+          "passed": true,
+          "threshold": 0.0,
+          "unit": "count",
+          "value": 0.0
+        }
+      ],
+      "failed_gates": [
+        "trajectory.ate_rmse",
+        "trajectory.final_drift"
+      ],
+      "fault": "trajectory_drift",
+      "input_directory": "data/ablation/20261010/trajectory_drift",
+      "input_sha256": {
+        "estimated_trajectory.csv": "5fb82b10a0ffb603cef20de55b414ccca771e672e78eba16f1eefd7c7762be6b",
+        "reference_trajectory.csv": "3052440c45451e67d64d740e4869b1407aafb895288d209d31b21a909a002b3a",
+        "sensor_timestamps.csv": "4a5410d0e5d1a8df23c86112c767502ea60974279f2f5733cb84daef47218d07"
+      },
+      "paired_delta": {
+        "ate_rmse_m": 0.141177542,
+        "rpe_rmse_m": 0.004138123,
+        "sync_p95_ms": 0.0
+      },
+      "seed": 20261010,
+      "timing": [
+        {
+          "dropout_rate": 0.0,
+          "estimated_dropouts": 0,
+          "jitter_rms_ms": 0.503536099,
+          "max_gap_ms": 35.49418,
+          "nominal_hz": 30.0,
+          "observed_hz": 29.999382713,
+          "out_of_order_count": 0,
+          "sample_count": 900,
+          "sensor": "camera"
+        },
+        {
+          "dropout_rate": 0.0,
+          "estimated_dropouts": 0,
+          "jitter_rms_ms": 0.114662742,
+          "max_gap_ms": 10.39322,
+          "nominal_hz": 100.0,
+          "observed_hz": 100.000108503,
+          "out_of_order_count": 0,
+          "sample_count": 3000,
+          "sensor": "imu"
+        },
+        {
+          "dropout_rate": 0.0,
+          "estimated_dropouts": 0,
+          "jitter_rms_ms": 1.084820113,
+          "max_gap_ms": 103.62122,
+          "nominal_hz": 10.0,
+          "observed_hz": 9.999472182,
+          "out_of_order_count": 0,
+          "sample_count": 300,
+          "sensor": "lidar"
+        }
+      ],
+      "trajectory": {
+        "ate_p95_m": 0.283827805,
+        "ate_rmse_m": 0.176978486,
+        "final_drift_m": 0.309168147,
+        "heading_rmse_deg": 1.079069343,
+        "path_length_error_pct": 4.054986616,
+        "rpe_rmse_m": 0.048637318,
+        "sample_count": 601
+      },
+      "unchanged_inputs": {
+        "estimated_trajectory.csv": false,
+        "reference_trajectory.csv": true,
+        "sensor_timestamps.csv": true
+      }
+    },
+    {
+      "camera_lidar_sync_p95_ms": 2.0268945,
+      "checks": [
+        {
+          "name": "trajectory.ate_rmse",
+          "passed": true,
+          "threshold": 0.12,
+          "unit": "m",
+          "value": 0.090770297
+        },
+        {
+          "name": "trajectory.rpe_rmse",
+          "passed": true,
+          "threshold": 0.1,
+          "unit": "m",
+          "value": 0.077356943
+        },
+        {
+          "name": "trajectory.final_drift",
+          "passed": true,
+          "threshold": 0.2,
+          "unit": "m",
+          "value": 0.025185796
+        },
+        {
+          "name": "trajectory.heading_rmse",
+          "passed": true,
+          "threshold": 3.0,
+          "unit": "deg",
+          "value": 0.610696119
+        },
+        {
+          "name": "trajectory.path_length_error",
+          "passed": true,
+          "threshold": 5.0,
+          "unit": "%",
+          "value": 0.720501217
+        },
+        {
+          "name": "sync.camera_lidar_p95",
+          "passed": true,
+          "threshold": 8.0,
+          "unit": "ms",
+          "value": 2.0268945
+        },
+        {
+          "name": "timing.camera.jitter_rms",
+          "passed": true,
+          "threshold": 1.5,
+          "unit": "ms",
+          "value": 0.503536099
+        },
+        {
+          "name": "timing.camera.dropout_rate",
+          "passed": true,
+          "threshold": 0.015,
+          "unit": "ratio",
+          "value": 0.0
+        },
+        {
+          "name": "timing.camera.out_of_order",
+          "passed": true,
+          "threshold": 0.0,
+          "unit": "count",
+          "value": 0.0
+        },
+        {
+          "name": "timing.imu.jitter_rms",
+          "passed": true,
+          "threshold": 0.5,
+          "unit": "ms",
+          "value": 0.114662742
+        },
+        {
+          "name": "timing.imu.dropout_rate",
+          "passed": true,
+          "threshold": 0.015,
+          "unit": "ratio",
+          "value": 0.0
+        },
+        {
+          "name": "timing.imu.out_of_order",
+          "passed": true,
+          "threshold": 0.0,
+          "unit": "count",
+          "value": 0.0
+        },
+        {
+          "name": "timing.lidar.jitter_rms",
+          "passed": true,
+          "threshold": 2.5,
+          "unit": "ms",
+          "value": 1.084820113
+        },
+        {
+          "name": "timing.lidar.dropout_rate",
+          "passed": true,
+          "threshold": 0.015,
+          "unit": "ratio",
+          "value": 0.0
+        },
+        {
+          "name": "timing.lidar.out_of_order",
+          "passed": true,
+          "threshold": 0.0,
+          "unit": "count",
+          "value": 0.0
+        }
+      ],
+      "failed_gates": [],
+      "fault": "trajectory_bump",
+      "input_directory": "data/ablation/20261010/trajectory_bump",
+      "input_sha256": {
+        "estimated_trajectory.csv": "183e5ba13da8a3797c155251d60920c8a4ea6b6160b59ea77684ef252a29c4b8",
+        "reference_trajectory.csv": "3052440c45451e67d64d740e4869b1407aafb895288d209d31b21a909a002b3a",
+        "sensor_timestamps.csv": "4a5410d0e5d1a8df23c86112c767502ea60974279f2f5733cb84daef47218d07"
+      },
+      "paired_delta": {
+        "ate_rmse_m": 0.054969353,
+        "rpe_rmse_m": 0.032857748,
+        "sync_p95_ms": 0.0
+      },
+      "seed": 20261010,
+      "timing": [
+        {
+          "dropout_rate": 0.0,
+          "estimated_dropouts": 0,
+          "jitter_rms_ms": 0.503536099,
+          "max_gap_ms": 35.49418,
+          "nominal_hz": 30.0,
+          "observed_hz": 29.999382713,
+          "out_of_order_count": 0,
+          "sample_count": 900,
+          "sensor": "camera"
+        },
+        {
+          "dropout_rate": 0.0,
+          "estimated_dropouts": 0,
+          "jitter_rms_ms": 0.114662742,
+          "max_gap_ms": 10.39322,
+          "nominal_hz": 100.0,
+          "observed_hz": 100.000108503,
+          "out_of_order_count": 0,
+          "sample_count": 3000,
+          "sensor": "imu"
+        },
+        {
+          "dropout_rate": 0.0,
+          "estimated_dropouts": 0,
+          "jitter_rms_ms": 1.084820113,
+          "max_gap_ms": 103.62122,
+          "nominal_hz": 10.0,
+          "observed_hz": 9.999472182,
+          "out_of_order_count": 0,
+          "sample_count": 300,
+          "sensor": "lidar"
+        }
+      ],
+      "trajectory": {
+        "ate_p95_m": 0.249905221,
+        "ate_rmse_m": 0.090770297,
+        "final_drift_m": 0.025185796,
+        "heading_rmse_deg": 0.610696119,
+        "path_length_error_pct": 0.720501217,
+        "rpe_rmse_m": 0.077356943,
+        "sample_count": 601
+      },
+      "unchanged_inputs": {
+        "estimated_trajectory.csv": false,
+        "reference_trajectory.csv": true,
+        "sensor_timestamps.csv": true
+      }
+    },
+    {
+      "camera_lidar_sync_p95_ms": 2.0114775,
+      "checks": [
+        {
+          "name": "trajectory.ate_rmse",
+          "passed": true,
+          "threshold": 0.12,
+          "unit": "m",
+          "value": 0.036267356
+        },
+        {
+          "name": "trajectory.rpe_rmse",
+          "passed": true,
+          "threshold": 0.1,
+          "unit": "m",
+          "value": 0.044146973
+        },
+        {
+          "name": "trajectory.final_drift",
+          "passed": true,
+          "threshold": 0.2,
+          "unit": "m",
+          "value": 0.050035829
+        },
+        {
+          "name": "trajectory.heading_rmse",
+          "passed": true,
+          "threshold": 3.0,
+          "unit": "deg",
+          "value": 0.597758321
+        },
+        {
+          "name": "trajectory.path_length_error",
+          "passed": true,
+          "threshold": 5.0,
+          "unit": "%",
+          "value": 0.698209828
+        },
+        {
+          "name": "sync.camera_lidar_p95",
+          "passed": true,
+          "threshold": 8.0,
+          "unit": "ms",
+          "value": 2.0114775
+        },
+        {
+          "name": "timing.camera.jitter_rms",
+          "passed": true,
+          "threshold": 1.5,
+          "unit": "ms",
+          "value": 0.467024616
+        },
+        {
+          "name": "timing.camera.dropout_rate",
+          "passed": true,
+          "threshold": 0.015,
+          "unit": "ratio",
+          "value": 0.0
+        },
+        {
+          "name": "timing.camera.out_of_order",
+          "passed": true,
+          "threshold": 0.0,
+          "unit": "count",
+          "value": 0.0
+        },
+        {
+          "name": "timing.imu.jitter_rms",
+          "passed": true,
+          "threshold": 0.5,
+          "unit": "ms",
+          "value": 0.113205016
+        },
+        {
+          "name": "timing.imu.dropout_rate",
+          "passed": true,
+          "threshold": 0.015,
+          "unit": "ratio",
+          "value": 0.0
+        },
+        {
+          "name": "timing.imu.out_of_order",
+          "passed": true,
+          "threshold": 0.0,
+          "unit": "count",
+          "value": 0.0
+        },
+        {
+          "name": "timing.lidar.jitter_rms",
+          "passed": true,
+          "threshold": 2.5,
+          "unit": "ms",
+          "value": 0.915804869
+        },
+        {
+          "name": "timing.lidar.dropout_rate",
+          "passed": true,
+          "threshold": 0.015,
+          "unit": "ratio",
+          "value": 0.0
+        },
+        {
+          "name": "timing.lidar.out_of_order",
+          "passed": true,
+          "threshold": 0.0,
+          "unit": "count",
+          "value": 0.0
+        }
+      ],
+      "failed_gates": [],
+      "fault": "baseline",
+      "input_directory": "data/ablation/20261011/baseline",
+      "input_sha256": {
+        "estimated_trajectory.csv": "89ab19d10162c81cb4f75f336314d3e2574a1562a1e36d36ee747cfa08c9720a",
+        "reference_trajectory.csv": "3052440c45451e67d64d740e4869b1407aafb895288d209d31b21a909a002b3a",
+        "sensor_timestamps.csv": "5ac6d7a27470a580e6b94fabe90bdde35a461374a4c8cdcc757535f8c2e4c3ba"
+      },
+      "paired_delta": {
+        "ate_rmse_m": 0.0,
+        "rpe_rmse_m": 0.0,
+        "sync_p95_ms": 0.0
+      },
+      "seed": 20261011,
+      "timing": [
+        {
+          "dropout_rate": 0.0,
+          "estimated_dropouts": 0,
+          "jitter_rms_ms": 0.467024616,
+          "max_gap_ms": 35.11617,
+          "nominal_hz": 30.0,
+          "observed_hz": 29.999686181,
+          "out_of_order_count": 0,
+          "sample_count": 900,
+          "sensor": "camera"
+        },
+        {
+          "dropout_rate": 0.0,
+          "estimated_dropouts": 0,
+          "jitter_rms_ms": 0.113205016,
+          "max_gap_ms": 10.37181,
+          "nominal_hz": 100.0,
+          "observed_hz": 100.000163988,
+          "out_of_order_count": 0,
+          "sample_count": 3000,
+          "sensor": "imu"
+        },
+        {
+          "dropout_rate": 0.0,
+          "estimated_dropouts": 0,
+          "jitter_rms_ms": 0.915804869,
+          "max_gap_ms": 102.79279,
+          "nominal_hz": 10.0,
+          "observed_hz": 10.00007794,
+          "out_of_order_count": 0,
+          "sample_count": 300,
+          "sensor": "lidar"
+        }
+      ],
+      "trajectory": {
+        "ate_p95_m": 0.058694896,
+        "ate_rmse_m": 0.036267356,
+        "final_drift_m": 0.050035829,
+        "heading_rmse_deg": 0.597758321,
+        "path_length_error_pct": 0.698209828,
+        "rpe_rmse_m": 0.044146973,
+        "sample_count": 601
+      },
+      "unchanged_inputs": {
+        "estimated_trajectory.csv": true,
+        "reference_trajectory.csv": true,
+        "sensor_timestamps.csv": true
+      }
+    },
+    {
+      "camera_lidar_sync_p95_ms": 12.0974895,
+      "checks": [
+        {
+          "name": "trajectory.ate_rmse",
+          "passed": true,
+          "threshold": 0.12,
+          "unit": "m",
+          "value": 0.036267356
+        },
+        {
+          "name": "trajectory.rpe_rmse",
+          "passed": true,
+          "threshold": 0.1,
+          "unit": "m",
+          "value": 0.044146973
+        },
+        {
+          "name": "trajectory.final_drift",
+          "passed": true,
+          "threshold": 0.2,
+          "unit": "m",
+          "value": 0.050035829
+        },
+        {
+          "name": "trajectory.heading_rmse",
+          "passed": true,
+          "threshold": 3.0,
+          "unit": "deg",
+          "value": 0.597758321
+        },
+        {
+          "name": "trajectory.path_length_error",
+          "passed": true,
+          "threshold": 5.0,
+          "unit": "%",
+          "value": 0.698209828
+        },
+        {
+          "name": "sync.camera_lidar_p95",
+          "passed": false,
+          "threshold": 8.0,
+          "unit": "ms",
+          "value": 12.0974895
+        },
+        {
+          "name": "timing.camera.jitter_rms",
+          "passed": false,
+          "threshold": 1.5,
+          "unit": "ms",
+          "value": 4.26994074
+        },
+        {
+          "name": "timing.camera.dropout_rate",
+          "passed": true,
+          "threshold": 0.015,
+          "unit": "ratio",
+          "value": 0.0
+        },
+        {
+          "name": "timing.camera.out_of_order",
+          "passed": true,
+          "threshold": 0.0,
+          "unit": "count",
+          "value": 0.0
+        },
+        {
+          "name": "timing.imu.jitter_rms",
+          "passed": false,
+          "threshold": 0.5,
+          "unit": "ms",
+          "value": 1.061297863
+        },
+        {
+          "name": "timing.imu.dropout_rate",
+          "passed": true,
+          "threshold": 0.015,
+          "unit": "ratio",
+          "value": 0.0
+        },
+        {
+          "name": "timing.imu.out_of_order",
+          "passed": true,
+          "threshold": 0.0,
+          "unit": "count",
+          "value": 0.0
+        },
+        {
+          "name": "timing.lidar.jitter_rms",
+          "passed": false,
+          "threshold": 2.5,
+          "unit": "ms",
+          "value": 7.195616179
+        },
+        {
+          "name": "timing.lidar.dropout_rate",
+          "passed": true,
+          "threshold": 0.015,
+          "unit": "ratio",
+          "value": 0.0
+        },
+        {
+          "name": "timing.lidar.out_of_order",
+          "passed": true,
+          "threshold": 0.0,
+          "unit": "count",
+          "value": 0.0
+        }
+      ],
+      "failed_gates": [
+        "sync.camera_lidar_p95",
+        "timing.camera.jitter_rms",
+        "timing.imu.jitter_rms",
+        "timing.lidar.jitter_rms"
+      ],
+      "fault": "timing_jitter",
+      "input_directory": "data/ablation/20261011/timing_jitter",
+      "input_sha256": {
+        "estimated_trajectory.csv": "89ab19d10162c81cb4f75f336314d3e2574a1562a1e36d36ee747cfa08c9720a",
+        "reference_trajectory.csv": "3052440c45451e67d64d740e4869b1407aafb895288d209d31b21a909a002b3a",
+        "sensor_timestamps.csv": "bc2b3d45a6c104889d08b5a2ef78bf19253dad908d72d9e33b52a1d7e41a4a7d"
+      },
+      "paired_delta": {
+        "ate_rmse_m": 0.0,
+        "rpe_rmse_m": 0.0,
+        "sync_p95_ms": 10.086012
+      },
+      "seed": 20261011,
+      "timing": [
+        {
+          "dropout_rate": 0.0,
+          "estimated_dropouts": 0,
+          "jitter_rms_ms": 4.26994074,
+          "max_gap_ms": 49.63361,
+          "nominal_hz": 30.0,
+          "observed_hz": 29.997131083,
+          "out_of_order_count": 0,
+          "sample_count": 900,
+          "sensor": "camera"
+        },
+        {
+          "dropout_rate": 0.0,
+          "estimated_dropouts": 0,
+          "jitter_rms_ms": 1.061297863,
+          "max_gap_ms": 13.48578,
+          "nominal_hz": 100.0,
+          "observed_hz": 100.001537536,
+          "out_of_order_count": 0,
+          "sample_count": 3000,
+          "sensor": "imu"
+        },
+        {
+          "dropout_rate": 0.0,
+          "estimated_dropouts": 0,
+          "jitter_rms_ms": 7.195616179,
+          "max_gap_ms": 121.94336,
+          "nominal_hz": 10.0,
+          "observed_hz": 10.000612422,
+          "out_of_order_count": 0,
+          "sample_count": 300,
+          "sensor": "lidar"
+        }
+      ],
+      "trajectory": {
+        "ate_p95_m": 0.058694896,
+        "ate_rmse_m": 0.036267356,
+        "final_drift_m": 0.050035829,
+        "heading_rmse_deg": 0.597758321,
+        "path_length_error_pct": 0.698209828,
+        "rpe_rmse_m": 0.044146973,
+        "sample_count": 601
+      },
+      "unchanged_inputs": {
+        "estimated_trajectory.csv": true,
+        "reference_trajectory.csv": true,
+        "sensor_timestamps.csv": false
+      }
+    },
+    {
+      "camera_lidar_sync_p95_ms": 16.765054,
+      "checks": [
+        {
+          "name": "trajectory.ate_rmse",
+          "passed": true,
+          "threshold": 0.12,
+          "unit": "m",
+          "value": 0.036267356
+        },
+        {
+          "name": "trajectory.rpe_rmse",
+          "passed": true,
+          "threshold": 0.1,
+          "unit": "m",
+          "value": 0.044146973
+        },
+        {
+          "name": "trajectory.final_drift",
+          "passed": true,
+          "threshold": 0.2,
+          "unit": "m",
+          "value": 0.050035829
+        },
+        {
+          "name": "trajectory.heading_rmse",
+          "passed": true,
+          "threshold": 3.0,
+          "unit": "deg",
+          "value": 0.597758321
+        },
+        {
+          "name": "trajectory.path_length_error",
+          "passed": true,
+          "threshold": 5.0,
+          "unit": "%",
+          "value": 0.698209828
+        },
+        {
+          "name": "sync.camera_lidar_p95",
+          "passed": false,
+          "threshold": 8.0,
+          "unit": "ms",
+          "value": 16.765054
+        },
+        {
+          "name": "timing.camera.jitter_rms",
+          "passed": true,
+          "threshold": 1.5,
+          "unit": "ms",
+          "value": 0.467024616
+        },
+        {
+          "name": "timing.camera.dropout_rate",
+          "passed": true,
+          "threshold": 0.015,
+          "unit": "ratio",
+          "value": 0.0
+        },
+        {
+          "name": "timing.camera.out_of_order",
+          "passed": true,
+          "threshold": 0.0,
+          "unit": "count",
+          "value": 0.0
+        },
+        {
+          "name": "timing.imu.jitter_rms",
+          "passed": true,
+          "threshold": 0.5,
+          "unit": "ms",
+          "value": 0.113205016
+        },
+        {
+          "name": "timing.imu.dropout_rate",
+          "passed": true,
+          "threshold": 0.015,
+          "unit": "ratio",
+          "value": 0.0
+        },
+        {
+          "name": "timing.imu.out_of_order",
+          "passed": true,
+          "threshold": 0.0,
+          "unit": "count",
+          "value": 0.0
+        },
+        {
+          "name": "timing.lidar.jitter_rms",
+          "passed": true,
+          "threshold": 2.5,
+          "unit": "ms",
+          "value": 0.915804869
+        },
+        {
+          "name": "timing.lidar.dropout_rate",
+          "passed": true,
+          "threshold": 0.015,
+          "unit": "ratio",
+          "value": 0.0
+        },
+        {
+          "name": "timing.lidar.out_of_order",
+          "passed": true,
+          "threshold": 0.0,
+          "unit": "count",
+          "value": 0.0
+        }
+      ],
+      "failed_gates": [
+        "sync.camera_lidar_p95"
+      ],
+      "fault": "lidar_offset",
+      "input_directory": "data/ablation/20261011/lidar_offset",
+      "input_sha256": {
+        "estimated_trajectory.csv": "89ab19d10162c81cb4f75f336314d3e2574a1562a1e36d36ee747cfa08c9720a",
+        "reference_trajectory.csv": "3052440c45451e67d64d740e4869b1407aafb895288d209d31b21a909a002b3a",
+        "sensor_timestamps.csv": "558111e188aa21d5ad9377265447feb5339ab79152b11bcc438e4333fefe31fb"
+      },
+      "paired_delta": {
+        "ate_rmse_m": 0.0,
+        "rpe_rmse_m": 0.0,
+        "sync_p95_ms": 14.7535765
+      },
+      "seed": 20261011,
+      "timing": [
+        {
+          "dropout_rate": 0.0,
+          "estimated_dropouts": 0,
+          "jitter_rms_ms": 0.467024616,
+          "max_gap_ms": 35.11617,
+          "nominal_hz": 30.0,
+          "observed_hz": 29.999686181,
+          "out_of_order_count": 0,
+          "sample_count": 900,
+          "sensor": "camera"
+        },
+        {
+          "dropout_rate": 0.0,
+          "estimated_dropouts": 0,
+          "jitter_rms_ms": 0.113205016,
+          "max_gap_ms": 10.37181,
+          "nominal_hz": 100.0,
+          "observed_hz": 100.000163988,
+          "out_of_order_count": 0,
+          "sample_count": 3000,
+          "sensor": "imu"
+        },
+        {
+          "dropout_rate": 0.0,
+          "estimated_dropouts": 0,
+          "jitter_rms_ms": 0.915804869,
+          "max_gap_ms": 102.79279,
+          "nominal_hz": 10.0,
+          "observed_hz": 10.00007794,
+          "out_of_order_count": 0,
+          "sample_count": 300,
+          "sensor": "lidar"
+        }
+      ],
+      "trajectory": {
+        "ate_p95_m": 0.058694896,
+        "ate_rmse_m": 0.036267356,
+        "final_drift_m": 0.050035829,
+        "heading_rmse_deg": 0.597758321,
+        "path_length_error_pct": 0.698209828,
+        "rpe_rmse_m": 0.044146973,
+        "sample_count": 601
+      },
+      "unchanged_inputs": {
+        "estimated_trajectory.csv": true,
+        "reference_trajectory.csv": true,
+        "sensor_timestamps.csv": false
+      }
+    },
+    {
+      "camera_lidar_sync_p95_ms": 2.0462575,
+      "checks": [
+        {
+          "name": "trajectory.ate_rmse",
+          "passed": true,
+          "threshold": 0.12,
+          "unit": "m",
+          "value": 0.036267356
+        },
+        {
+          "name": "trajectory.rpe_rmse",
+          "passed": true,
+          "threshold": 0.1,
+          "unit": "m",
+          "value": 0.044146973
+        },
+        {
+          "name": "trajectory.final_drift",
+          "passed": true,
+          "threshold": 0.2,
+          "unit": "m",
+          "value": 0.050035829
+        },
+        {
+          "name": "trajectory.heading_rmse",
+          "passed": true,
+          "threshold": 3.0,
+          "unit": "deg",
+          "value": 0.597758321
+        },
+        {
+          "name": "trajectory.path_length_error",
+          "passed": true,
+          "threshold": 5.0,
+          "unit": "%",
+          "value": 0.698209828
+        },
+        {
+          "name": "sync.camera_lidar_p95",
+          "passed": true,
+          "threshold": 8.0,
+          "unit": "ms",
+          "value": 2.0462575
+        },
+        {
+          "name": "timing.camera.jitter_rms",
+          "passed": true,
+          "threshold": 1.5,
+          "unit": "ms",
+          "value": 0.467024616
+        },
+        {
+          "name": "timing.camera.dropout_rate",
+          "passed": true,
+          "threshold": 0.015,
+          "unit": "ratio",
+          "value": 0.0
+        },
+        {
+          "name": "timing.camera.out_of_order",
+          "passed": true,
+          "threshold": 0.0,
+          "unit": "count",
+          "value": 0.0
+        },
+        {
+          "name": "timing.imu.jitter_rms",
+          "passed": true,
+          "threshold": 0.5,
+          "unit": "ms",
+          "value": 0.113205016
+        },
+        {
+          "name": "timing.imu.dropout_rate",
+          "passed": true,
+          "threshold": 0.015,
+          "unit": "ratio",
+          "value": 0.0
+        },
+        {
+          "name": "timing.imu.out_of_order",
+          "passed": true,
+          "threshold": 0.0,
+          "unit": "count",
+          "value": 0.0
+        },
+        {
+          "name": "timing.lidar.jitter_rms",
+          "passed": true,
+          "threshold": 2.5,
+          "unit": "ms",
+          "value": 0.912949636
+        },
+        {
+          "name": "timing.lidar.dropout_rate",
+          "passed": false,
+          "threshold": 0.015,
+          "unit": "ratio",
+          "value": 0.026666667
+        },
+        {
+          "name": "timing.lidar.out_of_order",
+          "passed": true,
+          "threshold": 0.0,
+          "unit": "count",
+          "value": 0.0
+        }
+      ],
+      "failed_gates": [
+        "timing.lidar.dropout_rate"
+      ],
+      "fault": "lidar_dropout",
+      "input_directory": "data/ablation/20261011/lidar_dropout",
+      "input_sha256": {
+        "estimated_trajectory.csv": "89ab19d10162c81cb4f75f336314d3e2574a1562a1e36d36ee747cfa08c9720a",
+        "reference_trajectory.csv": "3052440c45451e67d64d740e4869b1407aafb895288d209d31b21a909a002b3a",
+        "sensor_timestamps.csv": "cc7ae7a8d43e2de782dfda05a7256c47fee6f43210a4cfb5b4bac71495f6b03c"
+      },
+      "paired_delta": {
+        "ate_rmse_m": 0.0,
+        "rpe_rmse_m": 0.0,
+        "sync_p95_ms": 0.03478
+      },
+      "seed": 20261011,
+      "timing": [
+        {
+          "dropout_rate": 0.0,
+          "estimated_dropouts": 0,
+          "jitter_rms_ms": 0.467024616,
+          "max_gap_ms": 35.11617,
+          "nominal_hz": 30.0,
+          "observed_hz": 29.999686181,
+          "out_of_order_count": 0,
+          "sample_count": 900,
+          "sensor": "camera"
+        },
+        {
+          "dropout_rate": 0.0,
+          "estimated_dropouts": 0,
+          "jitter_rms_ms": 0.113205016,
+          "max_gap_ms": 10.37181,
+          "nominal_hz": 100.0,
+          "observed_hz": 100.000163988,
+          "out_of_order_count": 0,
+          "sample_count": 3000,
+          "sensor": "imu"
+        },
+        {
+          "dropout_rate": 0.026666667,
+          "estimated_dropouts": 8,
+          "jitter_rms_ms": 0.912949636,
+          "max_gap_ms": 201.1425,
+          "nominal_hz": 10.0,
+          "observed_hz": 10.00007794,
+          "out_of_order_count": 0,
+          "sample_count": 292,
+          "sensor": "lidar"
+        }
+      ],
+      "trajectory": {
+        "ate_p95_m": 0.058694896,
+        "ate_rmse_m": 0.036267356,
+        "final_drift_m": 0.050035829,
+        "heading_rmse_deg": 0.597758321,
+        "path_length_error_pct": 0.698209828,
+        "rpe_rmse_m": 0.044146973,
+        "sample_count": 601
+      },
+      "unchanged_inputs": {
+        "estimated_trajectory.csv": true,
+        "reference_trajectory.csv": true,
+        "sensor_timestamps.csv": false
+      }
+    },
+    {
+      "camera_lidar_sync_p95_ms": 2.0114775,
+      "checks": [
+        {
+          "name": "trajectory.ate_rmse",
+          "passed": true,
+          "threshold": 0.12,
+          "unit": "m",
+          "value": 0.036267356
+        },
+        {
+          "name": "trajectory.rpe_rmse",
+          "passed": true,
+          "threshold": 0.1,
+          "unit": "m",
+          "value": 0.044146973
+        },
+        {
+          "name": "trajectory.final_drift",
+          "passed": true,
+          "threshold": 0.2,
+          "unit": "m",
+          "value": 0.050035829
+        },
+        {
+          "name": "trajectory.heading_rmse",
+          "passed": true,
+          "threshold": 3.0,
+          "unit": "deg",
+          "value": 0.597758321
+        },
+        {
+          "name": "trajectory.path_length_error",
+          "passed": true,
+          "threshold": 5.0,
+          "unit": "%",
+          "value": 0.698209828
+        },
+        {
+          "name": "sync.camera_lidar_p95",
+          "passed": true,
+          "threshold": 8.0,
+          "unit": "ms",
+          "value": 2.0114775
+        },
+        {
+          "name": "timing.camera.jitter_rms",
+          "passed": false,
+          "threshold": 1.5,
+          "unit": "ms",
+          "value": 1.631802121
+        },
+        {
+          "name": "timing.camera.dropout_rate",
+          "passed": true,
+          "threshold": 0.015,
+          "unit": "ratio",
+          "value": 0.0
+        },
+        {
+          "name": "timing.camera.out_of_order",
+          "passed": false,
+          "threshold": 0.0,
+          "unit": "count",
+          "value": 1.0
+        },
+        {
+          "name": "timing.imu.jitter_rms",
+          "passed": true,
+          "threshold": 0.5,
+          "unit": "ms",
+          "value": 0.113205016
+        },
+        {
+          "name": "timing.imu.dropout_rate",
+          "passed": true,
+          "threshold": 0.015,
+          "unit": "ratio",
+          "value": 0.0
+        },
+        {
+          "name": "timing.imu.out_of_order",
+          "passed": true,
+          "threshold": 0.0,
+          "unit": "count",
+          "value": 0.0
+        },
+        {
+          "name": "timing.lidar.jitter_rms",
+          "passed": true,
+          "threshold": 2.5,
+          "unit": "ms",
+          "value": 0.915804869
+        },
+        {
+          "name": "timing.lidar.dropout_rate",
+          "passed": true,
+          "threshold": 0.015,
+          "unit": "ratio",
+          "value": 0.0
+        },
+        {
+          "name": "timing.lidar.out_of_order",
+          "passed": true,
+          "threshold": 0.0,
+          "unit": "count",
+          "value": 0.0
+        }
+      ],
+      "failed_gates": [
+        "timing.camera.jitter_rms",
+        "timing.camera.out_of_order"
+      ],
+      "fault": "camera_reversal",
+      "input_directory": "data/ablation/20261011/camera_reversal",
+      "input_sha256": {
+        "estimated_trajectory.csv": "89ab19d10162c81cb4f75f336314d3e2574a1562a1e36d36ee747cfa08c9720a",
+        "reference_trajectory.csv": "3052440c45451e67d64d740e4869b1407aafb895288d209d31b21a909a002b3a",
+        "sensor_timestamps.csv": "8bdbf4926a1f07451b1e9682af75d1f4fe058ea15648a3aea9634e75fcdf0688"
+      },
+      "paired_delta": {
+        "ate_rmse_m": 0.0,
+        "rpe_rmse_m": 0.0,
+        "sync_p95_ms": 0.0
+      },
+      "seed": 20261011,
+      "timing": [
+        {
+          "dropout_rate": 0.0,
+          "estimated_dropouts": 0,
+          "jitter_rms_ms": 1.631802121,
+          "max_gap_ms": 66.61714,
+          "nominal_hz": 30.0,
+          "observed_hz": 29.999686181,
+          "out_of_order_count": 1,
+          "sample_count": 900,
+          "sensor": "camera"
+        },
+        {
+          "dropout_rate": 0.0,
+          "estimated_dropouts": 0,
+          "jitter_rms_ms": 0.113205016,
+          "max_gap_ms": 10.37181,
+          "nominal_hz": 100.0,
+          "observed_hz": 100.000163988,
+          "out_of_order_count": 0,
+          "sample_count": 3000,
+          "sensor": "imu"
+        },
+        {
+          "dropout_rate": 0.0,
+          "estimated_dropouts": 0,
+          "jitter_rms_ms": 0.915804869,
+          "max_gap_ms": 102.79279,
+          "nominal_hz": 10.0,
+          "observed_hz": 10.00007794,
+          "out_of_order_count": 0,
+          "sample_count": 300,
+          "sensor": "lidar"
+        }
+      ],
+      "trajectory": {
+        "ate_p95_m": 0.058694896,
+        "ate_rmse_m": 0.036267356,
+        "final_drift_m": 0.050035829,
+        "heading_rmse_deg": 0.597758321,
+        "path_length_error_pct": 0.698209828,
+        "rpe_rmse_m": 0.044146973,
+        "sample_count": 601
+      },
+      "unchanged_inputs": {
+        "estimated_trajectory.csv": true,
+        "reference_trajectory.csv": true,
+        "sensor_timestamps.csv": false
+      }
+    },
+    {
+      "camera_lidar_sync_p95_ms": 2.0114775,
+      "checks": [
+        {
+          "name": "trajectory.ate_rmse",
+          "passed": false,
+          "threshold": 0.12,
+          "unit": "m",
+          "value": 0.178348563
+        },
+        {
+          "name": "trajectory.rpe_rmse",
+          "passed": true,
+          "threshold": 0.1,
+          "unit": "m",
+          "value": 0.04828557
+        },
+        {
+          "name": "trajectory.final_drift",
+          "passed": false,
+          "threshold": 0.2,
+          "unit": "m",
+          "value": 0.308522248
+        },
+        {
+          "name": "trajectory.heading_rmse",
+          "passed": true,
+          "threshold": 3.0,
+          "unit": "deg",
+          "value": 1.059307749
+        },
+        {
+          "name": "trajectory.path_length_error",
+          "passed": true,
+          "threshold": 5.0,
+          "unit": "%",
+          "value": 3.99350379
+        },
+        {
+          "name": "sync.camera_lidar_p95",
+          "passed": true,
+          "threshold": 8.0,
+          "unit": "ms",
+          "value": 2.0114775
+        },
+        {
+          "name": "timing.camera.jitter_rms",
+          "passed": true,
+          "threshold": 1.5,
+          "unit": "ms",
+          "value": 0.467024616
+        },
+        {
+          "name": "timing.camera.dropout_rate",
+          "passed": true,
+          "threshold": 0.015,
+          "unit": "ratio",
+          "value": 0.0
+        },
+        {
+          "name": "timing.camera.out_of_order",
+          "passed": true,
+          "threshold": 0.0,
+          "unit": "count",
+          "value": 0.0
+        },
+        {
+          "name": "timing.imu.jitter_rms",
+          "passed": true,
+          "threshold": 0.5,
+          "unit": "ms",
+          "value": 0.113205016
+        },
+        {
+          "name": "timing.imu.dropout_rate",
+          "passed": true,
+          "threshold": 0.015,
+          "unit": "ratio",
+          "value": 0.0
+        },
+        {
+          "name": "timing.imu.out_of_order",
+          "passed": true,
+          "threshold": 0.0,
+          "unit": "count",
+          "value": 0.0
+        },
+        {
+          "name": "timing.lidar.jitter_rms",
+          "passed": true,
+          "threshold": 2.5,
+          "unit": "ms",
+          "value": 0.915804869
+        },
+        {
+          "name": "timing.lidar.dropout_rate",
+          "passed": true,
+          "threshold": 0.015,
+          "unit": "ratio",
+          "value": 0.0
+        },
+        {
+          "name": "timing.lidar.out_of_order",
+          "passed": true,
+          "threshold": 0.0,
+          "unit": "count",
+          "value": 0.0
+        }
+      ],
+      "failed_gates": [
+        "trajectory.ate_rmse",
+        "trajectory.final_drift"
+      ],
+      "fault": "trajectory_drift",
+      "input_directory": "data/ablation/20261011/trajectory_drift",
+      "input_sha256": {
+        "estimated_trajectory.csv": "3ea8cd1d671d725a83933524328d95ec01e38d2d805d713a213e69f09aa0c9d0",
+        "reference_trajectory.csv": "3052440c45451e67d64d740e4869b1407aafb895288d209d31b21a909a002b3a",
+        "sensor_timestamps.csv": "5ac6d7a27470a580e6b94fabe90bdde35a461374a4c8cdcc757535f8c2e4c3ba"
+      },
+      "paired_delta": {
+        "ate_rmse_m": 0.142081207,
+        "rpe_rmse_m": 0.004138597,
+        "sync_p95_ms": 0.0
+      },
+      "seed": 20261011,
+      "timing": [
+        {
+          "dropout_rate": 0.0,
+          "estimated_dropouts": 0,
+          "jitter_rms_ms": 0.467024616,
+          "max_gap_ms": 35.11617,
+          "nominal_hz": 30.0,
+          "observed_hz": 29.999686181,
+          "out_of_order_count": 0,
+          "sample_count": 900,
+          "sensor": "camera"
+        },
+        {
+          "dropout_rate": 0.0,
+          "estimated_dropouts": 0,
+          "jitter_rms_ms": 0.113205016,
+          "max_gap_ms": 10.37181,
+          "nominal_hz": 100.0,
+          "observed_hz": 100.000163988,
+          "out_of_order_count": 0,
+          "sample_count": 3000,
+          "sensor": "imu"
+        },
+        {
+          "dropout_rate": 0.0,
+          "estimated_dropouts": 0,
+          "jitter_rms_ms": 0.915804869,
+          "max_gap_ms": 102.79279,
+          "nominal_hz": 10.0,
+          "observed_hz": 10.00007794,
+          "out_of_order_count": 0,
+          "sample_count": 300,
+          "sensor": "lidar"
+        }
+      ],
+      "trajectory": {
+        "ate_p95_m": 0.283817248,
+        "ate_rmse_m": 0.178348563,
+        "final_drift_m": 0.308522248,
+        "heading_rmse_deg": 1.059307749,
+        "path_length_error_pct": 3.99350379,
+        "rpe_rmse_m": 0.04828557,
+        "sample_count": 601
+      },
+      "unchanged_inputs": {
+        "estimated_trajectory.csv": false,
+        "reference_trajectory.csv": true,
+        "sensor_timestamps.csv": true
+      }
+    },
+    {
+      "camera_lidar_sync_p95_ms": 2.0114775,
+      "checks": [
+        {
+          "name": "trajectory.ate_rmse",
+          "passed": true,
+          "threshold": 0.12,
+          "unit": "m",
+          "value": 0.090034395
+        },
+        {
+          "name": "trajectory.rpe_rmse",
+          "passed": true,
+          "threshold": 0.1,
+          "unit": "m",
+          "value": 0.076281622
+        },
+        {
+          "name": "trajectory.final_drift",
+          "passed": true,
+          "threshold": 0.2,
+          "unit": "m",
+          "value": 0.023053993
+        },
+        {
+          "name": "trajectory.heading_rmse",
+          "passed": true,
+          "threshold": 3.0,
+          "unit": "deg",
+          "value": 0.597121549
+        },
+        {
+          "name": "trajectory.path_length_error",
+          "passed": true,
+          "threshold": 5.0,
+          "unit": "%",
+          "value": 0.620593938
+        },
+        {
+          "name": "sync.camera_lidar_p95",
+          "passed": true,
+          "threshold": 8.0,
+          "unit": "ms",
+          "value": 2.0114775
+        },
+        {
+          "name": "timing.camera.jitter_rms",
+          "passed": true,
+          "threshold": 1.5,
+          "unit": "ms",
+          "value": 0.467024616
+        },
+        {
+          "name": "timing.camera.dropout_rate",
+          "passed": true,
+          "threshold": 0.015,
+          "unit": "ratio",
+          "value": 0.0
+        },
+        {
+          "name": "timing.camera.out_of_order",
+          "passed": true,
+          "threshold": 0.0,
+          "unit": "count",
+          "value": 0.0
+        },
+        {
+          "name": "timing.imu.jitter_rms",
+          "passed": true,
+          "threshold": 0.5,
+          "unit": "ms",
+          "value": 0.113205016
+        },
+        {
+          "name": "timing.imu.dropout_rate",
+          "passed": true,
+          "threshold": 0.015,
+          "unit": "ratio",
+          "value": 0.0
+        },
+        {
+          "name": "timing.imu.out_of_order",
+          "passed": true,
+          "threshold": 0.0,
+          "unit": "count",
+          "value": 0.0
+        },
+        {
+          "name": "timing.lidar.jitter_rms",
+          "passed": true,
+          "threshold": 2.5,
+          "unit": "ms",
+          "value": 0.915804869
+        },
+        {
+          "name": "timing.lidar.dropout_rate",
+          "passed": true,
+          "threshold": 0.015,
+          "unit": "ratio",
+          "value": 0.0
+        },
+        {
+          "name": "timing.lidar.out_of_order",
+          "passed": true,
+          "threshold": 0.0,
+          "unit": "count",
+          "value": 0.0
+        }
+      ],
+      "failed_gates": [],
+      "fault": "trajectory_bump",
+      "input_directory": "data/ablation/20261011/trajectory_bump",
+      "input_sha256": {
+        "estimated_trajectory.csv": "a9071e272e144b14cd8df394fc4f9f28bad0e445be8ecc5760c0a1a8f3cc9714",
+        "reference_trajectory.csv": "3052440c45451e67d64d740e4869b1407aafb895288d209d31b21a909a002b3a",
+        "sensor_timestamps.csv": "5ac6d7a27470a580e6b94fabe90bdde35a461374a4c8cdcc757535f8c2e4c3ba"
+      },
+      "paired_delta": {
+        "ate_rmse_m": 0.053767039,
+        "rpe_rmse_m": 0.032134649,
+        "sync_p95_ms": 0.0
+      },
+      "seed": 20261011,
+      "timing": [
+        {
+          "dropout_rate": 0.0,
+          "estimated_dropouts": 0,
+          "jitter_rms_ms": 0.467024616,
+          "max_gap_ms": 35.11617,
+          "nominal_hz": 30.0,
+          "observed_hz": 29.999686181,
+          "out_of_order_count": 0,
+          "sample_count": 900,
+          "sensor": "camera"
+        },
+        {
+          "dropout_rate": 0.0,
+          "estimated_dropouts": 0,
+          "jitter_rms_ms": 0.113205016,
+          "max_gap_ms": 10.37181,
+          "nominal_hz": 100.0,
+          "observed_hz": 100.000163988,
+          "out_of_order_count": 0,
+          "sample_count": 3000,
+          "sensor": "imu"
+        },
+        {
+          "dropout_rate": 0.0,
+          "estimated_dropouts": 0,
+          "jitter_rms_ms": 0.915804869,
+          "max_gap_ms": 102.79279,
+          "nominal_hz": 10.0,
+          "observed_hz": 10.00007794,
+          "out_of_order_count": 0,
+          "sample_count": 300,
+          "sensor": "lidar"
+        }
+      ],
+      "trajectory": {
+        "ate_p95_m": 0.246856139,
+        "ate_rmse_m": 0.090034395,
+        "final_drift_m": 0.023053993,
+        "heading_rmse_deg": 0.597121549,
+        "path_length_error_pct": 0.620593938,
+        "rpe_rmse_m": 0.076281622,
+        "sample_count": 601
+      },
+      "unchanged_inputs": {
+        "estimated_trajectory.csv": false,
+        "reference_trajectory.csv": true,
+        "sensor_timestamps.csv": true
+      }
+    },
+    {
+      "camera_lidar_sync_p95_ms": 2.0370735,
+      "checks": [
+        {
+          "name": "trajectory.ate_rmse",
+          "passed": true,
+          "threshold": 0.12,
+          "unit": "m",
+          "value": 0.036438302
+        },
+        {
+          "name": "trajectory.rpe_rmse",
+          "passed": true,
+          "threshold": 0.1,
+          "unit": "m",
+          "value": 0.045130858
+        },
+        {
+          "name": "trajectory.final_drift",
+          "passed": true,
+          "threshold": 0.2,
+          "unit": "m",
+          "value": 0.059582862
+        },
+        {
+          "name": "trajectory.heading_rmse",
+          "passed": true,
+          "threshold": 3.0,
+          "unit": "deg",
+          "value": 0.58356874
+        },
+        {
+          "name": "trajectory.path_length_error",
+          "passed": true,
+          "threshold": 5.0,
+          "unit": "%",
+          "value": 0.722481782
+        },
+        {
+          "name": "sync.camera_lidar_p95",
+          "passed": true,
+          "threshold": 8.0,
+          "unit": "ms",
+          "value": 2.0370735
+        },
+        {
+          "name": "timing.camera.jitter_rms",
+          "passed": true,
+          "threshold": 1.5,
+          "unit": "ms",
+          "value": 0.505797537
+        },
+        {
+          "name": "timing.camera.dropout_rate",
+          "passed": true,
+          "threshold": 0.015,
+          "unit": "ratio",
+          "value": 0.0
+        },
+        {
+          "name": "timing.camera.out_of_order",
+          "passed": true,
+          "threshold": 0.0,
+          "unit": "count",
+          "value": 0.0
+        },
+        {
+          "name": "timing.imu.jitter_rms",
+          "passed": true,
+          "threshold": 0.5,
+          "unit": "ms",
+          "value": 0.113957302
+        },
+        {
+          "name": "timing.imu.dropout_rate",
+          "passed": true,
+          "threshold": 0.015,
+          "unit": "ratio",
+          "value": 0.0
+        },
+        {
+          "name": "timing.imu.out_of_order",
+          "passed": true,
+          "threshold": 0.0,
+          "unit": "count",
+          "value": 0.0
+        },
+        {
+          "name": "timing.lidar.jitter_rms",
+          "passed": true,
+          "threshold": 2.5,
+          "unit": "ms",
+          "value": 0.933043229
+        },
+        {
+          "name": "timing.lidar.dropout_rate",
+          "passed": true,
+          "threshold": 0.015,
+          "unit": "ratio",
+          "value": 0.0
+        },
+        {
+          "name": "timing.lidar.out_of_order",
+          "passed": true,
+          "threshold": 0.0,
+          "unit": "count",
+          "value": 0.0
+        }
+      ],
+      "failed_gates": [],
+      "fault": "baseline",
+      "input_directory": "data/ablation/20261012/baseline",
+      "input_sha256": {
+        "estimated_trajectory.csv": "30d646eb37f61c701c17520b00588db39bdde2f2547254f5990a11bb2444d85d",
+        "reference_trajectory.csv": "3052440c45451e67d64d740e4869b1407aafb895288d209d31b21a909a002b3a",
+        "sensor_timestamps.csv": "94da5a4ef3980cd66a635ebb5f462aee5c147dc29e864d06e5cc72c9b2039447"
+      },
+      "paired_delta": {
+        "ate_rmse_m": 0.0,
+        "rpe_rmse_m": 0.0,
+        "sync_p95_ms": 0.0
+      },
+      "seed": 20261012,
+      "timing": [
+        {
+          "dropout_rate": 0.0,
+          "estimated_dropouts": 0,
+          "jitter_rms_ms": 0.505797537,
+          "max_gap_ms": 34.92912,
+          "nominal_hz": 30.0,
+          "observed_hz": 30.00010188,
+          "out_of_order_count": 0,
+          "sample_count": 900,
+          "sensor": "camera"
+        },
+        {
+          "dropout_rate": 0.0,
+          "estimated_dropouts": 0,
+          "jitter_rms_ms": 0.113957302,
+          "max_gap_ms": 10.39719,
+          "nominal_hz": 100.0,
+          "observed_hz": 100.00057166,
+          "out_of_order_count": 0,
+          "sample_count": 3000,
+          "sensor": "imu"
+        },
+        {
+          "dropout_rate": 0.0,
+          "estimated_dropouts": 0,
+          "jitter_rms_ms": 0.933043229,
+          "max_gap_ms": 102.80444,
+          "nominal_hz": 10.0,
+          "observed_hz": 10.000360829,
+          "out_of_order_count": 0,
+          "sample_count": 300,
+          "sensor": "lidar"
+        }
+      ],
+      "trajectory": {
+        "ate_p95_m": 0.058110912,
+        "ate_rmse_m": 0.036438302,
+        "final_drift_m": 0.059582862,
+        "heading_rmse_deg": 0.58356874,
+        "path_length_error_pct": 0.722481782,
+        "rpe_rmse_m": 0.045130858,
+        "sample_count": 601
+      },
+      "unchanged_inputs": {
+        "estimated_trajectory.csv": true,
+        "reference_trajectory.csv": true,
+        "sensor_timestamps.csv": true
+      }
+    },
+    {
+      "camera_lidar_sync_p95_ms": 11.751432,
+      "checks": [
+        {
+          "name": "trajectory.ate_rmse",
+          "passed": true,
+          "threshold": 0.12,
+          "unit": "m",
+          "value": 0.036438302
+        },
+        {
+          "name": "trajectory.rpe_rmse",
+          "passed": true,
+          "threshold": 0.1,
+          "unit": "m",
+          "value": 0.045130858
+        },
+        {
+          "name": "trajectory.final_drift",
+          "passed": true,
+          "threshold": 0.2,
+          "unit": "m",
+          "value": 0.059582862
+        },
+        {
+          "name": "trajectory.heading_rmse",
+          "passed": true,
+          "threshold": 3.0,
+          "unit": "deg",
+          "value": 0.58356874
+        },
+        {
+          "name": "trajectory.path_length_error",
+          "passed": true,
+          "threshold": 5.0,
+          "unit": "%",
+          "value": 0.722481782
+        },
+        {
+          "name": "sync.camera_lidar_p95",
+          "passed": false,
+          "threshold": 8.0,
+          "unit": "ms",
+          "value": 11.751432
+        },
+        {
+          "name": "timing.camera.jitter_rms",
+          "passed": false,
+          "threshold": 1.5,
+          "unit": "ms",
+          "value": 4.624436769
+        },
+        {
+          "name": "timing.camera.dropout_rate",
+          "passed": true,
+          "threshold": 0.015,
+          "unit": "ratio",
+          "value": 0.0
+        },
+        {
+          "name": "timing.camera.out_of_order",
+          "passed": true,
+          "threshold": 0.0,
+          "unit": "count",
+          "value": 0.0
+        },
+        {
+          "name": "timing.imu.jitter_rms",
+          "passed": false,
+          "threshold": 0.5,
+          "unit": "ms",
+          "value": 1.068351054
+        },
+        {
+          "name": "timing.imu.dropout_rate",
+          "passed": true,
+          "threshold": 0.015,
+          "unit": "ratio",
+          "value": 0.0
+        },
+        {
+          "name": "timing.imu.out_of_order",
+          "passed": true,
+          "threshold": 0.0,
+          "unit": "count",
+          "value": 0.0
+        },
+        {
+          "name": "timing.lidar.jitter_rms",
+          "passed": false,
+          "threshold": 2.5,
+          "unit": "ms",
+          "value": 7.331051125
+        },
+        {
+          "name": "timing.lidar.dropout_rate",
+          "passed": true,
+          "threshold": 0.015,
+          "unit": "ratio",
+          "value": 0.0
+        },
+        {
+          "name": "timing.lidar.out_of_order",
+          "passed": true,
+          "threshold": 0.0,
+          "unit": "count",
+          "value": 0.0
+        }
+      ],
+      "failed_gates": [
+        "sync.camera_lidar_p95",
+        "timing.camera.jitter_rms",
+        "timing.imu.jitter_rms",
+        "timing.lidar.jitter_rms"
+      ],
+      "fault": "timing_jitter",
+      "input_directory": "data/ablation/20261012/timing_jitter",
+      "input_sha256": {
+        "estimated_trajectory.csv": "30d646eb37f61c701c17520b00588db39bdde2f2547254f5990a11bb2444d85d",
+        "reference_trajectory.csv": "3052440c45451e67d64d740e4869b1407aafb895288d209d31b21a909a002b3a",
+        "sensor_timestamps.csv": "2349c6a6f6326a79b10c02d6453782ddb2958615748164db463984d2b964946d"
+      },
+      "paired_delta": {
+        "ate_rmse_m": 0.0,
+        "rpe_rmse_m": 0.0,
+        "sync_p95_ms": 9.7143585
+      },
+      "seed": 20261012,
+      "timing": [
+        {
+          "dropout_rate": 0.0,
+          "estimated_dropouts": 0,
+          "jitter_rms_ms": 4.624436769,
+          "max_gap_ms": 47.92345,
+          "nominal_hz": 30.0,
+          "observed_hz": 30.000931571,
+          "out_of_order_count": 0,
+          "sample_count": 900,
+          "sensor": "camera"
+        },
+        {
+          "dropout_rate": 0.0,
+          "estimated_dropouts": 0,
+          "jitter_rms_ms": 1.068351054,
+          "max_gap_ms": 13.72366,
+          "nominal_hz": 100.0,
+          "observed_hz": 100.00535954,
+          "out_of_order_count": 0,
+          "sample_count": 3000,
+          "sensor": "imu"
+        },
+        {
+          "dropout_rate": 0.0,
+          "estimated_dropouts": 0,
+          "jitter_rms_ms": 7.331051125,
+          "max_gap_ms": 122.03487,
+          "nominal_hz": 10.0,
+          "observed_hz": 10.002835787,
+          "out_of_order_count": 0,
+          "sample_count": 300,
+          "sensor": "lidar"
+        }
+      ],
+      "trajectory": {
+        "ate_p95_m": 0.058110912,
+        "ate_rmse_m": 0.036438302,
+        "final_drift_m": 0.059582862,
+        "heading_rmse_deg": 0.58356874,
+        "path_length_error_pct": 0.722481782,
+        "rpe_rmse_m": 0.045130858,
+        "sample_count": 601
+      },
+      "unchanged_inputs": {
+        "estimated_trajectory.csv": true,
+        "reference_trajectory.csv": true,
+        "sensor_timestamps.csv": false
+      }
+    },
+    {
+      "camera_lidar_sync_p95_ms": 16.7844245,
+      "checks": [
+        {
+          "name": "trajectory.ate_rmse",
+          "passed": true,
+          "threshold": 0.12,
+          "unit": "m",
+          "value": 0.036438302
+        },
+        {
+          "name": "trajectory.rpe_rmse",
+          "passed": true,
+          "threshold": 0.1,
+          "unit": "m",
+          "value": 0.045130858
+        },
+        {
+          "name": "trajectory.final_drift",
+          "passed": true,
+          "threshold": 0.2,
+          "unit": "m",
+          "value": 0.059582862
+        },
+        {
+          "name": "trajectory.heading_rmse",
+          "passed": true,
+          "threshold": 3.0,
+          "unit": "deg",
+          "value": 0.58356874
+        },
+        {
+          "name": "trajectory.path_length_error",
+          "passed": true,
+          "threshold": 5.0,
+          "unit": "%",
+          "value": 0.722481782
+        },
+        {
+          "name": "sync.camera_lidar_p95",
+          "passed": false,
+          "threshold": 8.0,
+          "unit": "ms",
+          "value": 16.7844245
+        },
+        {
+          "name": "timing.camera.jitter_rms",
+          "passed": true,
+          "threshold": 1.5,
+          "unit": "ms",
+          "value": 0.505797537
+        },
+        {
+          "name": "timing.camera.dropout_rate",
+          "passed": true,
+          "threshold": 0.015,
+          "unit": "ratio",
+          "value": 0.0
+        },
+        {
+          "name": "timing.camera.out_of_order",
+          "passed": true,
+          "threshold": 0.0,
+          "unit": "count",
+          "value": 0.0
+        },
+        {
+          "name": "timing.imu.jitter_rms",
+          "passed": true,
+          "threshold": 0.5,
+          "unit": "ms",
+          "value": 0.113957302
+        },
+        {
+          "name": "timing.imu.dropout_rate",
+          "passed": true,
+          "threshold": 0.015,
+          "unit": "ratio",
+          "value": 0.0
+        },
+        {
+          "name": "timing.imu.out_of_order",
+          "passed": true,
+          "threshold": 0.0,
+          "unit": "count",
+          "value": 0.0
+        },
+        {
+          "name": "timing.lidar.jitter_rms",
+          "passed": true,
+          "threshold": 2.5,
+          "unit": "ms",
+          "value": 0.933043229
+        },
+        {
+          "name": "timing.lidar.dropout_rate",
+          "passed": true,
+          "threshold": 0.015,
+          "unit": "ratio",
+          "value": 0.0
+        },
+        {
+          "name": "timing.lidar.out_of_order",
+          "passed": true,
+          "threshold": 0.0,
+          "unit": "count",
+          "value": 0.0
+        }
+      ],
+      "failed_gates": [
+        "sync.camera_lidar_p95"
+      ],
+      "fault": "lidar_offset",
+      "input_directory": "data/ablation/20261012/lidar_offset",
+      "input_sha256": {
+        "estimated_trajectory.csv": "30d646eb37f61c701c17520b00588db39bdde2f2547254f5990a11bb2444d85d",
+        "reference_trajectory.csv": "3052440c45451e67d64d740e4869b1407aafb895288d209d31b21a909a002b3a",
+        "sensor_timestamps.csv": "f08cf24d192757794554a04bad8a44558e573df6ed106ab53d24b9a1a67ce69b"
+      },
+      "paired_delta": {
+        "ate_rmse_m": 0.0,
+        "rpe_rmse_m": 0.0,
+        "sync_p95_ms": 14.747351
+      },
+      "seed": 20261012,
+      "timing": [
+        {
+          "dropout_rate": 0.0,
+          "estimated_dropouts": 0,
+          "jitter_rms_ms": 0.505797537,
+          "max_gap_ms": 34.92912,
+          "nominal_hz": 30.0,
+          "observed_hz": 30.00010188,
+          "out_of_order_count": 0,
+          "sample_count": 900,
+          "sensor": "camera"
+        },
+        {
+          "dropout_rate": 0.0,
+          "estimated_dropouts": 0,
+          "jitter_rms_ms": 0.113957302,
+          "max_gap_ms": 10.39719,
+          "nominal_hz": 100.0,
+          "observed_hz": 100.00057166,
+          "out_of_order_count": 0,
+          "sample_count": 3000,
+          "sensor": "imu"
+        },
+        {
+          "dropout_rate": 0.0,
+          "estimated_dropouts": 0,
+          "jitter_rms_ms": 0.933043229,
+          "max_gap_ms": 102.80444,
+          "nominal_hz": 10.0,
+          "observed_hz": 10.000360829,
+          "out_of_order_count": 0,
+          "sample_count": 300,
+          "sensor": "lidar"
+        }
+      ],
+      "trajectory": {
+        "ate_p95_m": 0.058110912,
+        "ate_rmse_m": 0.036438302,
+        "final_drift_m": 0.059582862,
+        "heading_rmse_deg": 0.58356874,
+        "path_length_error_pct": 0.722481782,
+        "rpe_rmse_m": 0.045130858,
+        "sample_count": 601
+      },
+      "unchanged_inputs": {
+        "estimated_trajectory.csv": true,
+        "reference_trajectory.csv": true,
+        "sensor_timestamps.csv": false
+      }
+    },
+    {
+      "camera_lidar_sync_p95_ms": 2.0500615,
+      "checks": [
+        {
+          "name": "trajectory.ate_rmse",
+          "passed": true,
+          "threshold": 0.12,
+          "unit": "m",
+          "value": 0.036438302
+        },
+        {
+          "name": "trajectory.rpe_rmse",
+          "passed": true,
+          "threshold": 0.1,
+          "unit": "m",
+          "value": 0.045130858
+        },
+        {
+          "name": "trajectory.final_drift",
+          "passed": true,
+          "threshold": 0.2,
+          "unit": "m",
+          "value": 0.059582862
+        },
+        {
+          "name": "trajectory.heading_rmse",
+          "passed": true,
+          "threshold": 3.0,
+          "unit": "deg",
+          "value": 0.58356874
+        },
+        {
+          "name": "trajectory.path_length_error",
+          "passed": true,
+          "threshold": 5.0,
+          "unit": "%",
+          "value": 0.722481782
+        },
+        {
+          "name": "sync.camera_lidar_p95",
+          "passed": true,
+          "threshold": 8.0,
+          "unit": "ms",
+          "value": 2.0500615
+        },
+        {
+          "name": "timing.camera.jitter_rms",
+          "passed": true,
+          "threshold": 1.5,
+          "unit": "ms",
+          "value": 0.505797537
+        },
+        {
+          "name": "timing.camera.dropout_rate",
+          "passed": true,
+          "threshold": 0.015,
+          "unit": "ratio",
+          "value": 0.0
+        },
+        {
+          "name": "timing.camera.out_of_order",
+          "passed": true,
+          "threshold": 0.0,
+          "unit": "count",
+          "value": 0.0
+        },
+        {
+          "name": "timing.imu.jitter_rms",
+          "passed": true,
+          "threshold": 0.5,
+          "unit": "ms",
+          "value": 0.113957302
+        },
+        {
+          "name": "timing.imu.dropout_rate",
+          "passed": true,
+          "threshold": 0.015,
+          "unit": "ratio",
+          "value": 0.0
+        },
+        {
+          "name": "timing.imu.out_of_order",
+          "passed": true,
+          "threshold": 0.0,
+          "unit": "count",
+          "value": 0.0
+        },
+        {
+          "name": "timing.lidar.jitter_rms",
+          "passed": true,
+          "threshold": 2.5,
+          "unit": "ms",
+          "value": 0.935057735
+        },
+        {
+          "name": "timing.lidar.dropout_rate",
+          "passed": false,
+          "threshold": 0.015,
+          "unit": "ratio",
+          "value": 0.026666667
+        },
+        {
+          "name": "timing.lidar.out_of_order",
+          "passed": true,
+          "threshold": 0.0,
+          "unit": "count",
+          "value": 0.0
+        }
+      ],
+      "failed_gates": [
+        "timing.lidar.dropout_rate"
+      ],
+      "fault": "lidar_dropout",
+      "input_directory": "data/ablation/20261012/lidar_dropout",
+      "input_sha256": {
+        "estimated_trajectory.csv": "30d646eb37f61c701c17520b00588db39bdde2f2547254f5990a11bb2444d85d",
+        "reference_trajectory.csv": "3052440c45451e67d64d740e4869b1407aafb895288d209d31b21a909a002b3a",
+        "sensor_timestamps.csv": "205ef4a6a4c9193542255dd9f1ad4887aeb8874e1f3481131053a2b5eef8431a"
+      },
+      "paired_delta": {
+        "ate_rmse_m": 0.0,
+        "rpe_rmse_m": 0.0,
+        "sync_p95_ms": 0.012988
+      },
+      "seed": 20261012,
+      "timing": [
+        {
+          "dropout_rate": 0.0,
+          "estimated_dropouts": 0,
+          "jitter_rms_ms": 0.505797537,
+          "max_gap_ms": 34.92912,
+          "nominal_hz": 30.0,
+          "observed_hz": 30.00010188,
+          "out_of_order_count": 0,
+          "sample_count": 900,
+          "sensor": "camera"
+        },
+        {
+          "dropout_rate": 0.0,
+          "estimated_dropouts": 0,
+          "jitter_rms_ms": 0.113957302,
+          "max_gap_ms": 10.39719,
+          "nominal_hz": 100.0,
+          "observed_hz": 100.00057166,
+          "out_of_order_count": 0,
+          "sample_count": 3000,
+          "sensor": "imu"
+        },
+        {
+          "dropout_rate": 0.026666667,
+          "estimated_dropouts": 8,
+          "jitter_rms_ms": 0.935057735,
+          "max_gap_ms": 201.32829,
+          "nominal_hz": 10.0,
+          "observed_hz": 10.000360829,
+          "out_of_order_count": 0,
+          "sample_count": 292,
+          "sensor": "lidar"
+        }
+      ],
+      "trajectory": {
+        "ate_p95_m": 0.058110912,
+        "ate_rmse_m": 0.036438302,
+        "final_drift_m": 0.059582862,
+        "heading_rmse_deg": 0.58356874,
+        "path_length_error_pct": 0.722481782,
+        "rpe_rmse_m": 0.045130858,
+        "sample_count": 601
+      },
+      "unchanged_inputs": {
+        "estimated_trajectory.csv": true,
+        "reference_trajectory.csv": true,
+        "sensor_timestamps.csv": false
+      }
+    },
+    {
+      "camera_lidar_sync_p95_ms": 2.0370735,
+      "checks": [
+        {
+          "name": "trajectory.ate_rmse",
+          "passed": true,
+          "threshold": 0.12,
+          "unit": "m",
+          "value": 0.036438302
+        },
+        {
+          "name": "trajectory.rpe_rmse",
+          "passed": true,
+          "threshold": 0.1,
+          "unit": "m",
+          "value": 0.045130858
+        },
+        {
+          "name": "trajectory.final_drift",
+          "passed": true,
+          "threshold": 0.2,
+          "unit": "m",
+          "value": 0.059582862
+        },
+        {
+          "name": "trajectory.heading_rmse",
+          "passed": true,
+          "threshold": 3.0,
+          "unit": "deg",
+          "value": 0.58356874
+        },
+        {
+          "name": "trajectory.path_length_error",
+          "passed": true,
+          "threshold": 5.0,
+          "unit": "%",
+          "value": 0.722481782
+        },
+        {
+          "name": "sync.camera_lidar_p95",
+          "passed": true,
+          "threshold": 8.0,
+          "unit": "ms",
+          "value": 2.0370735
+        },
+        {
+          "name": "timing.camera.jitter_rms",
+          "passed": false,
+          "threshold": 1.5,
+          "unit": "ms",
+          "value": 1.658894995
+        },
+        {
+          "name": "timing.camera.dropout_rate",
+          "passed": true,
+          "threshold": 0.015,
+          "unit": "ratio",
+          "value": 0.0
+        },
+        {
+          "name": "timing.camera.out_of_order",
+          "passed": false,
+          "threshold": 0.0,
+          "unit": "count",
+          "value": 1.0
+        },
+        {
+          "name": "timing.imu.jitter_rms",
+          "passed": true,
+          "threshold": 0.5,
+          "unit": "ms",
+          "value": 0.113957302
+        },
+        {
+          "name": "timing.imu.dropout_rate",
+          "passed": true,
+          "threshold": 0.015,
+          "unit": "ratio",
+          "value": 0.0
+        },
+        {
+          "name": "timing.imu.out_of_order",
+          "passed": true,
+          "threshold": 0.0,
+          "unit": "count",
+          "value": 0.0
+        },
+        {
+          "name": "timing.lidar.jitter_rms",
+          "passed": true,
+          "threshold": 2.5,
+          "unit": "ms",
+          "value": 0.933043229
+        },
+        {
+          "name": "timing.lidar.dropout_rate",
+          "passed": true,
+          "threshold": 0.015,
+          "unit": "ratio",
+          "value": 0.0
+        },
+        {
+          "name": "timing.lidar.out_of_order",
+          "passed": true,
+          "threshold": 0.0,
+          "unit": "count",
+          "value": 0.0
+        }
+      ],
+      "failed_gates": [
+        "timing.camera.jitter_rms",
+        "timing.camera.out_of_order"
+      ],
+      "fault": "camera_reversal",
+      "input_directory": "data/ablation/20261012/camera_reversal",
+      "input_sha256": {
+        "estimated_trajectory.csv": "30d646eb37f61c701c17520b00588db39bdde2f2547254f5990a11bb2444d85d",
+        "reference_trajectory.csv": "3052440c45451e67d64d740e4869b1407aafb895288d209d31b21a909a002b3a",
+        "sensor_timestamps.csv": "ca0950f57e30a7cfd0968cea4f63d69f3de4d5b19ee671c36d264cc952dfae05"
+      },
+      "paired_delta": {
+        "ate_rmse_m": 0.0,
+        "rpe_rmse_m": 0.0,
+        "sync_p95_ms": 0.0
+      },
+      "seed": 20261012,
+      "timing": [
+        {
+          "dropout_rate": 0.0,
+          "estimated_dropouts": 0,
+          "jitter_rms_ms": 1.658894995,
+          "max_gap_ms": 67.07563,
+          "nominal_hz": 30.0,
+          "observed_hz": 30.00010188,
+          "out_of_order_count": 1,
+          "sample_count": 900,
+          "sensor": "camera"
+        },
+        {
+          "dropout_rate": 0.0,
+          "estimated_dropouts": 0,
+          "jitter_rms_ms": 0.113957302,
+          "max_gap_ms": 10.39719,
+          "nominal_hz": 100.0,
+          "observed_hz": 100.00057166,
+          "out_of_order_count": 0,
+          "sample_count": 3000,
+          "sensor": "imu"
+        },
+        {
+          "dropout_rate": 0.0,
+          "estimated_dropouts": 0,
+          "jitter_rms_ms": 0.933043229,
+          "max_gap_ms": 102.80444,
+          "nominal_hz": 10.0,
+          "observed_hz": 10.000360829,
+          "out_of_order_count": 0,
+          "sample_count": 300,
+          "sensor": "lidar"
+        }
+      ],
+      "trajectory": {
+        "ate_p95_m": 0.058110912,
+        "ate_rmse_m": 0.036438302,
+        "final_drift_m": 0.059582862,
+        "heading_rmse_deg": 0.58356874,
+        "path_length_error_pct": 0.722481782,
+        "rpe_rmse_m": 0.045130858,
+        "sample_count": 601
+      },
+      "unchanged_inputs": {
+        "estimated_trajectory.csv": true,
+        "reference_trajectory.csv": true,
+        "sensor_timestamps.csv": false
+      }
+    },
+    {
+      "camera_lidar_sync_p95_ms": 2.0370735,
+      "checks": [
+        {
+          "name": "trajectory.ate_rmse",
+          "passed": false,
+          "threshold": 0.12,
+          "unit": "m",
+          "value": 0.177851554
+        },
+        {
+          "name": "trajectory.rpe_rmse",
+          "passed": true,
+          "threshold": 0.1,
+          "unit": "m",
+          "value": 0.049204131
+        },
+        {
+          "name": "trajectory.final_drift",
+          "passed": false,
+          "threshold": 0.2,
+          "unit": "m",
+          "value": 0.314176978
+        },
+        {
+          "name": "trajectory.heading_rmse",
+          "passed": true,
+          "threshold": 3.0,
+          "unit": "deg",
+          "value": 1.043683282
+        },
+        {
+          "name": "trajectory.path_length_error",
+          "passed": true,
+          "threshold": 5.0,
+          "unit": "%",
+          "value": 4.011899491
+        },
+        {
+          "name": "sync.camera_lidar_p95",
+          "passed": true,
+          "threshold": 8.0,
+          "unit": "ms",
+          "value": 2.0370735
+        },
+        {
+          "name": "timing.camera.jitter_rms",
+          "passed": true,
+          "threshold": 1.5,
+          "unit": "ms",
+          "value": 0.505797537
+        },
+        {
+          "name": "timing.camera.dropout_rate",
+          "passed": true,
+          "threshold": 0.015,
+          "unit": "ratio",
+          "value": 0.0
+        },
+        {
+          "name": "timing.camera.out_of_order",
+          "passed": true,
+          "threshold": 0.0,
+          "unit": "count",
+          "value": 0.0
+        },
+        {
+          "name": "timing.imu.jitter_rms",
+          "passed": true,
+          "threshold": 0.5,
+          "unit": "ms",
+          "value": 0.113957302
+        },
+        {
+          "name": "timing.imu.dropout_rate",
+          "passed": true,
+          "threshold": 0.015,
+          "unit": "ratio",
+          "value": 0.0
+        },
+        {
+          "name": "timing.imu.out_of_order",
+          "passed": true,
+          "threshold": 0.0,
+          "unit": "count",
+          "value": 0.0
+        },
+        {
+          "name": "timing.lidar.jitter_rms",
+          "passed": true,
+          "threshold": 2.5,
+          "unit": "ms",
+          "value": 0.933043229
+        },
+        {
+          "name": "timing.lidar.dropout_rate",
+          "passed": true,
+          "threshold": 0.015,
+          "unit": "ratio",
+          "value": 0.0
+        },
+        {
+          "name": "timing.lidar.out_of_order",
+          "passed": true,
+          "threshold": 0.0,
+          "unit": "count",
+          "value": 0.0
+        }
+      ],
+      "failed_gates": [
+        "trajectory.ate_rmse",
+        "trajectory.final_drift"
+      ],
+      "fault": "trajectory_drift",
+      "input_directory": "data/ablation/20261012/trajectory_drift",
+      "input_sha256": {
+        "estimated_trajectory.csv": "e224b0079e54926af9993176603bf338854d79aa3bc562aabca0c3e1929e70e1",
+        "reference_trajectory.csv": "3052440c45451e67d64d740e4869b1407aafb895288d209d31b21a909a002b3a",
+        "sensor_timestamps.csv": "94da5a4ef3980cd66a635ebb5f462aee5c147dc29e864d06e5cc72c9b2039447"
+      },
+      "paired_delta": {
+        "ate_rmse_m": 0.141413252,
+        "rpe_rmse_m": 0.004073273,
+        "sync_p95_ms": 0.0
+      },
+      "seed": 20261012,
+      "timing": [
+        {
+          "dropout_rate": 0.0,
+          "estimated_dropouts": 0,
+          "jitter_rms_ms": 0.505797537,
+          "max_gap_ms": 34.92912,
+          "nominal_hz": 30.0,
+          "observed_hz": 30.00010188,
+          "out_of_order_count": 0,
+          "sample_count": 900,
+          "sensor": "camera"
+        },
+        {
+          "dropout_rate": 0.0,
+          "estimated_dropouts": 0,
+          "jitter_rms_ms": 0.113957302,
+          "max_gap_ms": 10.39719,
+          "nominal_hz": 100.0,
+          "observed_hz": 100.00057166,
+          "out_of_order_count": 0,
+          "sample_count": 3000,
+          "sensor": "imu"
+        },
+        {
+          "dropout_rate": 0.0,
+          "estimated_dropouts": 0,
+          "jitter_rms_ms": 0.933043229,
+          "max_gap_ms": 102.80444,
+          "nominal_hz": 10.0,
+          "observed_hz": 10.000360829,
+          "out_of_order_count": 0,
+          "sample_count": 300,
+          "sensor": "lidar"
+        }
+      ],
+      "trajectory": {
+        "ate_p95_m": 0.283970798,
+        "ate_rmse_m": 0.177851554,
+        "final_drift_m": 0.314176978,
+        "heading_rmse_deg": 1.043683282,
+        "path_length_error_pct": 4.011899491,
+        "rpe_rmse_m": 0.049204131,
+        "sample_count": 601
+      },
+      "unchanged_inputs": {
+        "estimated_trajectory.csv": false,
+        "reference_trajectory.csv": true,
+        "sensor_timestamps.csv": true
+      }
+    },
+    {
+      "camera_lidar_sync_p95_ms": 2.0370735,
+      "checks": [
+        {
+          "name": "trajectory.ate_rmse",
+          "passed": true,
+          "threshold": 0.12,
+          "unit": "m",
+          "value": 0.090725819
+        },
+        {
+          "name": "trajectory.rpe_rmse",
+          "passed": true,
+          "threshold": 0.1,
+          "unit": "m",
+          "value": 0.077959659
+        },
+        {
+          "name": "trajectory.final_drift",
+          "passed": true,
+          "threshold": 0.2,
+          "unit": "m",
+          "value": 0.034773485
+        },
+        {
+          "name": "trajectory.heading_rmse",
+          "passed": true,
+          "threshold": 3.0,
+          "unit": "deg",
+          "value": 0.582909613
+        },
+        {
+          "name": "trajectory.path_length_error",
+          "passed": true,
+          "threshold": 5.0,
+          "unit": "%",
+          "value": 0.716813413
+        },
+        {
+          "name": "sync.camera_lidar_p95",
+          "passed": true,
+          "threshold": 8.0,
+          "unit": "ms",
+          "value": 2.0370735
+        },
+        {
+          "name": "timing.camera.jitter_rms",
+          "passed": true,
+          "threshold": 1.5,
+          "unit": "ms",
+          "value": 0.505797537
+        },
+        {
+          "name": "timing.camera.dropout_rate",
+          "passed": true,
+          "threshold": 0.015,
+          "unit": "ratio",
+          "value": 0.0
+        },
+        {
+          "name": "timing.camera.out_of_order",
+          "passed": true,
+          "threshold": 0.0,
+          "unit": "count",
+          "value": 0.0
+        },
+        {
+          "name": "timing.imu.jitter_rms",
+          "passed": true,
+          "threshold": 0.5,
+          "unit": "ms",
+          "value": 0.113957302
+        },
+        {
+          "name": "timing.imu.dropout_rate",
+          "passed": true,
+          "threshold": 0.015,
+          "unit": "ratio",
+          "value": 0.0
+        },
+        {
+          "name": "timing.imu.out_of_order",
+          "passed": true,
+          "threshold": 0.0,
+          "unit": "count",
+          "value": 0.0
+        },
+        {
+          "name": "timing.lidar.jitter_rms",
+          "passed": true,
+          "threshold": 2.5,
+          "unit": "ms",
+          "value": 0.933043229
+        },
+        {
+          "name": "timing.lidar.dropout_rate",
+          "passed": true,
+          "threshold": 0.015,
+          "unit": "ratio",
+          "value": 0.0
+        },
+        {
+          "name": "timing.lidar.out_of_order",
+          "passed": true,
+          "threshold": 0.0,
+          "unit": "count",
+          "value": 0.0
+        }
+      ],
+      "failed_gates": [],
+      "fault": "trajectory_bump",
+      "input_directory": "data/ablation/20261012/trajectory_bump",
+      "input_sha256": {
+        "estimated_trajectory.csv": "15da855441e3ba42a8b3073359501853c84eeadbe614c9963ca8830aa8c9d1fb",
+        "reference_trajectory.csv": "3052440c45451e67d64d740e4869b1407aafb895288d209d31b21a909a002b3a",
+        "sensor_timestamps.csv": "94da5a4ef3980cd66a635ebb5f462aee5c147dc29e864d06e5cc72c9b2039447"
+      },
+      "paired_delta": {
+        "ate_rmse_m": 0.054287518,
+        "rpe_rmse_m": 0.032828802,
+        "sync_p95_ms": 0.0
+      },
+      "seed": 20261012,
+      "timing": [
+        {
+          "dropout_rate": 0.0,
+          "estimated_dropouts": 0,
+          "jitter_rms_ms": 0.505797537,
+          "max_gap_ms": 34.92912,
+          "nominal_hz": 30.0,
+          "observed_hz": 30.00010188,
+          "out_of_order_count": 0,
+          "sample_count": 900,
+          "sensor": "camera"
+        },
+        {
+          "dropout_rate": 0.0,
+          "estimated_dropouts": 0,
+          "jitter_rms_ms": 0.113957302,
+          "max_gap_ms": 10.39719,
+          "nominal_hz": 100.0,
+          "observed_hz": 100.00057166,
+          "out_of_order_count": 0,
+          "sample_count": 3000,
+          "sensor": "imu"
+        },
+        {
+          "dropout_rate": 0.0,
+          "estimated_dropouts": 0,
+          "jitter_rms_ms": 0.933043229,
+          "max_gap_ms": 102.80444,
+          "nominal_hz": 10.0,
+          "observed_hz": 10.000360829,
+          "out_of_order_count": 0,
+          "sample_count": 300,
+          "sensor": "lidar"
+        }
+      ],
+      "trajectory": {
+        "ate_p95_m": 0.255698564,
+        "ate_rmse_m": 0.090725819,
+        "final_drift_m": 0.034773485,
+        "heading_rmse_deg": 0.582909613,
+        "path_length_error_pct": 0.716813413,
+        "rpe_rmse_m": 0.077959659,
+        "sample_count": 601
+      },
+      "unchanged_inputs": {
+        "estimated_trajectory.csv": false,
+        "reference_trajectory.csv": true,
+        "sensor_timestamps.csv": true
+      }
+    },
+    {
+      "camera_lidar_sync_p95_ms": 1.9692035,
+      "checks": [
+        {
+          "name": "trajectory.ate_rmse",
+          "passed": true,
+          "threshold": 0.12,
+          "unit": "m",
+          "value": 0.036649818
+        },
+        {
+          "name": "trajectory.rpe_rmse",
+          "passed": true,
+          "threshold": 0.1,
+          "unit": "m",
+          "value": 0.044063125
+        },
+        {
+          "name": "trajectory.final_drift",
+          "passed": true,
+          "threshold": 0.2,
+          "unit": "m",
+          "value": 0.055446217
+        },
+        {
+          "name": "trajectory.heading_rmse",
+          "passed": true,
+          "threshold": 3.0,
+          "unit": "deg",
+          "value": 0.584803055
+        },
+        {
+          "name": "trajectory.path_length_error",
+          "passed": true,
+          "threshold": 5.0,
+          "unit": "%",
+          "value": 1.241055661
+        },
+        {
+          "name": "sync.camera_lidar_p95",
+          "passed": true,
+          "threshold": 8.0,
+          "unit": "ms",
+          "value": 1.9692035
+        },
+        {
+          "name": "timing.camera.jitter_rms",
+          "passed": true,
+          "threshold": 1.5,
+          "unit": "ms",
+          "value": 0.478954775
+        },
+        {
+          "name": "timing.camera.dropout_rate",
+          "passed": true,
+          "threshold": 0.015,
+          "unit": "ratio",
+          "value": 0.0
+        },
+        {
+          "name": "timing.camera.out_of_order",
+          "passed": true,
+          "threshold": 0.0,
+          "unit": "count",
+          "value": 0.0
+        },
+        {
+          "name": "timing.imu.jitter_rms",
+          "passed": true,
+          "threshold": 0.5,
+          "unit": "ms",
+          "value": 0.115230868
+        },
+        {
+          "name": "timing.imu.dropout_rate",
+          "passed": true,
+          "threshold": 0.015,
+          "unit": "ratio",
+          "value": 0.0
+        },
+        {
+          "name": "timing.imu.out_of_order",
+          "passed": true,
+          "threshold": 0.0,
+          "unit": "count",
+          "value": 0.0
+        },
+        {
+          "name": "timing.lidar.jitter_rms",
+          "passed": true,
+          "threshold": 2.5,
+          "unit": "ms",
+          "value": 0.98274483
+        },
+        {
+          "name": "timing.lidar.dropout_rate",
+          "passed": true,
+          "threshold": 0.015,
+          "unit": "ratio",
+          "value": 0.0
+        },
+        {
+          "name": "timing.lidar.out_of_order",
+          "passed": true,
+          "threshold": 0.0,
+          "unit": "count",
+          "value": 0.0
+        }
+      ],
+      "failed_gates": [],
+      "fault": "baseline",
+      "input_directory": "data/ablation/20261013/baseline",
+      "input_sha256": {
+        "estimated_trajectory.csv": "1397c808999b71e543e814740fd3bda1f893ed674fe896a3919806c7497852b2",
+        "reference_trajectory.csv": "3052440c45451e67d64d740e4869b1407aafb895288d209d31b21a909a002b3a",
+        "sensor_timestamps.csv": "8aa48236c453490884f266cb230fef4d6de837e13d2f687c1234c308536eee6f"
+      },
+      "paired_delta": {
+        "ate_rmse_m": 0.0,
+        "rpe_rmse_m": 0.0,
+        "sync_p95_ms": 0.0
+      },
+      "seed": 20261013,
+      "timing": [
+        {
+          "dropout_rate": 0.0,
+          "estimated_dropouts": 0,
+          "jitter_rms_ms": 0.478954775,
+          "max_gap_ms": 34.7167,
+          "nominal_hz": 30.0,
+          "observed_hz": 29.999137073,
+          "out_of_order_count": 0,
+          "sample_count": 900,
+          "sensor": "camera"
+        },
+        {
+          "dropout_rate": 0.0,
+          "estimated_dropouts": 0,
+          "jitter_rms_ms": 0.115230868,
+          "max_gap_ms": 10.40141,
+          "nominal_hz": 100.0,
+          "observed_hz": 99.999273863,
+          "out_of_order_count": 0,
+          "sample_count": 3000,
+          "sensor": "imu"
+        },
+        {
+          "dropout_rate": 0.0,
+          "estimated_dropouts": 0,
+          "jitter_rms_ms": 0.98274483,
+          "max_gap_ms": 102.57668,
+          "nominal_hz": 10.0,
+          "observed_hz": 9.999333111,
+          "out_of_order_count": 0,
+          "sample_count": 300,
+          "sensor": "lidar"
+        }
+      ],
+      "trajectory": {
+        "ate_p95_m": 0.057736027,
+        "ate_rmse_m": 0.036649818,
+        "final_drift_m": 0.055446217,
+        "heading_rmse_deg": 0.584803055,
+        "path_length_error_pct": 1.241055661,
+        "rpe_rmse_m": 0.044063125,
+        "sample_count": 601
+      },
+      "unchanged_inputs": {
+        "estimated_trajectory.csv": true,
+        "reference_trajectory.csv": true,
+        "sensor_timestamps.csv": true
+      }
+    },
+    {
+      "camera_lidar_sync_p95_ms": 12.195085,
+      "checks": [
+        {
+          "name": "trajectory.ate_rmse",
+          "passed": true,
+          "threshold": 0.12,
+          "unit": "m",
+          "value": 0.036649818
+        },
+        {
+          "name": "trajectory.rpe_rmse",
+          "passed": true,
+          "threshold": 0.1,
+          "unit": "m",
+          "value": 0.044063125
+        },
+        {
+          "name": "trajectory.final_drift",
+          "passed": true,
+          "threshold": 0.2,
+          "unit": "m",
+          "value": 0.055446217
+        },
+        {
+          "name": "trajectory.heading_rmse",
+          "passed": true,
+          "threshold": 3.0,
+          "unit": "deg",
+          "value": 0.584803055
+        },
+        {
+          "name": "trajectory.path_length_error",
+          "passed": true,
+          "threshold": 5.0,
+          "unit": "%",
+          "value": 1.241055661
+        },
+        {
+          "name": "sync.camera_lidar_p95",
+          "passed": false,
+          "threshold": 8.0,
+          "unit": "ms",
+          "value": 12.195085
+        },
+        {
+          "name": "timing.camera.jitter_rms",
+          "passed": false,
+          "threshold": 1.5,
+          "unit": "ms",
+          "value": 4.37901631
+        },
+        {
+          "name": "timing.camera.dropout_rate",
+          "passed": true,
+          "threshold": 0.015,
+          "unit": "ratio",
+          "value": 0.0
+        },
+        {
+          "name": "timing.camera.out_of_order",
+          "passed": true,
+          "threshold": 0.0,
+          "unit": "count",
+          "value": 0.0
+        },
+        {
+          "name": "timing.imu.jitter_rms",
+          "passed": false,
+          "threshold": 0.5,
+          "unit": "ms",
+          "value": 1.08028894
+        },
+        {
+          "name": "timing.imu.dropout_rate",
+          "passed": true,
+          "threshold": 0.015,
+          "unit": "ratio",
+          "value": 0.0
+        },
+        {
+          "name": "timing.imu.out_of_order",
+          "passed": true,
+          "threshold": 0.0,
+          "unit": "count",
+          "value": 0.0
+        },
+        {
+          "name": "timing.lidar.jitter_rms",
+          "passed": false,
+          "threshold": 2.5,
+          "unit": "ms",
+          "value": 7.721565644
+        },
+        {
+          "name": "timing.lidar.dropout_rate",
+          "passed": true,
+          "threshold": 0.015,
+          "unit": "ratio",
+          "value": 0.0
+        },
+        {
+          "name": "timing.lidar.out_of_order",
+          "passed": true,
+          "threshold": 0.0,
+          "unit": "count",
+          "value": 0.0
+        }
+      ],
+      "failed_gates": [
+        "sync.camera_lidar_p95",
+        "timing.camera.jitter_rms",
+        "timing.imu.jitter_rms",
+        "timing.lidar.jitter_rms"
+      ],
+      "fault": "timing_jitter",
+      "input_directory": "data/ablation/20261013/timing_jitter",
+      "input_sha256": {
+        "estimated_trajectory.csv": "1397c808999b71e543e814740fd3bda1f893ed674fe896a3919806c7497852b2",
+        "reference_trajectory.csv": "3052440c45451e67d64d740e4869b1407aafb895288d209d31b21a909a002b3a",
+        "sensor_timestamps.csv": "eb69629b8985a5c382ea761af1cd4bc447dde31d0a6ff3e5734a9c05375a9c47"
+      },
+      "paired_delta": {
+        "ate_rmse_m": 0.0,
+        "rpe_rmse_m": 0.0,
+        "sync_p95_ms": 10.2258815
+      },
+      "seed": 20261013,
+      "timing": [
+        {
+          "dropout_rate": 0.0,
+          "estimated_dropouts": 0,
+          "jitter_rms_ms": 4.37901631,
+          "max_gap_ms": 45.98133,
+          "nominal_hz": 30.0,
+          "observed_hz": 29.992112225,
+          "out_of_order_count": 0,
+          "sample_count": 900,
+          "sensor": "camera"
+        },
+        {
+          "dropout_rate": 0.0,
+          "estimated_dropouts": 0,
+          "jitter_rms_ms": 1.08028894,
+          "max_gap_ms": 13.76319,
+          "nominal_hz": 100.0,
+          "observed_hz": 99.993192994,
+          "out_of_order_count": 0,
+          "sample_count": 3000,
+          "sensor": "imu"
+        },
+        {
+          "dropout_rate": 0.0,
+          "estimated_dropouts": 0,
+          "jitter_rms_ms": 7.721565644,
+          "max_gap_ms": 120.24534,
+          "nominal_hz": 10.0,
+          "observed_hz": 9.994762561,
+          "out_of_order_count": 0,
+          "sample_count": 300,
+          "sensor": "lidar"
+        }
+      ],
+      "trajectory": {
+        "ate_p95_m": 0.057736027,
+        "ate_rmse_m": 0.036649818,
+        "final_drift_m": 0.055446217,
+        "heading_rmse_deg": 0.584803055,
+        "path_length_error_pct": 1.241055661,
+        "rpe_rmse_m": 0.044063125,
+        "sample_count": 601
+      },
+      "unchanged_inputs": {
+        "estimated_trajectory.csv": true,
+        "reference_trajectory.csv": true,
+        "sensor_timestamps.csv": false
+      }
+    },
+    {
+      "camera_lidar_sync_p95_ms": 16.808523,
+      "checks": [
+        {
+          "name": "trajectory.ate_rmse",
+          "passed": true,
+          "threshold": 0.12,
+          "unit": "m",
+          "value": 0.036649818
+        },
+        {
+          "name": "trajectory.rpe_rmse",
+          "passed": true,
+          "threshold": 0.1,
+          "unit": "m",
+          "value": 0.044063125
+        },
+        {
+          "name": "trajectory.final_drift",
+          "passed": true,
+          "threshold": 0.2,
+          "unit": "m",
+          "value": 0.055446217
+        },
+        {
+          "name": "trajectory.heading_rmse",
+          "passed": true,
+          "threshold": 3.0,
+          "unit": "deg",
+          "value": 0.584803055
+        },
+        {
+          "name": "trajectory.path_length_error",
+          "passed": true,
+          "threshold": 5.0,
+          "unit": "%",
+          "value": 1.241055661
+        },
+        {
+          "name": "sync.camera_lidar_p95",
+          "passed": false,
+          "threshold": 8.0,
+          "unit": "ms",
+          "value": 16.808523
+        },
+        {
+          "name": "timing.camera.jitter_rms",
+          "passed": true,
+          "threshold": 1.5,
+          "unit": "ms",
+          "value": 0.478954775
+        },
+        {
+          "name": "timing.camera.dropout_rate",
+          "passed": true,
+          "threshold": 0.015,
+          "unit": "ratio",
+          "value": 0.0
+        },
+        {
+          "name": "timing.camera.out_of_order",
+          "passed": true,
+          "threshold": 0.0,
+          "unit": "count",
+          "value": 0.0
+        },
+        {
+          "name": "timing.imu.jitter_rms",
+          "passed": true,
+          "threshold": 0.5,
+          "unit": "ms",
+          "value": 0.115230868
+        },
+        {
+          "name": "timing.imu.dropout_rate",
+          "passed": true,
+          "threshold": 0.015,
+          "unit": "ratio",
+          "value": 0.0
+        },
+        {
+          "name": "timing.imu.out_of_order",
+          "passed": true,
+          "threshold": 0.0,
+          "unit": "count",
+          "value": 0.0
+        },
+        {
+          "name": "timing.lidar.jitter_rms",
+          "passed": true,
+          "threshold": 2.5,
+          "unit": "ms",
+          "value": 0.98274483
+        },
+        {
+          "name": "timing.lidar.dropout_rate",
+          "passed": true,
+          "threshold": 0.015,
+          "unit": "ratio",
+          "value": 0.0
+        },
+        {
+          "name": "timing.lidar.out_of_order",
+          "passed": true,
+          "threshold": 0.0,
+          "unit": "count",
+          "value": 0.0
+        }
+      ],
+      "failed_gates": [
+        "sync.camera_lidar_p95"
+      ],
+      "fault": "lidar_offset",
+      "input_directory": "data/ablation/20261013/lidar_offset",
+      "input_sha256": {
+        "estimated_trajectory.csv": "1397c808999b71e543e814740fd3bda1f893ed674fe896a3919806c7497852b2",
+        "reference_trajectory.csv": "3052440c45451e67d64d740e4869b1407aafb895288d209d31b21a909a002b3a",
+        "sensor_timestamps.csv": "ac749b7f1618420b629e0709d719afdc024b9859936e2b766b36bec6f3003561"
+      },
+      "paired_delta": {
+        "ate_rmse_m": 0.0,
+        "rpe_rmse_m": 0.0,
+        "sync_p95_ms": 14.8393195
+      },
+      "seed": 20261013,
+      "timing": [
+        {
+          "dropout_rate": 0.0,
+          "estimated_dropouts": 0,
+          "jitter_rms_ms": 0.478954775,
+          "max_gap_ms": 34.7167,
+          "nominal_hz": 30.0,
+          "observed_hz": 29.999137073,
+          "out_of_order_count": 0,
+          "sample_count": 900,
+          "sensor": "camera"
+        },
+        {
+          "dropout_rate": 0.0,
+          "estimated_dropouts": 0,
+          "jitter_rms_ms": 0.115230868,
+          "max_gap_ms": 10.40141,
+          "nominal_hz": 100.0,
+          "observed_hz": 99.999273863,
+          "out_of_order_count": 0,
+          "sample_count": 3000,
+          "sensor": "imu"
+        },
+        {
+          "dropout_rate": 0.0,
+          "estimated_dropouts": 0,
+          "jitter_rms_ms": 0.98274483,
+          "max_gap_ms": 102.57668,
+          "nominal_hz": 10.0,
+          "observed_hz": 9.999333111,
+          "out_of_order_count": 0,
+          "sample_count": 300,
+          "sensor": "lidar"
+        }
+      ],
+      "trajectory": {
+        "ate_p95_m": 0.057736027,
+        "ate_rmse_m": 0.036649818,
+        "final_drift_m": 0.055446217,
+        "heading_rmse_deg": 0.584803055,
+        "path_length_error_pct": 1.241055661,
+        "rpe_rmse_m": 0.044063125,
+        "sample_count": 601
+      },
+      "unchanged_inputs": {
+        "estimated_trajectory.csv": true,
+        "reference_trajectory.csv": true,
+        "sensor_timestamps.csv": false
+      }
+    },
+    {
+      "camera_lidar_sync_p95_ms": 1.9741915,
+      "checks": [
+        {
+          "name": "trajectory.ate_rmse",
+          "passed": true,
+          "threshold": 0.12,
+          "unit": "m",
+          "value": 0.036649818
+        },
+        {
+          "name": "trajectory.rpe_rmse",
+          "passed": true,
+          "threshold": 0.1,
+          "unit": "m",
+          "value": 0.044063125
+        },
+        {
+          "name": "trajectory.final_drift",
+          "passed": true,
+          "threshold": 0.2,
+          "unit": "m",
+          "value": 0.055446217
+        },
+        {
+          "name": "trajectory.heading_rmse",
+          "passed": true,
+          "threshold": 3.0,
+          "unit": "deg",
+          "value": 0.584803055
+        },
+        {
+          "name": "trajectory.path_length_error",
+          "passed": true,
+          "threshold": 5.0,
+          "unit": "%",
+          "value": 1.241055661
+        },
+        {
+          "name": "sync.camera_lidar_p95",
+          "passed": true,
+          "threshold": 8.0,
+          "unit": "ms",
+          "value": 1.9741915
+        },
+        {
+          "name": "timing.camera.jitter_rms",
+          "passed": true,
+          "threshold": 1.5,
+          "unit": "ms",
+          "value": 0.478954775
+        },
+        {
+          "name": "timing.camera.dropout_rate",
+          "passed": true,
+          "threshold": 0.015,
+          "unit": "ratio",
+          "value": 0.0
+        },
+        {
+          "name": "timing.camera.out_of_order",
+          "passed": true,
+          "threshold": 0.0,
+          "unit": "count",
+          "value": 0.0
+        },
+        {
+          "name": "timing.imu.jitter_rms",
+          "passed": true,
+          "threshold": 0.5,
+          "unit": "ms",
+          "value": 0.115230868
+        },
+        {
+          "name": "timing.imu.dropout_rate",
+          "passed": true,
+          "threshold": 0.015,
+          "unit": "ratio",
+          "value": 0.0
+        },
+        {
+          "name": "timing.imu.out_of_order",
+          "passed": true,
+          "threshold": 0.0,
+          "unit": "count",
+          "value": 0.0
+        },
+        {
+          "name": "timing.lidar.jitter_rms",
+          "passed": true,
+          "threshold": 2.5,
+          "unit": "ms",
+          "value": 0.967101998
+        },
+        {
+          "name": "timing.lidar.dropout_rate",
+          "passed": false,
+          "threshold": 0.015,
+          "unit": "ratio",
+          "value": 0.026666667
+        },
+        {
+          "name": "timing.lidar.out_of_order",
+          "passed": true,
+          "threshold": 0.0,
+          "unit": "count",
+          "value": 0.0
+        }
+      ],
+      "failed_gates": [
+        "timing.lidar.dropout_rate"
+      ],
+      "fault": "lidar_dropout",
+      "input_directory": "data/ablation/20261013/lidar_dropout",
+      "input_sha256": {
+        "estimated_trajectory.csv": "1397c808999b71e543e814740fd3bda1f893ed674fe896a3919806c7497852b2",
+        "reference_trajectory.csv": "3052440c45451e67d64d740e4869b1407aafb895288d209d31b21a909a002b3a",
+        "sensor_timestamps.csv": "9c78266b3e644482cb501853c607025a6010b6e68061c4612712368d1b8391d7"
+      },
+      "paired_delta": {
+        "ate_rmse_m": 0.0,
+        "rpe_rmse_m": 0.0,
+        "sync_p95_ms": 0.004988
+      },
+      "seed": 20261013,
+      "timing": [
+        {
+          "dropout_rate": 0.0,
+          "estimated_dropouts": 0,
+          "jitter_rms_ms": 0.478954775,
+          "max_gap_ms": 34.7167,
+          "nominal_hz": 30.0,
+          "observed_hz": 29.999137073,
+          "out_of_order_count": 0,
+          "sample_count": 900,
+          "sensor": "camera"
+        },
+        {
+          "dropout_rate": 0.0,
+          "estimated_dropouts": 0,
+          "jitter_rms_ms": 0.115230868,
+          "max_gap_ms": 10.40141,
+          "nominal_hz": 100.0,
+          "observed_hz": 99.999273863,
+          "out_of_order_count": 0,
+          "sample_count": 3000,
+          "sensor": "imu"
+        },
+        {
+          "dropout_rate": 0.026666667,
+          "estimated_dropouts": 8,
+          "jitter_rms_ms": 0.967101998,
+          "max_gap_ms": 201.80099,
+          "nominal_hz": 10.0,
+          "observed_hz": 9.999333111,
+          "out_of_order_count": 0,
+          "sample_count": 292,
+          "sensor": "lidar"
+        }
+      ],
+      "trajectory": {
+        "ate_p95_m": 0.057736027,
+        "ate_rmse_m": 0.036649818,
+        "final_drift_m": 0.055446217,
+        "heading_rmse_deg": 0.584803055,
+        "path_length_error_pct": 1.241055661,
+        "rpe_rmse_m": 0.044063125,
+        "sample_count": 601
+      },
+      "unchanged_inputs": {
+        "estimated_trajectory.csv": true,
+        "reference_trajectory.csv": true,
+        "sensor_timestamps.csv": false
+      }
+    },
+    {
+      "camera_lidar_sync_p95_ms": 1.9692035,
+      "checks": [
+        {
+          "name": "trajectory.ate_rmse",
+          "passed": true,
+          "threshold": 0.12,
+          "unit": "m",
+          "value": 0.036649818
+        },
+        {
+          "name": "trajectory.rpe_rmse",
+          "passed": true,
+          "threshold": 0.1,
+          "unit": "m",
+          "value": 0.044063125
+        },
+        {
+          "name": "trajectory.final_drift",
+          "passed": true,
+          "threshold": 0.2,
+          "unit": "m",
+          "value": 0.055446217
+        },
+        {
+          "name": "trajectory.heading_rmse",
+          "passed": true,
+          "threshold": 3.0,
+          "unit": "deg",
+          "value": 0.584803055
+        },
+        {
+          "name": "trajectory.path_length_error",
+          "passed": true,
+          "threshold": 5.0,
+          "unit": "%",
+          "value": 1.241055661
+        },
+        {
+          "name": "sync.camera_lidar_p95",
+          "passed": true,
+          "threshold": 8.0,
+          "unit": "ms",
+          "value": 1.9692035
+        },
+        {
+          "name": "timing.camera.jitter_rms",
+          "passed": false,
+          "threshold": 1.5,
+          "unit": "ms",
+          "value": 1.651825811
+        },
+        {
+          "name": "timing.camera.dropout_rate",
+          "passed": true,
+          "threshold": 0.015,
+          "unit": "ratio",
+          "value": 0.0
+        },
+        {
+          "name": "timing.camera.out_of_order",
+          "passed": false,
+          "threshold": 0.0,
+          "unit": "count",
+          "value": 1.0
+        },
+        {
+          "name": "timing.imu.jitter_rms",
+          "passed": true,
+          "threshold": 0.5,
+          "unit": "ms",
+          "value": 0.115230868
+        },
+        {
+          "name": "timing.imu.dropout_rate",
+          "passed": true,
+          "threshold": 0.015,
+          "unit": "ratio",
+          "value": 0.0
+        },
+        {
+          "name": "timing.imu.out_of_order",
+          "passed": true,
+          "threshold": 0.0,
+          "unit": "count",
+          "value": 0.0
+        },
+        {
+          "name": "timing.lidar.jitter_rms",
+          "passed": true,
+          "threshold": 2.5,
+          "unit": "ms",
+          "value": 0.98274483
+        },
+        {
+          "name": "timing.lidar.dropout_rate",
+          "passed": true,
+          "threshold": 0.015,
+          "unit": "ratio",
+          "value": 0.0
+        },
+        {
+          "name": "timing.lidar.out_of_order",
+          "passed": true,
+          "threshold": 0.0,
+          "unit": "count",
+          "value": 0.0
+        }
+      ],
+      "failed_gates": [
+        "timing.camera.jitter_rms",
+        "timing.camera.out_of_order"
+      ],
+      "fault": "camera_reversal",
+      "input_directory": "data/ablation/20261013/camera_reversal",
+      "input_sha256": {
+        "estimated_trajectory.csv": "1397c808999b71e543e814740fd3bda1f893ed674fe896a3919806c7497852b2",
+        "reference_trajectory.csv": "3052440c45451e67d64d740e4869b1407aafb895288d209d31b21a909a002b3a",
+        "sensor_timestamps.csv": "326f15e574c13927d8d4700d3abdc88369a535e42cf5b52a7948d4efde529549"
+      },
+      "paired_delta": {
+        "ate_rmse_m": 0.0,
+        "rpe_rmse_m": 0.0,
+        "sync_p95_ms": 0.0
+      },
+      "seed": 20261013,
+      "timing": [
+        {
+          "dropout_rate": 0.0,
+          "estimated_dropouts": 0,
+          "jitter_rms_ms": 1.651825811,
+          "max_gap_ms": 66.93246,
+          "nominal_hz": 30.0,
+          "observed_hz": 29.999137073,
+          "out_of_order_count": 1,
+          "sample_count": 900,
+          "sensor": "camera"
+        },
+        {
+          "dropout_rate": 0.0,
+          "estimated_dropouts": 0,
+          "jitter_rms_ms": 0.115230868,
+          "max_gap_ms": 10.40141,
+          "nominal_hz": 100.0,
+          "observed_hz": 99.999273863,
+          "out_of_order_count": 0,
+          "sample_count": 3000,
+          "sensor": "imu"
+        },
+        {
+          "dropout_rate": 0.0,
+          "estimated_dropouts": 0,
+          "jitter_rms_ms": 0.98274483,
+          "max_gap_ms": 102.57668,
+          "nominal_hz": 10.0,
+          "observed_hz": 9.999333111,
+          "out_of_order_count": 0,
+          "sample_count": 300,
+          "sensor": "lidar"
+        }
+      ],
+      "trajectory": {
+        "ate_p95_m": 0.057736027,
+        "ate_rmse_m": 0.036649818,
+        "final_drift_m": 0.055446217,
+        "heading_rmse_deg": 0.584803055,
+        "path_length_error_pct": 1.241055661,
+        "rpe_rmse_m": 0.044063125,
+        "sample_count": 601
+      },
+      "unchanged_inputs": {
+        "estimated_trajectory.csv": true,
+        "reference_trajectory.csv": true,
+        "sensor_timestamps.csv": false
+      }
+    },
+    {
+      "camera_lidar_sync_p95_ms": 1.9692035,
+      "checks": [
+        {
+          "name": "trajectory.ate_rmse",
+          "passed": false,
+          "threshold": 0.12,
+          "unit": "m",
+          "value": 0.178445812
+        },
+        {
+          "name": "trajectory.rpe_rmse",
+          "passed": true,
+          "threshold": 0.1,
+          "unit": "m",
+          "value": 0.04822578
+        },
+        {
+          "name": "trajectory.final_drift",
+          "passed": false,
+          "threshold": 0.2,
+          "unit": "m",
+          "value": 0.277087695
+        },
+        {
+          "name": "trajectory.heading_rmse",
+          "passed": true,
+          "threshold": 3.0,
+          "unit": "deg",
+          "value": 1.049729787
+        },
+        {
+          "name": "trajectory.path_length_error",
+          "passed": true,
+          "threshold": 5.0,
+          "unit": "%",
+          "value": 4.511906175
+        },
+        {
+          "name": "sync.camera_lidar_p95",
+          "passed": true,
+          "threshold": 8.0,
+          "unit": "ms",
+          "value": 1.9692035
+        },
+        {
+          "name": "timing.camera.jitter_rms",
+          "passed": true,
+          "threshold": 1.5,
+          "unit": "ms",
+          "value": 0.478954775
+        },
+        {
+          "name": "timing.camera.dropout_rate",
+          "passed": true,
+          "threshold": 0.015,
+          "unit": "ratio",
+          "value": 0.0
+        },
+        {
+          "name": "timing.camera.out_of_order",
+          "passed": true,
+          "threshold": 0.0,
+          "unit": "count",
+          "value": 0.0
+        },
+        {
+          "name": "timing.imu.jitter_rms",
+          "passed": true,
+          "threshold": 0.5,
+          "unit": "ms",
+          "value": 0.115230868
+        },
+        {
+          "name": "timing.imu.dropout_rate",
+          "passed": true,
+          "threshold": 0.015,
+          "unit": "ratio",
+          "value": 0.0
+        },
+        {
+          "name": "timing.imu.out_of_order",
+          "passed": true,
+          "threshold": 0.0,
+          "unit": "count",
+          "value": 0.0
+        },
+        {
+          "name": "timing.lidar.jitter_rms",
+          "passed": true,
+          "threshold": 2.5,
+          "unit": "ms",
+          "value": 0.98274483
+        },
+        {
+          "name": "timing.lidar.dropout_rate",
+          "passed": true,
+          "threshold": 0.015,
+          "unit": "ratio",
+          "value": 0.0
+        },
+        {
+          "name": "timing.lidar.out_of_order",
+          "passed": true,
+          "threshold": 0.0,
+          "unit": "count",
+          "value": 0.0
+        }
+      ],
+      "failed_gates": [
+        "trajectory.ate_rmse",
+        "trajectory.final_drift"
+      ],
+      "fault": "trajectory_drift",
+      "input_directory": "data/ablation/20261013/trajectory_drift",
+      "input_sha256": {
+        "estimated_trajectory.csv": "4fa89f94b3fddf8abe120ebd37f9a5ddada5c48ae33cd3df39fe6756982ae7b9",
+        "reference_trajectory.csv": "3052440c45451e67d64d740e4869b1407aafb895288d209d31b21a909a002b3a",
+        "sensor_timestamps.csv": "8aa48236c453490884f266cb230fef4d6de837e13d2f687c1234c308536eee6f"
+      },
+      "paired_delta": {
+        "ate_rmse_m": 0.141795994,
+        "rpe_rmse_m": 0.004162655,
+        "sync_p95_ms": 0.0
+      },
+      "seed": 20261013,
+      "timing": [
+        {
+          "dropout_rate": 0.0,
+          "estimated_dropouts": 0,
+          "jitter_rms_ms": 0.478954775,
+          "max_gap_ms": 34.7167,
+          "nominal_hz": 30.0,
+          "observed_hz": 29.999137073,
+          "out_of_order_count": 0,
+          "sample_count": 900,
+          "sensor": "camera"
+        },
+        {
+          "dropout_rate": 0.0,
+          "estimated_dropouts": 0,
+          "jitter_rms_ms": 0.115230868,
+          "max_gap_ms": 10.40141,
+          "nominal_hz": 100.0,
+          "observed_hz": 99.999273863,
+          "out_of_order_count": 0,
+          "sample_count": 3000,
+          "sensor": "imu"
+        },
+        {
+          "dropout_rate": 0.0,
+          "estimated_dropouts": 0,
+          "jitter_rms_ms": 0.98274483,
+          "max_gap_ms": 102.57668,
+          "nominal_hz": 10.0,
+          "observed_hz": 9.999333111,
+          "out_of_order_count": 0,
+          "sample_count": 300,
+          "sensor": "lidar"
+        }
+      ],
+      "trajectory": {
+        "ate_p95_m": 0.283188317,
+        "ate_rmse_m": 0.178445812,
+        "final_drift_m": 0.277087695,
+        "heading_rmse_deg": 1.049729787,
+        "path_length_error_pct": 4.511906175,
+        "rpe_rmse_m": 0.04822578,
+        "sample_count": 601
+      },
+      "unchanged_inputs": {
+        "estimated_trajectory.csv": false,
+        "reference_trajectory.csv": true,
+        "sensor_timestamps.csv": true
+      }
+    },
+    {
+      "camera_lidar_sync_p95_ms": 1.9692035,
+      "checks": [
+        {
+          "name": "trajectory.ate_rmse",
+          "passed": true,
+          "threshold": 0.12,
+          "unit": "m",
+          "value": 0.090454074
+        },
+        {
+          "name": "trajectory.rpe_rmse",
+          "passed": true,
+          "threshold": 0.1,
+          "unit": "m",
+          "value": 0.076801284
+        },
+        {
+          "name": "trajectory.final_drift",
+          "passed": true,
+          "threshold": 0.2,
+          "unit": "m",
+          "value": 0.064774855
+        },
+        {
+          "name": "trajectory.heading_rmse",
+          "passed": true,
+          "threshold": 3.0,
+          "unit": "deg",
+          "value": 0.584153147
+        },
+        {
+          "name": "trajectory.path_length_error",
+          "passed": true,
+          "threshold": 5.0,
+          "unit": "%",
+          "value": 1.265064145
+        },
+        {
+          "name": "sync.camera_lidar_p95",
+          "passed": true,
+          "threshold": 8.0,
+          "unit": "ms",
+          "value": 1.9692035
+        },
+        {
+          "name": "timing.camera.jitter_rms",
+          "passed": true,
+          "threshold": 1.5,
+          "unit": "ms",
+          "value": 0.478954775
+        },
+        {
+          "name": "timing.camera.dropout_rate",
+          "passed": true,
+          "threshold": 0.015,
+          "unit": "ratio",
+          "value": 0.0
+        },
+        {
+          "name": "timing.camera.out_of_order",
+          "passed": true,
+          "threshold": 0.0,
+          "unit": "count",
+          "value": 0.0
+        },
+        {
+          "name": "timing.imu.jitter_rms",
+          "passed": true,
+          "threshold": 0.5,
+          "unit": "ms",
+          "value": 0.115230868
+        },
+        {
+          "name": "timing.imu.dropout_rate",
+          "passed": true,
+          "threshold": 0.015,
+          "unit": "ratio",
+          "value": 0.0
+        },
+        {
+          "name": "timing.imu.out_of_order",
+          "passed": true,
+          "threshold": 0.0,
+          "unit": "count",
+          "value": 0.0
+        },
+        {
+          "name": "timing.lidar.jitter_rms",
+          "passed": true,
+          "threshold": 2.5,
+          "unit": "ms",
+          "value": 0.98274483
+        },
+        {
+          "name": "timing.lidar.dropout_rate",
+          "passed": true,
+          "threshold": 0.015,
+          "unit": "ratio",
+          "value": 0.0
+        },
+        {
+          "name": "timing.lidar.out_of_order",
+          "passed": true,
+          "threshold": 0.0,
+          "unit": "count",
+          "value": 0.0
+        }
+      ],
+      "failed_gates": [],
+      "fault": "trajectory_bump",
+      "input_directory": "data/ablation/20261013/trajectory_bump",
+      "input_sha256": {
+        "estimated_trajectory.csv": "4a3157cc69f0a173ae8510fc832bb9b65377343569cf4807351bdcb0c3916a5d",
+        "reference_trajectory.csv": "3052440c45451e67d64d740e4869b1407aafb895288d209d31b21a909a002b3a",
+        "sensor_timestamps.csv": "8aa48236c453490884f266cb230fef4d6de837e13d2f687c1234c308536eee6f"
+      },
+      "paired_delta": {
+        "ate_rmse_m": 0.053804256,
+        "rpe_rmse_m": 0.032738159,
+        "sync_p95_ms": 0.0
+      },
+      "seed": 20261013,
+      "timing": [
+        {
+          "dropout_rate": 0.0,
+          "estimated_dropouts": 0,
+          "jitter_rms_ms": 0.478954775,
+          "max_gap_ms": 34.7167,
+          "nominal_hz": 30.0,
+          "observed_hz": 29.999137073,
+          "out_of_order_count": 0,
+          "sample_count": 900,
+          "sensor": "camera"
+        },
+        {
+          "dropout_rate": 0.0,
+          "estimated_dropouts": 0,
+          "jitter_rms_ms": 0.115230868,
+          "max_gap_ms": 10.40141,
+          "nominal_hz": 100.0,
+          "observed_hz": 99.999273863,
+          "out_of_order_count": 0,
+          "sample_count": 3000,
+          "sensor": "imu"
+        },
+        {
+          "dropout_rate": 0.0,
+          "estimated_dropouts": 0,
+          "jitter_rms_ms": 0.98274483,
+          "max_gap_ms": 102.57668,
+          "nominal_hz": 10.0,
+          "observed_hz": 9.999333111,
+          "out_of_order_count": 0,
+          "sample_count": 300,
+          "sensor": "lidar"
+        }
+      ],
+      "trajectory": {
+        "ate_p95_m": 0.247858813,
+        "ate_rmse_m": 0.090454074,
+        "final_drift_m": 0.064774855,
+        "heading_rmse_deg": 0.584153147,
+        "path_length_error_pct": 1.265064145,
+        "rpe_rmse_m": 0.076801284,
+        "sample_count": 601
+      },
+      "unchanged_inputs": {
+        "estimated_trajectory.csv": false,
+        "reference_trajectory.csv": true,
+        "sensor_timestamps.csv": true
+      }
+    },
+    {
+      "camera_lidar_sync_p95_ms": 2.0732475,
+      "checks": [
+        {
+          "name": "trajectory.ate_rmse",
+          "passed": true,
+          "threshold": 0.12,
+          "unit": "m",
+          "value": 0.036828332
+        },
+        {
+          "name": "trajectory.rpe_rmse",
+          "passed": true,
+          "threshold": 0.1,
+          "unit": "m",
+          "value": 0.042840894
+        },
+        {
+          "name": "trajectory.final_drift",
+          "passed": true,
+          "threshold": 0.2,
+          "unit": "m",
+          "value": 0.062849286
+        },
+        {
+          "name": "trajectory.heading_rmse",
+          "passed": true,
+          "threshold": 3.0,
+          "unit": "deg",
+          "value": 0.585786559
+        },
+        {
+          "name": "trajectory.path_length_error",
+          "passed": true,
+          "threshold": 5.0,
+          "unit": "%",
+          "value": 1.298806035
+        },
+        {
+          "name": "sync.camera_lidar_p95",
+          "passed": true,
+          "threshold": 8.0,
+          "unit": "ms",
+          "value": 2.0732475
+        },
+        {
+          "name": "timing.camera.jitter_rms",
+          "passed": true,
+          "threshold": 1.5,
+          "unit": "ms",
+          "value": 0.524937999
+        },
+        {
+          "name": "timing.camera.dropout_rate",
+          "passed": true,
+          "threshold": 0.015,
+          "unit": "ratio",
+          "value": 0.0
+        },
+        {
+          "name": "timing.camera.out_of_order",
+          "passed": true,
+          "threshold": 0.0,
+          "unit": "count",
+          "value": 0.0
+        },
+        {
+          "name": "timing.imu.jitter_rms",
+          "passed": true,
+          "threshold": 0.5,
+          "unit": "ms",
+          "value": 0.111157101
+        },
+        {
+          "name": "timing.imu.dropout_rate",
+          "passed": true,
+          "threshold": 0.015,
+          "unit": "ratio",
+          "value": 0.0
+        },
+        {
+          "name": "timing.imu.out_of_order",
+          "passed": true,
+          "threshold": 0.0,
+          "unit": "count",
+          "value": 0.0
+        },
+        {
+          "name": "timing.lidar.jitter_rms",
+          "passed": true,
+          "threshold": 2.5,
+          "unit": "ms",
+          "value": 0.969829961
+        },
+        {
+          "name": "timing.lidar.dropout_rate",
+          "passed": true,
+          "threshold": 0.015,
+          "unit": "ratio",
+          "value": 0.0
+        },
+        {
+          "name": "timing.lidar.out_of_order",
+          "passed": true,
+          "threshold": 0.0,
+          "unit": "count",
+          "value": 0.0
+        }
+      ],
+      "failed_gates": [],
+      "fault": "baseline",
+      "input_directory": "data/ablation/20261014/baseline",
+      "input_sha256": {
+        "estimated_trajectory.csv": "8b474b69b14c67b33ab8f806603e4d41cacd6815267d38c6b4d0ca21625092cc",
+        "reference_trajectory.csv": "3052440c45451e67d64d740e4869b1407aafb895288d209d31b21a909a002b3a",
+        "sensor_timestamps.csv": "3ef637af4fb7494e74ee84b39b68d2e9f483d7c3098dbfe4bc5d311321f9012b"
+      },
+      "paired_delta": {
+        "ate_rmse_m": 0.0,
+        "rpe_rmse_m": 0.0,
+        "sync_p95_ms": 0.0
+      },
+      "seed": 20261014,
+      "timing": [
+        {
+          "dropout_rate": 0.0,
+          "estimated_dropouts": 0,
+          "jitter_rms_ms": 0.524937999,
+          "max_gap_ms": 34.78981,
+          "nominal_hz": 30.0,
+          "observed_hz": 29.999658141,
+          "out_of_order_count": 0,
+          "sample_count": 900,
+          "sensor": "camera"
+        },
+        {
+          "dropout_rate": 0.0,
+          "estimated_dropouts": 0,
+          "jitter_rms_ms": 0.111157101,
+          "max_gap_ms": 10.46758,
+          "nominal_hz": 100.0,
+          "observed_hz": 99.999643182,
+          "out_of_order_count": 0,
+          "sample_count": 3000,
+          "sensor": "imu"
+        },
+        {
+          "dropout_rate": 0.0,
+          "estimated_dropouts": 0,
+          "jitter_rms_ms": 0.969829961,
+          "max_gap_ms": 102.83178,
+          "nominal_hz": 10.0,
+          "observed_hz": 10.000065432,
+          "out_of_order_count": 0,
+          "sample_count": 300,
+          "sensor": "lidar"
+        }
+      ],
+      "trajectory": {
+        "ate_p95_m": 0.060105145,
+        "ate_rmse_m": 0.036828332,
+        "final_drift_m": 0.062849286,
+        "heading_rmse_deg": 0.585786559,
+        "path_length_error_pct": 1.298806035,
+        "rpe_rmse_m": 0.042840894,
+        "sample_count": 601
+      },
+      "unchanged_inputs": {
+        "estimated_trajectory.csv": true,
+        "reference_trajectory.csv": true,
+        "sensor_timestamps.csv": true
+      }
+    },
+    {
+      "camera_lidar_sync_p95_ms": 12.6041035,
+      "checks": [
+        {
+          "name": "trajectory.ate_rmse",
+          "passed": true,
+          "threshold": 0.12,
+          "unit": "m",
+          "value": 0.036828332
+        },
+        {
+          "name": "trajectory.rpe_rmse",
+          "passed": true,
+          "threshold": 0.1,
+          "unit": "m",
+          "value": 0.042840894
+        },
+        {
+          "name": "trajectory.final_drift",
+          "passed": true,
+          "threshold": 0.2,
+          "unit": "m",
+          "value": 0.062849286
+        },
+        {
+          "name": "trajectory.heading_rmse",
+          "passed": true,
+          "threshold": 3.0,
+          "unit": "deg",
+          "value": 0.585786559
+        },
+        {
+          "name": "trajectory.path_length_error",
+          "passed": true,
+          "threshold": 5.0,
+          "unit": "%",
+          "value": 1.298806035
+        },
+        {
+          "name": "sync.camera_lidar_p95",
+          "passed": false,
+          "threshold": 8.0,
+          "unit": "ms",
+          "value": 12.6041035
+        },
+        {
+          "name": "timing.camera.jitter_rms",
+          "passed": false,
+          "threshold": 1.5,
+          "unit": "ms",
+          "value": 4.799433861
+        },
+        {
+          "name": "timing.camera.dropout_rate",
+          "passed": true,
+          "threshold": 0.015,
+          "unit": "ratio",
+          "value": 0.0
+        },
+        {
+          "name": "timing.camera.out_of_order",
+          "passed": true,
+          "threshold": 0.0,
+          "unit": "count",
+          "value": 0.0
+        },
+        {
+          "name": "timing.imu.jitter_rms",
+          "passed": false,
+          "threshold": 0.5,
+          "unit": "ms",
+          "value": 1.042098436
+        },
+        {
+          "name": "timing.imu.dropout_rate",
+          "passed": true,
+          "threshold": 0.015,
+          "unit": "ratio",
+          "value": 0.0
+        },
+        {
+          "name": "timing.imu.out_of_order",
+          "passed": true,
+          "threshold": 0.0,
+          "unit": "count",
+          "value": 0.0
+        },
+        {
+          "name": "timing.lidar.jitter_rms",
+          "passed": false,
+          "threshold": 2.5,
+          "unit": "ms",
+          "value": 7.620091132
+        },
+        {
+          "name": "timing.lidar.dropout_rate",
+          "passed": true,
+          "threshold": 0.015,
+          "unit": "ratio",
+          "value": 0.0
+        },
+        {
+          "name": "timing.lidar.out_of_order",
+          "passed": true,
+          "threshold": 0.0,
+          "unit": "count",
+          "value": 0.0
+        }
+      ],
+      "failed_gates": [
+        "sync.camera_lidar_p95",
+        "timing.camera.jitter_rms",
+        "timing.imu.jitter_rms",
+        "timing.lidar.jitter_rms"
+      ],
+      "fault": "timing_jitter",
+      "input_directory": "data/ablation/20261014/timing_jitter",
+      "input_sha256": {
+        "estimated_trajectory.csv": "8b474b69b14c67b33ab8f806603e4d41cacd6815267d38c6b4d0ca21625092cc",
+        "reference_trajectory.csv": "3052440c45451e67d64d740e4869b1407aafb895288d209d31b21a909a002b3a",
+        "sensor_timestamps.csv": "ec624444a8173d7ed3b35d829cce42c6ba8177f76a5d32849ab276d5b12c57ab"
+      },
+      "paired_delta": {
+        "ate_rmse_m": 0.0,
+        "rpe_rmse_m": 0.0,
+        "sync_p95_ms": 10.530856
+      },
+      "seed": 20261014,
+      "timing": [
+        {
+          "dropout_rate": 0.0,
+          "estimated_dropouts": 0,
+          "jitter_rms_ms": 4.799433861,
+          "max_gap_ms": 46.6497,
+          "nominal_hz": 30.0,
+          "observed_hz": 29.996874669,
+          "out_of_order_count": 0,
+          "sample_count": 900,
+          "sensor": "camera"
+        },
+        {
+          "dropout_rate": 0.0,
+          "estimated_dropouts": 0,
+          "jitter_rms_ms": 1.042098436,
+          "max_gap_ms": 14.38361,
+          "nominal_hz": 100.0,
+          "observed_hz": 99.996654697,
+          "out_of_order_count": 0,
+          "sample_count": 3000,
+          "sensor": "imu"
+        },
+        {
+          "dropout_rate": 0.0,
+          "estimated_dropouts": 0,
+          "jitter_rms_ms": 7.620091132,
+          "max_gap_ms": 122.24967,
+          "nominal_hz": 10.0,
+          "observed_hz": 10.000514137,
+          "out_of_order_count": 0,
+          "sample_count": 300,
+          "sensor": "lidar"
+        }
+      ],
+      "trajectory": {
+        "ate_p95_m": 0.060105145,
+        "ate_rmse_m": 0.036828332,
+        "final_drift_m": 0.062849286,
+        "heading_rmse_deg": 0.585786559,
+        "path_length_error_pct": 1.298806035,
+        "rpe_rmse_m": 0.042840894,
+        "sample_count": 601
+      },
+      "unchanged_inputs": {
+        "estimated_trajectory.csv": true,
+        "reference_trajectory.csv": true,
+        "sensor_timestamps.csv": false
+      }
+    },
+    {
+      "camera_lidar_sync_p95_ms": 16.779832,
+      "checks": [
+        {
+          "name": "trajectory.ate_rmse",
+          "passed": true,
+          "threshold": 0.12,
+          "unit": "m",
+          "value": 0.036828332
+        },
+        {
+          "name": "trajectory.rpe_rmse",
+          "passed": true,
+          "threshold": 0.1,
+          "unit": "m",
+          "value": 0.042840894
+        },
+        {
+          "name": "trajectory.final_drift",
+          "passed": true,
+          "threshold": 0.2,
+          "unit": "m",
+          "value": 0.062849286
+        },
+        {
+          "name": "trajectory.heading_rmse",
+          "passed": true,
+          "threshold": 3.0,
+          "unit": "deg",
+          "value": 0.585786559
+        },
+        {
+          "name": "trajectory.path_length_error",
+          "passed": true,
+          "threshold": 5.0,
+          "unit": "%",
+          "value": 1.298806035
+        },
+        {
+          "name": "sync.camera_lidar_p95",
+          "passed": false,
+          "threshold": 8.0,
+          "unit": "ms",
+          "value": 16.779832
+        },
+        {
+          "name": "timing.camera.jitter_rms",
+          "passed": true,
+          "threshold": 1.5,
+          "unit": "ms",
+          "value": 0.524937999
+        },
+        {
+          "name": "timing.camera.dropout_rate",
+          "passed": true,
+          "threshold": 0.015,
+          "unit": "ratio",
+          "value": 0.0
+        },
+        {
+          "name": "timing.camera.out_of_order",
+          "passed": true,
+          "threshold": 0.0,
+          "unit": "count",
+          "value": 0.0
+        },
+        {
+          "name": "timing.imu.jitter_rms",
+          "passed": true,
+          "threshold": 0.5,
+          "unit": "ms",
+          "value": 0.111157101
+        },
+        {
+          "name": "timing.imu.dropout_rate",
+          "passed": true,
+          "threshold": 0.015,
+          "unit": "ratio",
+          "value": 0.0
+        },
+        {
+          "name": "timing.imu.out_of_order",
+          "passed": true,
+          "threshold": 0.0,
+          "unit": "count",
+          "value": 0.0
+        },
+        {
+          "name": "timing.lidar.jitter_rms",
+          "passed": true,
+          "threshold": 2.5,
+          "unit": "ms",
+          "value": 0.969829961
+        },
+        {
+          "name": "timing.lidar.dropout_rate",
+          "passed": true,
+          "threshold": 0.015,
+          "unit": "ratio",
+          "value": 0.0
+        },
+        {
+          "name": "timing.lidar.out_of_order",
+          "passed": true,
+          "threshold": 0.0,
+          "unit": "count",
+          "value": 0.0
+        }
+      ],
+      "failed_gates": [
+        "sync.camera_lidar_p95"
+      ],
+      "fault": "lidar_offset",
+      "input_directory": "data/ablation/20261014/lidar_offset",
+      "input_sha256": {
+        "estimated_trajectory.csv": "8b474b69b14c67b33ab8f806603e4d41cacd6815267d38c6b4d0ca21625092cc",
+        "reference_trajectory.csv": "3052440c45451e67d64d740e4869b1407aafb895288d209d31b21a909a002b3a",
+        "sensor_timestamps.csv": "00d226a0295df528dda419ffee267ebd78359ce46e832d3e3ee2d6409eac19e1"
+      },
+      "paired_delta": {
+        "ate_rmse_m": 0.0,
+        "rpe_rmse_m": 0.0,
+        "sync_p95_ms": 14.7065845
+      },
+      "seed": 20261014,
+      "timing": [
+        {
+          "dropout_rate": 0.0,
+          "estimated_dropouts": 0,
+          "jitter_rms_ms": 0.524937999,
+          "max_gap_ms": 34.78981,
+          "nominal_hz": 30.0,
+          "observed_hz": 29.999658141,
+          "out_of_order_count": 0,
+          "sample_count": 900,
+          "sensor": "camera"
+        },
+        {
+          "dropout_rate": 0.0,
+          "estimated_dropouts": 0,
+          "jitter_rms_ms": 0.111157101,
+          "max_gap_ms": 10.46758,
+          "nominal_hz": 100.0,
+          "observed_hz": 99.999643182,
+          "out_of_order_count": 0,
+          "sample_count": 3000,
+          "sensor": "imu"
+        },
+        {
+          "dropout_rate": 0.0,
+          "estimated_dropouts": 0,
+          "jitter_rms_ms": 0.969829961,
+          "max_gap_ms": 102.83178,
+          "nominal_hz": 10.0,
+          "observed_hz": 10.000065432,
+          "out_of_order_count": 0,
+          "sample_count": 300,
+          "sensor": "lidar"
+        }
+      ],
+      "trajectory": {
+        "ate_p95_m": 0.060105145,
+        "ate_rmse_m": 0.036828332,
+        "final_drift_m": 0.062849286,
+        "heading_rmse_deg": 0.585786559,
+        "path_length_error_pct": 1.298806035,
+        "rpe_rmse_m": 0.042840894,
+        "sample_count": 601
+      },
+      "unchanged_inputs": {
+        "estimated_trajectory.csv": true,
+        "reference_trajectory.csv": true,
+        "sensor_timestamps.csv": false
+      }
+    },
+    {
+      "camera_lidar_sync_p95_ms": 2.0734675,
+      "checks": [
+        {
+          "name": "trajectory.ate_rmse",
+          "passed": true,
+          "threshold": 0.12,
+          "unit": "m",
+          "value": 0.036828332
+        },
+        {
+          "name": "trajectory.rpe_rmse",
+          "passed": true,
+          "threshold": 0.1,
+          "unit": "m",
+          "value": 0.042840894
+        },
+        {
+          "name": "trajectory.final_drift",
+          "passed": true,
+          "threshold": 0.2,
+          "unit": "m",
+          "value": 0.062849286
+        },
+        {
+          "name": "trajectory.heading_rmse",
+          "passed": true,
+          "threshold": 3.0,
+          "unit": "deg",
+          "value": 0.585786559
+        },
+        {
+          "name": "trajectory.path_length_error",
+          "passed": true,
+          "threshold": 5.0,
+          "unit": "%",
+          "value": 1.298806035
+        },
+        {
+          "name": "sync.camera_lidar_p95",
+          "passed": true,
+          "threshold": 8.0,
+          "unit": "ms",
+          "value": 2.0734675
+        },
+        {
+          "name": "timing.camera.jitter_rms",
+          "passed": true,
+          "threshold": 1.5,
+          "unit": "ms",
+          "value": 0.524937999
+        },
+        {
+          "name": "timing.camera.dropout_rate",
+          "passed": true,
+          "threshold": 0.015,
+          "unit": "ratio",
+          "value": 0.0
+        },
+        {
+          "name": "timing.camera.out_of_order",
+          "passed": true,
+          "threshold": 0.0,
+          "unit": "count",
+          "value": 0.0
+        },
+        {
+          "name": "timing.imu.jitter_rms",
+          "passed": true,
+          "threshold": 0.5,
+          "unit": "ms",
+          "value": 0.111157101
+        },
+        {
+          "name": "timing.imu.dropout_rate",
+          "passed": true,
+          "threshold": 0.015,
+          "unit": "ratio",
+          "value": 0.0
+        },
+        {
+          "name": "timing.imu.out_of_order",
+          "passed": true,
+          "threshold": 0.0,
+          "unit": "count",
+          "value": 0.0
+        },
+        {
+          "name": "timing.lidar.jitter_rms",
+          "passed": true,
+          "threshold": 2.5,
+          "unit": "ms",
+          "value": 0.972428545
+        },
+        {
+          "name": "timing.lidar.dropout_rate",
+          "passed": false,
+          "threshold": 0.015,
+          "unit": "ratio",
+          "value": 0.026666667
+        },
+        {
+          "name": "timing.lidar.out_of_order",
+          "passed": true,
+          "threshold": 0.0,
+          "unit": "count",
+          "value": 0.0
+        }
+      ],
+      "failed_gates": [
+        "timing.lidar.dropout_rate"
+      ],
+      "fault": "lidar_dropout",
+      "input_directory": "data/ablation/20261014/lidar_dropout",
+      "input_sha256": {
+        "estimated_trajectory.csv": "8b474b69b14c67b33ab8f806603e4d41cacd6815267d38c6b4d0ca21625092cc",
+        "reference_trajectory.csv": "3052440c45451e67d64d740e4869b1407aafb895288d209d31b21a909a002b3a",
+        "sensor_timestamps.csv": "a0f148927b18b3326999d32ecf4ca233cdab710c17cdde30017eec9da291317c"
+      },
+      "paired_delta": {
+        "ate_rmse_m": 0.0,
+        "rpe_rmse_m": 0.0,
+        "sync_p95_ms": 0.00022
+      },
+      "seed": 20261014,
+      "timing": [
+        {
+          "dropout_rate": 0.0,
+          "estimated_dropouts": 0,
+          "jitter_rms_ms": 0.524937999,
+          "max_gap_ms": 34.78981,
+          "nominal_hz": 30.0,
+          "observed_hz": 29.999658141,
+          "out_of_order_count": 0,
+          "sample_count": 900,
+          "sensor": "camera"
+        },
+        {
+          "dropout_rate": 0.0,
+          "estimated_dropouts": 0,
+          "jitter_rms_ms": 0.111157101,
+          "max_gap_ms": 10.46758,
+          "nominal_hz": 100.0,
+          "observed_hz": 99.999643182,
+          "out_of_order_count": 0,
+          "sample_count": 3000,
+          "sensor": "imu"
+        },
+        {
+          "dropout_rate": 0.026666667,
+          "estimated_dropouts": 8,
+          "jitter_rms_ms": 0.972428545,
+          "max_gap_ms": 201.38935,
+          "nominal_hz": 10.0,
+          "observed_hz": 10.000065432,
+          "out_of_order_count": 0,
+          "sample_count": 292,
+          "sensor": "lidar"
+        }
+      ],
+      "trajectory": {
+        "ate_p95_m": 0.060105145,
+        "ate_rmse_m": 0.036828332,
+        "final_drift_m": 0.062849286,
+        "heading_rmse_deg": 0.585786559,
+        "path_length_error_pct": 1.298806035,
+        "rpe_rmse_m": 0.042840894,
+        "sample_count": 601
+      },
+      "unchanged_inputs": {
+        "estimated_trajectory.csv": true,
+        "reference_trajectory.csv": true,
+        "sensor_timestamps.csv": false
+      }
+    },
+    {
+      "camera_lidar_sync_p95_ms": 2.0732475,
+      "checks": [
+        {
+          "name": "trajectory.ate_rmse",
+          "passed": true,
+          "threshold": 0.12,
+          "unit": "m",
+          "value": 0.036828332
+        },
+        {
+          "name": "trajectory.rpe_rmse",
+          "passed": true,
+          "threshold": 0.1,
+          "unit": "m",
+          "value": 0.042840894
+        },
+        {
+          "name": "trajectory.final_drift",
+          "passed": true,
+          "threshold": 0.2,
+          "unit": "m",
+          "value": 0.062849286
+        },
+        {
+          "name": "trajectory.heading_rmse",
+          "passed": true,
+          "threshold": 3.0,
+          "unit": "deg",
+          "value": 0.585786559
+        },
+        {
+          "name": "trajectory.path_length_error",
+          "passed": true,
+          "threshold": 5.0,
+          "unit": "%",
+          "value": 1.298806035
+        },
+        {
+          "name": "sync.camera_lidar_p95",
+          "passed": true,
+          "threshold": 8.0,
+          "unit": "ms",
+          "value": 2.0732475
+        },
+        {
+          "name": "timing.camera.jitter_rms",
+          "passed": false,
+          "threshold": 1.5,
+          "unit": "ms",
+          "value": 1.670345087
+        },
+        {
+          "name": "timing.camera.dropout_rate",
+          "passed": true,
+          "threshold": 0.015,
+          "unit": "ratio",
+          "value": 0.0
+        },
+        {
+          "name": "timing.camera.out_of_order",
+          "passed": false,
+          "threshold": 0.0,
+          "unit": "count",
+          "value": 1.0
+        },
+        {
+          "name": "timing.imu.jitter_rms",
+          "passed": true,
+          "threshold": 0.5,
+          "unit": "ms",
+          "value": 0.111157101
+        },
+        {
+          "name": "timing.imu.dropout_rate",
+          "passed": true,
+          "threshold": 0.015,
+          "unit": "ratio",
+          "value": 0.0
+        },
+        {
+          "name": "timing.imu.out_of_order",
+          "passed": true,
+          "threshold": 0.0,
+          "unit": "count",
+          "value": 0.0
+        },
+        {
+          "name": "timing.lidar.jitter_rms",
+          "passed": true,
+          "threshold": 2.5,
+          "unit": "ms",
+          "value": 0.969829961
+        },
+        {
+          "name": "timing.lidar.dropout_rate",
+          "passed": true,
+          "threshold": 0.015,
+          "unit": "ratio",
+          "value": 0.0
+        },
+        {
+          "name": "timing.lidar.out_of_order",
+          "passed": true,
+          "threshold": 0.0,
+          "unit": "count",
+          "value": 0.0
+        }
+      ],
+      "failed_gates": [
+        "timing.camera.jitter_rms",
+        "timing.camera.out_of_order"
+      ],
+      "fault": "camera_reversal",
+      "input_directory": "data/ablation/20261014/camera_reversal",
+      "input_sha256": {
+        "estimated_trajectory.csv": "8b474b69b14c67b33ab8f806603e4d41cacd6815267d38c6b4d0ca21625092cc",
+        "reference_trajectory.csv": "3052440c45451e67d64d740e4869b1407aafb895288d209d31b21a909a002b3a",
+        "sensor_timestamps.csv": "6e9c583960720940b19dc6bb68a373f36289b558506e76993c72b6c6eeb612a4"
+      },
+      "paired_delta": {
+        "ate_rmse_m": 0.0,
+        "rpe_rmse_m": 0.0,
+        "sync_p95_ms": 0.0
+      },
+      "seed": 20261014,
+      "timing": [
+        {
+          "dropout_rate": 0.0,
+          "estimated_dropouts": 0,
+          "jitter_rms_ms": 1.670345087,
+          "max_gap_ms": 67.02071,
+          "nominal_hz": 30.0,
+          "observed_hz": 29.999658141,
+          "out_of_order_count": 1,
+          "sample_count": 900,
+          "sensor": "camera"
+        },
+        {
+          "dropout_rate": 0.0,
+          "estimated_dropouts": 0,
+          "jitter_rms_ms": 0.111157101,
+          "max_gap_ms": 10.46758,
+          "nominal_hz": 100.0,
+          "observed_hz": 99.999643182,
+          "out_of_order_count": 0,
+          "sample_count": 3000,
+          "sensor": "imu"
+        },
+        {
+          "dropout_rate": 0.0,
+          "estimated_dropouts": 0,
+          "jitter_rms_ms": 0.969829961,
+          "max_gap_ms": 102.83178,
+          "nominal_hz": 10.0,
+          "observed_hz": 10.000065432,
+          "out_of_order_count": 0,
+          "sample_count": 300,
+          "sensor": "lidar"
+        }
+      ],
+      "trajectory": {
+        "ate_p95_m": 0.060105145,
+        "ate_rmse_m": 0.036828332,
+        "final_drift_m": 0.062849286,
+        "heading_rmse_deg": 0.585786559,
+        "path_length_error_pct": 1.298806035,
+        "rpe_rmse_m": 0.042840894,
+        "sample_count": 601
+      },
+      "unchanged_inputs": {
+        "estimated_trajectory.csv": true,
+        "reference_trajectory.csv": true,
+        "sensor_timestamps.csv": false
+      }
+    },
+    {
+      "camera_lidar_sync_p95_ms": 2.0732475,
+      "checks": [
+        {
+          "name": "trajectory.ate_rmse",
+          "passed": false,
+          "threshold": 0.12,
+          "unit": "m",
+          "value": 0.179301715
+        },
+        {
+          "name": "trajectory.rpe_rmse",
+          "passed": true,
+          "threshold": 0.1,
+          "unit": "m",
+          "value": 0.047184012
+        },
+        {
+          "name": "trajectory.final_drift",
+          "passed": false,
+          "threshold": 0.2,
+          "unit": "m",
+          "value": 0.308387106
+        },
+        {
+          "name": "trajectory.heading_rmse",
+          "passed": true,
+          "threshold": 3.0,
+          "unit": "deg",
+          "value": 1.043090353
+        },
+        {
+          "name": "trajectory.path_length_error",
+          "passed": true,
+          "threshold": 5.0,
+          "unit": "%",
+          "value": 4.592867256
+        },
+        {
+          "name": "sync.camera_lidar_p95",
+          "passed": true,
+          "threshold": 8.0,
+          "unit": "ms",
+          "value": 2.0732475
+        },
+        {
+          "name": "timing.camera.jitter_rms",
+          "passed": true,
+          "threshold": 1.5,
+          "unit": "ms",
+          "value": 0.524937999
+        },
+        {
+          "name": "timing.camera.dropout_rate",
+          "passed": true,
+          "threshold": 0.015,
+          "unit": "ratio",
+          "value": 0.0
+        },
+        {
+          "name": "timing.camera.out_of_order",
+          "passed": true,
+          "threshold": 0.0,
+          "unit": "count",
+          "value": 0.0
+        },
+        {
+          "name": "timing.imu.jitter_rms",
+          "passed": true,
+          "threshold": 0.5,
+          "unit": "ms",
+          "value": 0.111157101
+        },
+        {
+          "name": "timing.imu.dropout_rate",
+          "passed": true,
+          "threshold": 0.015,
+          "unit": "ratio",
+          "value": 0.0
+        },
+        {
+          "name": "timing.imu.out_of_order",
+          "passed": true,
+          "threshold": 0.0,
+          "unit": "count",
+          "value": 0.0
+        },
+        {
+          "name": "timing.lidar.jitter_rms",
+          "passed": true,
+          "threshold": 2.5,
+          "unit": "ms",
+          "value": 0.969829961
+        },
+        {
+          "name": "timing.lidar.dropout_rate",
+          "passed": true,
+          "threshold": 0.015,
+          "unit": "ratio",
+          "value": 0.0
+        },
+        {
+          "name": "timing.lidar.out_of_order",
+          "passed": true,
+          "threshold": 0.0,
+          "unit": "count",
+          "value": 0.0
+        }
+      ],
+      "failed_gates": [
+        "trajectory.ate_rmse",
+        "trajectory.final_drift"
+      ],
+      "fault": "trajectory_drift",
+      "input_directory": "data/ablation/20261014/trajectory_drift",
+      "input_sha256": {
+        "estimated_trajectory.csv": "7b60b9c4103f2a36f00064421b6ca8d41aa95a6dd350a7633eb719874e1577bb",
+        "reference_trajectory.csv": "3052440c45451e67d64d740e4869b1407aafb895288d209d31b21a909a002b3a",
+        "sensor_timestamps.csv": "3ef637af4fb7494e74ee84b39b68d2e9f483d7c3098dbfe4bc5d311321f9012b"
+      },
+      "paired_delta": {
+        "ate_rmse_m": 0.142473384,
+        "rpe_rmse_m": 0.004343118,
+        "sync_p95_ms": 0.0
+      },
+      "seed": 20261014,
+      "timing": [
+        {
+          "dropout_rate": 0.0,
+          "estimated_dropouts": 0,
+          "jitter_rms_ms": 0.524937999,
+          "max_gap_ms": 34.78981,
+          "nominal_hz": 30.0,
+          "observed_hz": 29.999658141,
+          "out_of_order_count": 0,
+          "sample_count": 900,
+          "sensor": "camera"
+        },
+        {
+          "dropout_rate": 0.0,
+          "estimated_dropouts": 0,
+          "jitter_rms_ms": 0.111157101,
+          "max_gap_ms": 10.46758,
+          "nominal_hz": 100.0,
+          "observed_hz": 99.999643182,
+          "out_of_order_count": 0,
+          "sample_count": 3000,
+          "sensor": "imu"
+        },
+        {
+          "dropout_rate": 0.0,
+          "estimated_dropouts": 0,
+          "jitter_rms_ms": 0.969829961,
+          "max_gap_ms": 102.83178,
+          "nominal_hz": 10.0,
+          "observed_hz": 10.000065432,
+          "out_of_order_count": 0,
+          "sample_count": 300,
+          "sensor": "lidar"
+        }
+      ],
+      "trajectory": {
+        "ate_p95_m": 0.282358709,
+        "ate_rmse_m": 0.179301715,
+        "final_drift_m": 0.308387106,
+        "heading_rmse_deg": 1.043090353,
+        "path_length_error_pct": 4.592867256,
+        "rpe_rmse_m": 0.047184012,
+        "sample_count": 601
+      },
+      "unchanged_inputs": {
+        "estimated_trajectory.csv": false,
+        "reference_trajectory.csv": true,
+        "sensor_timestamps.csv": true
+      }
+    },
+    {
+      "camera_lidar_sync_p95_ms": 2.0732475,
+      "checks": [
+        {
+          "name": "trajectory.ate_rmse",
+          "passed": true,
+          "threshold": 0.12,
+          "unit": "m",
+          "value": 0.091308411
+        },
+        {
+          "name": "trajectory.rpe_rmse",
+          "passed": true,
+          "threshold": 0.1,
+          "unit": "m",
+          "value": 0.077070881
+        },
+        {
+          "name": "trajectory.final_drift",
+          "passed": true,
+          "threshold": 0.2,
+          "unit": "m",
+          "value": 0.058928725
+        },
+        {
+          "name": "trajectory.heading_rmse",
+          "passed": true,
+          "threshold": 3.0,
+          "unit": "deg",
+          "value": 0.585167976
+        },
+        {
+          "name": "trajectory.path_length_error",
+          "passed": true,
+          "threshold": 5.0,
+          "unit": "%",
+          "value": 1.237840435
+        },
+        {
+          "name": "sync.camera_lidar_p95",
+          "passed": true,
+          "threshold": 8.0,
+          "unit": "ms",
+          "value": 2.0732475
+        },
+        {
+          "name": "timing.camera.jitter_rms",
+          "passed": true,
+          "threshold": 1.5,
+          "unit": "ms",
+          "value": 0.524937999
+        },
+        {
+          "name": "timing.camera.dropout_rate",
+          "passed": true,
+          "threshold": 0.015,
+          "unit": "ratio",
+          "value": 0.0
+        },
+        {
+          "name": "timing.camera.out_of_order",
+          "passed": true,
+          "threshold": 0.0,
+          "unit": "count",
+          "value": 0.0
+        },
+        {
+          "name": "timing.imu.jitter_rms",
+          "passed": true,
+          "threshold": 0.5,
+          "unit": "ms",
+          "value": 0.111157101
+        },
+        {
+          "name": "timing.imu.dropout_rate",
+          "passed": true,
+          "threshold": 0.015,
+          "unit": "ratio",
+          "value": 0.0
+        },
+        {
+          "name": "timing.imu.out_of_order",
+          "passed": true,
+          "threshold": 0.0,
+          "unit": "count",
+          "value": 0.0
+        },
+        {
+          "name": "timing.lidar.jitter_rms",
+          "passed": true,
+          "threshold": 2.5,
+          "unit": "ms",
+          "value": 0.969829961
+        },
+        {
+          "name": "timing.lidar.dropout_rate",
+          "passed": true,
+          "threshold": 0.015,
+          "unit": "ratio",
+          "value": 0.0
+        },
+        {
+          "name": "timing.lidar.out_of_order",
+          "passed": true,
+          "threshold": 0.0,
+          "unit": "count",
+          "value": 0.0
+        }
+      ],
+      "failed_gates": [],
+      "fault": "trajectory_bump",
+      "input_directory": "data/ablation/20261014/trajectory_bump",
+      "input_sha256": {
+        "estimated_trajectory.csv": "c3f90c8a690cee5e463d4e250b57aa560ac68c09d986b76f7b73b098885c902a",
+        "reference_trajectory.csv": "3052440c45451e67d64d740e4869b1407aafb895288d209d31b21a909a002b3a",
+        "sensor_timestamps.csv": "3ef637af4fb7494e74ee84b39b68d2e9f483d7c3098dbfe4bc5d311321f9012b"
+      },
+      "paired_delta": {
+        "ate_rmse_m": 0.05448008,
+        "rpe_rmse_m": 0.034229988,
+        "sync_p95_ms": 0.0
+      },
+      "seed": 20261014,
+      "timing": [
+        {
+          "dropout_rate": 0.0,
+          "estimated_dropouts": 0,
+          "jitter_rms_ms": 0.524937999,
+          "max_gap_ms": 34.78981,
+          "nominal_hz": 30.0,
+          "observed_hz": 29.999658141,
+          "out_of_order_count": 0,
+          "sample_count": 900,
+          "sensor": "camera"
+        },
+        {
+          "dropout_rate": 0.0,
+          "estimated_dropouts": 0,
+          "jitter_rms_ms": 0.111157101,
+          "max_gap_ms": 10.46758,
+          "nominal_hz": 100.0,
+          "observed_hz": 99.999643182,
+          "out_of_order_count": 0,
+          "sample_count": 3000,
+          "sensor": "imu"
+        },
+        {
+          "dropout_rate": 0.0,
+          "estimated_dropouts": 0,
+          "jitter_rms_ms": 0.969829961,
+          "max_gap_ms": 102.83178,
+          "nominal_hz": 10.0,
+          "observed_hz": 10.000065432,
+          "out_of_order_count": 0,
+          "sample_count": 300,
+          "sensor": "lidar"
+        }
+      ],
+      "trajectory": {
+        "ate_p95_m": 0.260147796,
+        "ate_rmse_m": 0.091308411,
+        "final_drift_m": 0.058928725,
+        "heading_rmse_deg": 0.585167976,
+        "path_length_error_pct": 1.237840435,
+        "rpe_rmse_m": 0.077070881,
+        "sample_count": 601
+      },
+      "unchanged_inputs": {
+        "estimated_trajectory.csv": false,
+        "reference_trajectory.csv": true,
+        "sensor_timestamps.csv": true
+      }
+    }
+  ],
+  "seeds": [
+    20261010,
+    20261011,
+    20261012,
+    20261013,
+    20261014
+  ]
+}

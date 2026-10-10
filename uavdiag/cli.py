@@ -4,6 +4,7 @@ import argparse
 from pathlib import Path
 
 from .pipeline import analyze_scenario, run_benchmark
+from .ablation import run_ablation
 from .simulate import generate_scenario
 
 
@@ -19,6 +20,8 @@ def build_parser() -> argparse.ArgumentParser:
 
     benchmark = subparsers.add_parser("benchmark", help="regenerate and analyze baseline/degraded scenarios")
     benchmark.add_argument("--project-root", type=Path, default=PROJECT_ROOT)
+    ablation = subparsers.add_parser("ablation", help="run paired single-fault comparisons across five seeds")
+    ablation.add_argument("--project-root", type=Path, default=PROJECT_ROOT)
 
     generate = subparsers.add_parser("generate", help="generate one deterministic scenario")
     generate.add_argument("scenario", choices=("baseline", "degraded"))
@@ -34,6 +37,10 @@ def build_parser() -> argparse.ArgumentParser:
 
 def main(argv: list[str] | None = None) -> int:
     args = build_parser().parse_args(argv)
+    if args.command == "ablation":
+        summary = run_ablation(args.project_root)
+        print(f"Completed {len(summary['runs'])} paired baseline/fault runs")
+        return 0
     if args.command == "generate":
         generate_scenario(args.scenario, args.output_dir)
         print(f"Generated {args.scenario} scenario in {args.output_dir}")

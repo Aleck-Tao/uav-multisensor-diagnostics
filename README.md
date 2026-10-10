@@ -26,6 +26,10 @@ Trajectory alignment removes a fixed XY rotation/translation and vertical offset
 
 Read the [baseline report](results/baseline/report.md) and [degraded report](results/degraded/report.md) for every threshold and decision. The corresponding [baseline](results/baseline/metrics.json) and [degraded](results/degraded/metrics.json) JSON files contain the values and input hashes.
 
+The [single-fault comparison](results/ablation/comparison.md) adds 35 runs: five paired seeds, six isolated faults and their baselines. Timing faults leave trajectory inputs byte-identical; trajectory faults leave sensor timestamps byte-identical. The matrix records which checks respond, including any injected fault that stays below the current thresholds. Per-run metric deltas, all gates and raw-input hashes are available alongside the table.
+
+The local 12–16 s position disturbance is not rejected in any of the five runs: mean ATE rises from 0.0364 to 0.0907 m but remains below the 0.12 m gate. Constant drift is rejected in all five runs. This separates a detected fault from a changed metric and identifies a concrete limit of the current whole-run thresholds.
+
 ## Run it
 
 From a checkout, with Python 3.12:
@@ -33,6 +37,7 @@ From a checkout, with Python 3.12:
 ```bash
 python -m pip install -e .
 uavdiag benchmark
+uavdiag ablation
 ```
 
 The expected output is `baseline: PASS (0 failed gates)` and `degraded: FAIL (11 failed gates)`. CI regenerates the data and reports and compares them with the committed files. To run the tests locally:

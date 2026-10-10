@@ -3,6 +3,9 @@ name: reproducibility
 on:
   push:
   pull_request:
+  workflow_dispatch:
+  schedule:
+    - cron: '7 2 * * 1'
 
 jobs:
   test-and-reproduce:
@@ -20,5 +23,7 @@ jobs:
         run: python -m unittest discover -s tests -v
       - name: Reproduce benchmark
         run: uavdiag benchmark
+      - name: Reproduce paired fault ablation
+        run: uavdiag ablation
       - name: Verify deterministic artifacts
         run: git diff --exit-code -- data results
